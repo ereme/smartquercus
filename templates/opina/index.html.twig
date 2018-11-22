@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Opina{% endblock %}
+
+{% block body %}
+    <h1>Opina</h1>
+    <div class="container-fluid">
+        {% for row in opinas|batch(3) %}
+            <div class="row">
+                {% for opina in row %}
+                    <div id="opina" class="col-sm-4">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('imagen/alburquerque.jpg')}}" alt="Card image cap" width="50">
+                            <div class="card-body">
+                                <h5 class="card-title">ALBURQUERQUE</h5>
+                                <div class="card-text">
+                                <p class="card-text-2">{{ opina.pregunta }}</p>
+                                </div>
+                                <p>
+                                <input type="hidden" value="{{ opina.id }}">
+                                <button type="button" class="btn btn-outline-success botonopina" valor="F">A favor</button>
+                                <button type="button" class="btn btn-outline-danger botonopina" valor="C">En contra</button>
+                                </p>
+                                <p>Tienes de fecha hasta: {{ opina.fechahoralimite ? opina.fechahoralimite|date('d-m-Y') : '' }}</p>
+
+                                <a href="{{ path('opina_show', {'id': opina.id}) }}">Mostrar</a>
+                                <a href="{{ path('opina_edit', {'id': opina.id}) }}">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <a href="{{ path('opina_new') }}">Create new</a>
+
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+
+    <script src="{{ asset('build/opina.js') }}"></script>
+{% endblock %}
