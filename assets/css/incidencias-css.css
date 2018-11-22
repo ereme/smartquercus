@@ -1,6 +1,10 @@
 
-#incidencias{
-   background: black;
+div.container{
+   background: #7FB3D5;
+}
+
+div.container > div.row {
+   background: #154360  ;
 }
 
 
