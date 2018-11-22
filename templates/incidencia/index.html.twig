@@ -1,41 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Incidencia index{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('build/incidencias-css.css') }}">{% endblock %}
 
 {% block body %}
-    <h1>Incidencia index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Fechahora</th>
-                <th>Latitud</th>
-                <th>Longitud</th>
-                <th>Descripcion</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for incidencium in incidencias %}
-            <tr>
-                <td>{{ incidencium.id }}</td>
-                <td>{{ incidencium.fechahora ? incidencium.fechahora|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ incidencium.latitud }}</td>
-                <td>{{ incidencium.longitud }}</td>
-                <td>{{ incidencium.descripcion }}</td>
-                <td>
-                    <a href="{{ path('incidencia_show', {'id': incidencium.id}) }}">show</a>
-                    <a href="{{ path('incidencia_edit', {'id': incidencium.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('incidencia_new') }}">Create new</a>
+    <div class="container" id="incidencias">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+        </div>
+        <a href="{{ path('incidencia_new') }}">Create new</a>
+    </div>
+{% endblock %}
+{% block javascripts%}
+    <script src="{{ asset('build/incidencias.js') }}"></script>
 {% endblock %}

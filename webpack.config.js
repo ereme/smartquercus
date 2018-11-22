@@ -18,9 +18,11 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     //.addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
+    .addEntry('incidencias', './assets/js/incidencias.js')
+    .addStyleEntry('incidencias-css', './assets/css/incidencias-css.css')
     //.addEntry('page2', './assets/js/page2.js')
     .addStyleEntry('app', './assets/css/app.css')
+    
 
     /*
      * FEATURE CONFIG
@@ -42,7 +44,7 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();
