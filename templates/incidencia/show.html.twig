@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Incidencia{% endblock %}
+
+{% block body %}
+    <h1>Incidencia</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ incidencium.id }}</td>
+            </tr>
+            <tr>
+                <th>Fechahora</th>
+                <td>{{ incidencium.fechahora ? incidencium.fechahora|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Latitud</th>
+                <td>{{ incidencium.latitud }}</td>
+            </tr>
+            <tr>
+                <th>Longitud</th>
+                <td>{{ incidencium.longitud }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ incidencium.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('incidencia_index') }}">back to list</a>
+
+    <a href="{{ path('incidencia_edit', {'id': incidencium.id}) }}">edit</a>
+
+    {{ include('incidencia/_delete_form.html.twig') }}
+{% endblock %}
