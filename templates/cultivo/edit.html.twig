@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cultivo{% endblock %}
+
+{% block body %}
+    <h1>Edit Cultivo</h1>
+
+    {{ include('cultivo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cultivo_index') }}">back to list</a>
+
+    {{ include('cultivo/_delete_form.html.twig') }}
+{% endblock %}

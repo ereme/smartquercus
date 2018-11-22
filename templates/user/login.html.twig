@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{# templates/security/login.html.twig #}
+{# ... probablemente tengas que extender tu planntilla de base, como por ejemplo base.html.twig #}
+
+{% block body %}
+
+        <div class="vertical-center">
+            <div class="container">
+                  
+                  {% if error %}
+                    <div class="row justify-content-md-center"> 
+                      <div class="alert alert-danger" role="alert">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                      </div>
+                    </div>
+                  {% endif %}
+                  
+                  <div class="row justify-content-md-center">
+                    <div class="col-md-4">
+                        <h4 class="text-center">Acceso a {{ brand_name }}</h4>
+                        <div class="card">
+                          <div class="card-body">
+                            <form action="{{ path('login') }}" method="post">
+                              <div class="form-group">
+                                <label for="username">Usuario</label>
+                                <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Usuario" name="_username" value="{{ last_username }}">
+                                <small id="emailHelp" class="form-text text-muted">Tus datos no serán compartidos con nadie.</small>
+                              </div>
+                              <div class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="_password" placeholder="Contraseña">
+                              </div>
+                              {#<div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                              </div>#}
+
+                              <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                              <button type="submit" class="btn btn-primary btn-block">Acceder</button>
+                            </form>                         </div>
+                        </div>
+                        <div class="text-center">
+                          <a href="{{ path('user_registration') }}">Aún no estoy registrado</a>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

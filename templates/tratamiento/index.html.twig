@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tratamiento index{% endblock %}
+
+{% block body %}
+ <h1>Parcelas</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+
+            {% if tratamientos is empty %}
+                    Aún no hay tratamientos.  
+            {% else %}
+                <table class="table table-hover table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">Agrupación</th>
+                      <th scope="col">Cultivo</th>
+                      <th scope="col">PI</th>
+                      <th scope="col">Superficie</th>
+                      <th scope="col">Plaga</th>
+                      <th scope="col">Producto</th>
+                      <th scope="col">NumRegistro</th>
+                      <th scope="col">Dosis recom</th>
+                      <th scope="col">Dosis empleada</th>
+                      <th scope="col">Equipo</th>
+                      <th scope="col">Volumen copa (m2)</th>
+                      <th scope="col">PI</th>
+                      <th scope="col">Ayuda PI</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for t in tratamientos %}        
+                        <tr>
+                          <th scope="row">{{ t.parcelas[0].agrupacion.nombre }} (suptotal)</th>
+                          <td>CULTIVO A TRATAR</td>
+                          <td>{{ t.pi ? 'PI'}}</td>
+                          <td>{{ t.superficie }}</td>
+                          <td>{{ t.plaga.nombre }}</td>
+                          <td>{{ t.producto.nombre }}</td>
+                          <td>{{ t.registro }}</td>
+                          <td>{{ t.dosisRecomendada }}</td>
+                          <td>{{ t.dosisEmpleada }}</td>
+                          <td>{{ t.equipo.nombre }} - {{ t.equipo.capacidad }}</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>
+                            <a href="{{ path('tratamiento_edit', {'id': t.id}) }}"><i class="far fa-edit"></i></a>
+                          </td>
+                        </tr>    
+                    {% endfor %}
+                  </tbody>
+                </table>   
+  
+            {% endif %}               
+
+            <div class="text-right boton-add">
+                <a class="btn btn-primary btn-sm" href="{{ path('tratamiento_new') }}">Añadir tratamiento</a>
+            </div>   
+        </div>
+
+        <div class="col-md-3 parcela-sidebar">
+
+        </div>
+    </div>
+ 
+    <div class="row">
+
+    </div>
+</div>    
+{% endblock %}

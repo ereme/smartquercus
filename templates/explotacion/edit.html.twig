@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Explotacion{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+		    <h1>Editar explotación</h1>
+		    {{ include('explotacion/_form.html.twig') }}
+		</div>
+	</div>
+</div>
+
+    <a href="{{ path('explotacion_index') }}">back to list</a>
+
+    {{ include('explotacion/_delete_form.html.twig') }}
+{% endblock %}

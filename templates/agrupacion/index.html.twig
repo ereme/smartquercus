@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agrupacion index{% endblock %}
+
+{% block body %}
+    <h1>Agrupacion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agrupacion in agrupacions %}
+            <tr>
+                <td>{{ agrupacion.id }}</td>
+                <td>{{ agrupacion.nombre }}</td>
+                <td>
+                    <a href="{{ path('agrupacion_show', {'id': agrupacion.id}) }}">show</a>
+                    <a href="{{ path('agrupacion_edit', {'id': agrupacion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('agrupacion_new') }}">Create new</a>
+{% endblock %}

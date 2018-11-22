@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Explotacion{% endblock %}
+
+{% block body %}
+<div class="container-fluid contenedor">
+	<div class="row">
+		<div class="col-md-12">
+		 	<h1>Crear explotación</h1>
+		</div>
+	</div>
+	<div class="row justify-content-md-center">
+		<div class="col-md-6">
+		    {{ include('explotacion/_form.html.twig') }}
+		</div>
+	</div>
+</div>
+
+    <a href="{{ path('tratamiento_index') }}">back to list</a>
+{% endblock %}

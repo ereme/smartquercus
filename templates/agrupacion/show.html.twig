@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agrupacion{% endblock %}
+
+{% block body %}
+    <h1>Agrupacion</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ agrupacion.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ agrupacion.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('agrupacion_index') }}">back to list</a>
+
+    <a href="{{ path('agrupacion_edit', {'id': agrupacion.id}) }}">edit</a>
+
+    {{ include('agrupacion/_delete_form.html.twig') }}
+{% endblock %}

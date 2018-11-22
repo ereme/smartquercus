@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cultivo{% endblock %}
+
+{% block body %}
+    <h1>Create new Cultivo</h1>
+
+    {{ include('cultivo/_form.html.twig') }}
+
+    <a href="{{ path('cultivo_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parcela index{% endblock %}
+
+{% block body %}
+    <h1>Parcelas</h1>
+
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+          {% for p in participaciones %}
+            {% for a in p.explotacion.agrupaciones %} 
+                Número ID {{ a.nombre }}
+
+                {% if a.parcelas is empty %}
+                        Aún no hay ninguna parcela. <a href="{{ path('parcela_new') }}">Añade una para comenzar</a>  
+                {% else %}
+                    <table class="table table-hover table-sm">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Provincia</th>
+                          <th scope="col">Municipio</th>
+                          <th scope="col">Polígono</th>
+                          <th scope="col">Parcela</th>
+                          <th scope="col">Recinto</th>
+                          <th scope="col">Uso SIGPAC</th>
+                          <th scope="col">Superficie (ha)</th>
+                          <th scope="col">Marco Plantación</th>
+                          <th scope="col">Cultivo</th>
+                          <th scope="col">Volumen copa (m2)</th>
+                          <th scope="col">PI</th>
+                          <th scope="col">Ayuda PI</th>
+                          <th scope="col">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for p in a.parcelas %}                
+                            <tr>
+                              <th scope="row">{{ p.numid }}</th>
+                              <td>{{ p.localidad.provincia.nombre }}</td>
+                              <td>{{ p.localidad.nombre }}</td>
+                              <td>{{ p.poligono }}</td>
+                              <td>{{ p.parcela }}</td>
+                              <td>{{ p.recinto }}</td>
+                              <td>{{ p.sigpacuso.nombre }}</td>
+                              <td class="float-right">{{ p.superficie|number_format(4, ',', '.') }}</td>
+                              <td>{{ p.marcoplantacion }}</td>
+                              <td>
+                                {% for v in p.variedades %}
+                                    {{ v.nombre }} ({{ v.cultivo.nombre }}) <br>
+                                {% endfor %}
+                              </td>
+                              <td>{{ p.volumencopa }}</td>
+                              <td>{{ p.pi ? 'SI' : 'NO' }}</td>
+                              <td>{{ p.piayuda ? 'SI' : 'NO' }} </td>
+                              <td>
+                                <a href="{{ path('parcela_edit', {'id': p.id}) }}"><i class="far fa-edit"></i></a>
+                              </td>
+                            </tr>    
+                        {% endfor %}
+                            <tr>
+                              <th colspan="6"></th>
+                              <th>Total</th>
+                              <td class="float-right">{{ a.superficie|number_format(4, ',', '.') }}</td>
+                            </tr>  
+                      </tbody>
+                    </table>   
+      
+                {% endif %}  
+            {% endfor %} 
+          {% endfor %}                           
+
+            <div class="text-right boton-add">
+                <a class="btn btn-primary btn-sm" href="{{ path('parcela_new') }}">Añadir parcela</a>
+            </div>   
+        </div>
+
+        <div class="col-md-3 parcela-sidebar">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Explotación</h5>
+              <p>Número parcelas
+              <span class="float-right">{{ '0' }}</span></p>
+              <p>Superficie total
+              <span class="float-right">{{ '0' }}</span></p>
+            </div>
+          </div>
+        </div>
+    </div>
+ 
+    <div class="row">
+
+    </div>
+  </div>
+{% endblock %}

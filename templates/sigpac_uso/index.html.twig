@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SigpacUso index{% endblock %}
+
+{% block body %}
+    <h1>SigpacUso index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sigpac_uso in sigpac_usos %}
+            <tr>
+                <td>{{ sigpac_uso.id }}</td>
+                <td>{{ sigpac_uso.nombre }}</td>
+                <td>
+                    <a href="{{ path('sigpac_uso_show', {'id': sigpac_uso.id}) }}">show</a>
+                    <a href="{{ path('sigpac_uso_edit', {'id': sigpac_uso.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sigpac_uso_new') }}">Create new</a>
+{% endblock %}

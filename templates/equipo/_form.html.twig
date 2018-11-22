@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+
+	<div class="row">
+		<div class="col-md-2">
+			{{ form_row(form.numero) }}
+		</div>
+		<div class="col-md-10">
+			{{ form_row(form.nombre) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			{{ form_row(form.capacidad) }}
+		</div>
+		<div class="col-md-4">
+			{{ form_row(form.roma) }}
+		</div>
+		<div class="col-md-4">
+			{{ form_row(form.bastidor) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			{{ form_row(form.fechaAdquisicion) }}
+		</div>
+		<div class="col-md-4">
+			{{ form_row(form.fechaUltimaInspeccion) }}
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-md-12">
+			{{ form_row(form.save) }}
+		</div>
+	</div>			
+{{ form_end(form) }}

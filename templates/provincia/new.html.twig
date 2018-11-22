@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Provincia{% endblock %}
+
+{% block body %}
+    <h1>Create new Provincia</h1>
+
+    {{ include('provincia/_form.html.twig') }}
+
+    <a href="{{ path('provincia_index') }}">back to list</a>
+{% endblock %}

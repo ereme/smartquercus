@@ -1,0 +1,20 @@
+<div class="row justify-content-md-center welcome-card">
+    <div class="col-md-8">          
+        <div class="card bg-light">
+          <div class="card-header">
+            Bienvenido a {{ brand_name }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Aún no has dado de alta ninguna explotación</h5>
+            <p class="card-text">Para comenzar es necesario dar de alta las parcelas</p>
+            <ol>
+                <li>Una <strong>explotación</strong> engloba varias agrupaciones</li>
+                <li>Una <strong>agrupación</strong> engloba varias parcelas</li>
+            </ol>
+            <p class="card-text"><strong>Es muy sencillo.</strong> Comienza por dar de alta una explotación. Después, crea una agrupación.<br>
+                            Finalmente, añade las parcelas.</p>
+            <a class="btn btn-primary float-right" href="{{ path('explotacion_new') }}" >Crear explotación</a>
+          </div>
+        </div>    
+    </div>
+</div>    

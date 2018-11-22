@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-md-9">
+
+        {% for row in participaciones|batch(2) %}
+            <div class="row">
+                {% for e in row %}
+                    <div class="col-md-6">
+                        <div class="card border-dark mb-3">
+                          <div class="card-header">
+                                <a href="{{ path('explotacion_edit', {'id': e.id}) }}" class="explotacion-link">Explotación {{ e.explotacion.rexa }} / {{ e.explotacion.roppi }}</a>
+                                {% if e.explotacion.superficie > 0 %}
+                                    <span class="float-right">{{ e.explotacion.superficie|number_format(4, ',', '.') }} ha</span>
+                                {% endif %}
+                            </div>
+                          <div class="card-body text-dark">
+                            {% if e.explotacion.agrupaciones is empty %}
+                                <p class="card-text"><small>Esta explotación aún no tiene parcelas añadidas. Las parcelas se organizan en grupos llamados <strong>agrupaciones</strong>. Para comenzar crea una agrupación a la que poder añadir parcelas.</small></p>
+                                <a href="{{ path('agrupacion_new', {'id_exp': e.id}) }}" class="btn btn-primary boton-add btn-sm float-right">Crear agrupación</a>
+                            {% else %}
+                                
+                                {% for a in e.explotacion.agrupaciones %}
+                                    
+                                    <div class="card text-white bg-success mb-3">
+                                      <div class="card-header">
+                                            <a href="{{ path('agrupacion_edit', {'id': a.id}) }}" class="agrupacion-link">Agrupación {{ a.nombre }}</a>
+                                            {% if a.superficie > 0 %}
+                                                <span class="float-right">{{ a.superficie|number_format(4, ',', '.') }} ha</span>
+                                            {% endif %}
+                                      </div>
+                                      <div class="card-body text-success">
+                                            
+                                            <div class="list-group">
+                                                {% for p in a.parcelas %}
+                                                    <a href="{{ path('parcela_show', {'id': p.id}) }}" class="list-group-item list-group-item-action">
+                                                        {{ p.localidad.nombre }} ({{ p.localidad.provincia.nombre }})
+                                                        <span class="float-right">{{ p.superficie }} ha</span>
+                                                        <div class="info">
+                                                            Polígono {{ p.poligono }} / 
+                                                            Parcela {{ p.parcela }} / 
+                                                            Recinto {{ p.recinto }}
+                                                        </div>
+                                                    </a>
+                                                {% else %}
+                                                    <p class="parrafo-white">Esta agrupación aún no tiene parcelas. <br> Crea una para comenzar.</p>
+                                                    <a href="{{ path('parcela_new') }}" class="btn btn-primary boton-add btn-sm float-right">Crear parcela</a>
+                                                {% endfor %}
+                                            </div>                                        
+
+                                      </div>
+                                    </div>
+
+                                {% else %}
+                                    <p class="parrafo-white">Esta explotación aún no tiene agrupaciones ni parcelas. Crea una agrupación y añade posteriormente parcelas para comenzar.</p>
+                                    <a href="{{ path('agrupacion_new') }}" class="btn btn-primary boton-add btn-sm float-right">Crear agrupación</a>
+
+                                {% endfor %}                    
+                            
+                            {% endif %}
+                            {#<a href="{{ path('agrupacion_new', {'id_exp': e.id}) }}" class="btn btn-primary boton-add btn-sm float-right">Crear agrupación</a>#}
+                          </div>
+                        </div>                
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="col-md-3">
+
+        {#<a href="{{ path('agrupacion_new') }}" class="btn btn-primary boton-add btn-sm float-right">Crear agrupación</a>#}
+        <div class="alert alert-primary" role="alert">
+          This is a primary alert—check it out!
+        </div>
+        <div class="alert alert-secondary" role="alert">
+          This is a secondary alert—check it out!
+        </div>
+        <div class="alert alert-success" role="alert">
+          This is a success alert—check it out!
+        </div>  
+
+    </div>
+</div>  

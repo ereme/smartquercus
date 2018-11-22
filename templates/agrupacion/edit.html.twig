@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Agrupacion{% endblock %}
+
+{% block body %}
+    <h1>Edit Agrupacion</h1>
+
+    {{ include('agrupacion/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('agrupacion_index') }}">back to list</a>
+
+    {{ include('agrupacion/_delete_form.html.twig') }}
+{% endblock %}

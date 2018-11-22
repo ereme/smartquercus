@@ -1,0 +1,63 @@
+security:
+    encoders:
+        #Symfony\Component\Security\Core\User\User: 
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        #in_memory:
+            #memory:
+                #users:
+                    #juan:
+                        #password: $2y$12$QFRT8aJNKfwxbeMa7g5zCe9ysDsiWKFsLAwZcVSeNBpgiA1Zv.bP2
+                        #roles: 'ROLE_USER'
+
+        our_db_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    firewalls:      
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false      
+        main:
+            pattern: ^/
+            anonymous: true
+
+            # activate different ways to authenticate
+
+            http_basic: ~
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            form_login: 
+                login_path: login
+                check_path: login
+                default_target_path: inicio
+                csrf_token_generator: security.csrf.token_manager
+                always_use_default_target_path: true
+                failure_path: login
+
+
+            logout:
+                path: /logout
+                target: /
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            provider: our_db_provider
+                
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/producto, roles: ROLE_USER }
+
+
+    role_hierarchy:
+            ROLE_TITULAR:       ROLE_USER
+            ROLE_ASESOR:        ROLE_USER
+            ROLE_ADMIN:         [ROLE_TITULAR, ROLE_ASESOR]
+            ROLE_SUPER_ADMIN:   ROLE_ADMIN

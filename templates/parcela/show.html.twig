@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parcela{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid contenedor">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="card border-dark mb-3">
+              <div class="card-header">
+                    Parcela {{ parcela.id }}
+                    <span class="float-right">{{ parcela.superficie|number_format(4, ',', '.') }} ha</span>
+              </div>
+              <div class="card-body">
+                    <p class="float-center">{{ parcela.localidad.nombre }}</p>
+                    <table class="table table-sm borderless text-center">
+                      <thead>
+                        <tr>
+                          <th scope="col">POLÍGONO</th>
+                          <th scope="col">PARCELA</th>
+                          <th scope="col">RECINTO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{ parcela.poligono }}</td>
+                          <td>{{ parcela.parcela }}</td>
+                          <td>{{ parcela.recinto }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+  
+                    <div class="card">
+                      <div class="card-body">                  
+                        <h6 class="card-title">Variedades</h6>
+                        {% for v in parcela.variedades %}        
+                            <span class="badge badge-success">{{ v.nombre }}</span> 
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                    <div class="card contenedor">
+                      <div class="card-body">                  
+                        <h6 class="card-title">Sigpac</h6>
+                        {% for s in parcela.sigpacUso %}        
+                            <span class="badge badge-info">{{ s.nombre }}</span> 
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <a class="float-right icono contenedor" href="{{ path('parcela_edit', {'id': parcela.id}) }}"><i class="far fa-edit"></i></a>
+                {#<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>#}
+              </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-9">
+            <div class="card">
+              <div class="card-body">
+                This is some text within a card body.
+              </div>
+            </div>
+
+            <div class="card border-warning mb-2 contenedor">
+              <div class="card-header">Tratamientos</div>
+              <div class="card-body">
+                <p class="card-text">
+
+                    {% if parcela.tratamientos is empty %}
+                            Aún no hay tratamientos.  
+                    {% else %}
+                        <table class="table table-sm borderless-left">
+                          <thead>
+                            <tr>
+                              <th scope="col">Cultivo</th>
+                              <th scope="col">PI</th>
+                              <th scope="col">Plaga</th>
+                              <th scope="col">Producto</th>
+                              <th scope="col">NumRegistro</th>
+                              <th scope="col">Dosis recom</th>
+                              <th scope="col">Dosis empleada</th>
+                              <th scope="col">Equipo</th>
+                              <th scope="col">Volumen copa (m2)</th>
+                              <th scope="col">PI</th>
+                              <th scope="col">Ayuda PI</th>
+                              <th scope="col">Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for t in parcela.tratamientos %}        
+                                <tr>
+                                  <td>CULTIVO A TRATAR</td>
+                                  <td>{{ t.pi ? 'PI'}}</td>
+                                  <td>{{ t.plaga.nombre }}</td>
+                                  <td>{{ t.producto.nombre }}</td>
+                                  <td>{{ t.registro }}</td>
+                                  <td>{{ t.dosisRecomendada }}</td>
+                                  <td>{{ t.dosisEmpleada }}</td>
+                                  <td>{{ t.equipo.nombre }} - {{ t.equipo.capacidad }}</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td>
+                                    <a href="{{ path('tratamiento_edit', {'id': t.id}) }}"><i class="far fa-edit"></i></a>
+                                  </td>
+                                </tr>    
+                            {% endfor %}
+                          </tbody>
+                        </table>   
+                    {% endif %}
+
+                </p>
+              </div>
+            </div>            
+        </div>
+    </div>   
+</div>
+
+
+    <a href="{{ path('parcela_index') }}">Listado parcelas</a>
+
+{% endblock %}

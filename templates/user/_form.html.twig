@@ -1,0 +1,36 @@
+{{ form_start(form) }}
+	<div class="row">
+		<div class="col-md-12">
+			{{ form_row(form.nombre) }}
+		</div>	
+	</div>	
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_row(form.apellido1) }}
+		</div>
+		<div class="col-md-6">
+			{{ form_row(form.apellido2) }}
+		</div>		
+	</div>	
+	<div class="row">
+		<div class="col-md-4">
+			{{ form_row(form.username) }}
+		</div>
+		<div class="col-md-8">
+			{{ form_row(form.email) }}
+		</div>
+	</div>			
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_row(form.plainPassword.first) }}
+		</div>
+		<div class="col-md-6">
+			{{ form_row(form.plainPassword.second) }}
+		</div>
+	</div>			
+	<div class="row">
+		<div class="col-md-12">
+			{{ form_row(form.save) }}
+		</div>
+	</div>		
+{{ form_end(form) }}

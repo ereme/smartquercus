@@ -1,0 +1,98 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+body {
+  padding-top: 54px;
+}
+
+.welcome-card, .contenedor {
+  margin-top:20px;
+} 
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.navbar-text {
+  margin-left: 30px;
+}
+
+.list-group .info {
+	color:darkgrey;
+	font-size: x-small;
+}
+
+.vertical-center {
+  min-height: 80%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 80vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+
+.boton-add {
+	margin-top: 10px;
+}
+
+table {
+	font-size: smaller;
+}
+
+.parcela-sidebar p {
+	font-size: smaller;
+	margin-bottom: 0px;
+	color:darkgrey;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.bg-image-full {
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+ul.no-bullets {
+  list-style: none;
+}
+
+.agrupacion-link {
+  text-decoration: none;
+  color: white;
+}
+
+.agrupacion-link:hover {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.explotacion-link {
+  text-decoration: none;
+  color: black;
+}
+
+.explotacion-link:hover {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.parrafo-white {
+  text-align: center;
+  color:white;
+  font-size: smaller;
+}
+
+.icono {
+  color:darkgrey;
+}
+.icono:hover {
+  color:black;
+}
