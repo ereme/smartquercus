@@ -36,6 +36,11 @@ class Incidencia
      */
     private $descripcion;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $estado;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Incidencia
     public function setDescripcion(string $descripcion): self
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getEstado(): ?string
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(string $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }

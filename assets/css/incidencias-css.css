@@ -1,10 +1,9 @@
 
-div.container{
+#incidencias{
    background: #7FB3D5;
+   margin-top: 2%;
 }
 
-div.container > div.row {
-   background: #154360  ;
-}
+
 
 

@@ -20,6 +20,9 @@ class IncidenciaController extends AbstractController
      */
     public function index(IncidenciaRepository $incidenciaRepository): Response
     {
+       /* $incidencia = $this->getDoctrine()
+        ->getRepository(Incidencia::class)
+        ->find($id);*/
         return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findAll()]);
     }
 

@@ -22,19 +22,19 @@ class IncidenciaRepository extends ServiceEntityRepository
 //    /**
 //     * @return Incidencia[] Returns an array of Incidencia objects
 //     */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByAll($value)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('i.incidencia = :incidenciaID')
+            ->setParameter('incidencia', $incidencia)
             ->orderBy('i.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Incidencia

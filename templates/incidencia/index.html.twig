@@ -6,24 +6,31 @@
 {% block body %}
     <div class="container" id="incidencias">
         <div class="row">
-            <div class="col">imagen incidencia</div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        Quote
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
+            <div class="col-md-9">
+                {% for incidencia in incidencias %}
+                    <a href="inmueble/{{incidencia.id}}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img class="card-img-top" src="/images/atico.jpg" alt="Error al cargar imagen">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ incidencia.fechahora }}</h5>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
             </div>
         </div>
-        <a href="{{ path('incidencia_new') }}">Create new</a>
+        <a href="{{ path('incidencia_new') }}">Nueva incidencia</a>
     </div>
 {% endblock %}
 {% block javascripts%}
-    <script src="{{ asset('build/incidencias.js') }}"></script>
+    <script src="{{ asset('build/incidencias-js.js') }}"></script>
 {% endblock %}
