@@ -26,8 +26,8 @@ class VecinoType extends AbstractType
                 'second_options' => array('label' => 'Confirmar contraseña'),
             ))
             ->add('nombre')
-            /*->add('apellido1')
-            ->add('apellido2')*/
+            ->add('apellido1')
+            ->add('apellido2')
             ->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),
                'label' => 'Darme de alta'
