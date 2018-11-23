@@ -1,17 +1,28 @@
 {{ form_start(form) }}
-	<div class="row">
-		<div class="col-md-12">
-			{{ form_row(form.nombre) }}
+
+	{{ dump (form)}}
+	{% if form.nombre is defined %}
+	    <div class="row">
+			<div class="col-md-12">
+				{{ form_row(form.nombre) }}
+			</div>	
 		</div>	
-	</div>	
-	<div class="row">
-		<div class="col-md-6">
-			{{ form_row(form.apellido1) }}
-		</div>
-		<div class="col-md-6">
-			{{ form_row(form.apellido2) }}
-		</div>		
-	</div>	
+		{#<div class="row">
+			<div class="col-md-6">
+				{{ form_row(form.apellido1) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_row(form.apellido2) }}
+			</div>		
+		</div>				
+	{% else %}
+	    <div class="row">
+			<div class="col-md-12">
+				{{ form_row(form.localidad) }}
+			</div>	
+		</div>#}
+	{% endif %}
+
 	<div class="row">
 		<div class="col-md-4">
 			{{ form_row(form.username) }}
@@ -27,7 +38,7 @@
 		<div class="col-md-6">
 			{{ form_row(form.plainPassword.second) }}
 		</div>
-	</div>			
+	</div>
 	<div class="row">
 		<div class="col-md-12">
 			{{ form_row(form.save) }}

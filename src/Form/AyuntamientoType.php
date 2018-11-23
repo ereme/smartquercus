@@ -3,9 +3,7 @@
 // src/Form/UserType.php
 namespace App\Form;
 
-use App\Entity\User;
 use App\Entity\Ayuntamiento;
-use App\Entity\Vecino;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserType extends AbstractType
+class AyuntamientoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,17 +25,19 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Contraseña'),
                 'second_options' => array('label' => 'Confirmar contraseña'),
             ))
+            ->add('localidad')
             ->add('save', SubmitType::class, array(
-                'attr' => array('class' => 'btn btn-primary float-right'),
-                'label' => 'Darme de alta'
-            ))
+               'attr' => array('class' => 'btn btn-primary float-right'),
+               'label' => 'Darme de alta'
+           ))
+            
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => User::class,
+            'data_class' => Ayuntamiento::class,
         ));
     }
 }
