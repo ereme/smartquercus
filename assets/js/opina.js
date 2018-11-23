@@ -13,7 +13,21 @@ $( document ).ready(function() {
             url: '/opina/' + idopina + '/' + valor + '/json',
             dataType: 'json',
             success: function success(datos) {
-               console.log(datos);
+     
+            	console.log($(this).parent().find('.bg-success'));
+
+
+            	$('#'+idopina+'favor').attr({
+            				'aria-valuenow': datos.votosfavor,
+            				'style': 'width:'+datos.votosfavor+'%',
+            	});
+
+            	$('#'+idopina+'contra').attr({
+            				'aria-valuenow': datos.votoscontra,
+            				'style': 'width:'+datos.votoscontra+'%',
+            	});
+               	console.log(datos);
+               
             }
         });
 

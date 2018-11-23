@@ -36,7 +36,7 @@ class OpinaRepository extends ServiceEntityRepository
     }
     */
 
-    public function findOpina($opinaid){
+   /* public function findOpina($opinaid){
         return $this->createQueryBuilder('m')
             //->select('m.id, m.mensaje, m.fechahora, m.receptor')
             ->where('m.emisor = ?1', $qb->expr()->eq('m.emisor', '?2'))
@@ -47,5 +47,5 @@ class OpinaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult() //puedo poner: getResult() para muchos, getSingleResult() para uno
         ;
-    }
+    }*/
 }

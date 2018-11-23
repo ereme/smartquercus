@@ -6,3 +6,31 @@
 #opina .card-text p{
 	height: 100px;
 }
+
+h1{
+	color: #01254f;
+	font-weight: bold;
+	margin-left: 20px;
+	
+}
+
+#opina .card-text-2{
+	color: #01254f;
+	font-weight: bold;
+}
+
+#fecha{
+	color: #01254f;
+	font-weight: bold;
+}
+
+.btn{
+
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+.progress .far{
+
+	margin-right: 5px;
+}
