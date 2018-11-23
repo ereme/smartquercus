@@ -17,12 +17,20 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
+<<<<<<< HEAD
     //.addEntry('app', './assets/js/app.js')
     .addEntry('incidencias', './assets/js/incidencias.js')
     .addStyleEntry('incidencias-css', './assets/css/incidencias-css.css')
     //.addEntry('page2', './assets/js/page2.js')
     .addStyleEntry('app', './assets/css/app.css')
     
+=======
+    .addEntry('opinajs', './assets/js/opina.js')
+    //.addEntry('page1', './assets/js/page1.js')
+    //.addEntry('page2', './assets/js/page2.js')
+    .addStyleEntry('app', './assets/css/app.css')
+    .addStyleEntry('opina', './assets/css/opina.css')
+>>>>>>> origin/master
 
     /*
      * FEATURE CONFIG

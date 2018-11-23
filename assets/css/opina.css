@@ -1,0 +1,8 @@
+#opina .card{
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#opina .card-text p{
+	height: 100px;
+}

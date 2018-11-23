@@ -3,13 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+<<<<<<< HEAD
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% block stylesheets %}{% endblock %}
+=======
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        	<link rel="stylesheet" href="{{ asset('build/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('build/opina.css') }}">
+        {% endblock %}
+>>>>>>> origin/master
     </head>
     <body>
     	{% include('_base/header.html.twig') %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+   
+            
+        {% endblock %}
+
+
     </body>
 </html>
