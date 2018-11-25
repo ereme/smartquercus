@@ -1,9 +1,36 @@
-
+/* container */
 #incidencias{
    background: #7FB3D5;
    margin-top: 2%;
 }
 
+/* sección globlar */
+#incidencias > section{
+   background:  #808b96 ;
+   margin-left: 40px;
+   margin-right: 40px;
+   margin-bottom: 20px;
+   
+}
+
+/* filas globales */
+#incidencias > section > div.row{
+   background: #000;
+}
+
+/* botones de filtros */
+#incidencias > section > #incidencias-filtros{
+   padding: 20px;  
+}
+#incidencias div.input-group-sm {
+   margin-right: 10px;
+}
+
+/* cards */
+#incidencias > section > #incidencias-cards{
+   padding: 20px;
+}
+   
 
 
 

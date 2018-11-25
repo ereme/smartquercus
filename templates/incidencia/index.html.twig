@@ -5,30 +5,37 @@
 
 {% block body %}
     <div class="container" id="incidencias">
-        <div class="row">
-            <div class="col-md-9">
-                {% for incidencia in incidencias %}
-                    <a href="inmueble/{{incidencia.id}}">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img class="card-img-top" src="/images/atico.jpg" alt="Error al cargar imagen">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ incidencia.fechahora }}</h5>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                {% endfor %}
+        <section>
+            <div class="row" id="incidencias-filtros">
+                <div class="input-group-sm ml-auto mb-3">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected> Por fechas</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>    
+                </div>
+                <div class="input-group-sm mb-3">
+                    <select class="custom-select" id="inputGroupSelect02">
+                        <option selected>Por Estado</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>    
+                </div>
+                <a href="{{ path('incidencia_new') }}" data-toggle="tooltip" data-placement="top" title="Añadir incidencia"><i class="fas fa-plus fa-3x"></i></i></a>
             </div>
-        </div>
-        <a href="{{ path('incidencia_new') }}">Nueva incidencia</a>
+            <div class="row" id="incidencias-cards">
+                <a href=""><div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/imagen/alburquerque.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Fecha de publicación</h5>
+                        <p class="card-text">Asunto</p>
+                        
+                    </div>
+                </div></a> 
+            </div>
+        </section>
     </div>
 {% endblock %}
 {% block javascripts%}

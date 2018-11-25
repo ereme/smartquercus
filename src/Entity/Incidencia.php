@@ -17,7 +17,7 @@ class Incidencia
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $fechahora;
 
@@ -46,12 +46,12 @@ class Incidencia
         return $this->id;
     }
 
-    public function getFechahora(): ?\DateTimeInterface
+    public function getFechahora(): ?\DateInterface
     {
         return $this->fechahora;
     }
 
-    public function setFechahora(\DateTimeInterface $fechahora): self
+    public function setFechahora(\DateInterface $fechahora): self
     {
         $this->fechahora = $fechahora;
 
