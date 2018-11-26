@@ -1,29 +1,15 @@
 /* container */
 #incidencias{
-   background: #7FB3D5;
    margin-top: 2%;
 }
 
-/* sección globlar */
+/* sección global */
 #incidencias > section{
-   background:  #808b96 ;
+   
    margin-left: 40px;
    margin-right: 40px;
    margin-bottom: 20px;
    
-}
-
-/* filas globales */
-#incidencias > section > div.row{
-   background: #000;
-}
-
-/* botones de filtros */
-#incidencias > section > #incidencias-filtros{
-   padding: 20px;  
-}
-#incidencias div.input-group-sm {
-   margin-right: 10px;
 }
 
 /* cards */
@@ -31,11 +17,23 @@
    padding: 20px;
 }
 
-#incidencias-cards > a > div.card {
-   margin-right: 10px;
+#incidencias-cards > a {
+   text-decoration: none;
+   color: black;
+   margin: 0 auto;
+}
+#incidencias-cards > a:hover{
+   -ms-transform: scale(1.10); /* IE 9 */
+   -webkit-transform: scale(1.10); /* Safari 3-8 */
+   transform: scale(1.10); 
 }
 
-/* Vista de la incidencia */
+
+
+/*--- Fin Lista Incidencias ---*/
+
+
+/*--- Incidencia show ---*/
 
 #incidencia-vista > div.row {
    border: 1px solid #808b96;
@@ -46,13 +44,20 @@
    margin-bottom: 20px;
 }
 
+#incidencia-vista > div.row > div.col-7 > div.card{
+   margin-left: 50px;
+   padding-bottom: 40px;
+}
+
 #incidencia-vista > div.row > div.col-7 > div.card > div.card-body{
    text-align: center;
-   padding: 25px;
+   margin-top: 5px;
+   
 }
 
 #incidencia-vista > div.row > div.col-4 > img.img-fluid{
    margin-left: 50px;
+   border: 1px solid rgba(0,0,0,.125)
 }
 
 

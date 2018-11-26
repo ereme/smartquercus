@@ -6,32 +6,14 @@
 {% block body %}
     <div class="container" id="incidencias">
         <section>
-            <div class="row" id="incidencias-filtros">
-                <div class="input-group-sm ml-auto mb-3">
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected> Por fechas</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>    
-                </div>
-                <div class="input-group-sm mb-3">
-                    <select class="custom-select" id="inputGroupSelect02">
-                        <option selected>Por Estado</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>    
-                </div>
-            </div>
             <div class="row" id="incidencias-cards">
                 {% for incidencia in incidencias %}
                     <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="/imagen/alburquerque.jpg" alt="Card image cap">
+                            <img class="card-img-top" src="/imagen/bache.jpg" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">{{ incidencia.fecha|date('Y-m-d') }}</h5>
-                                <p>{{incidencia.estado}}</p>   
+                                <p>Estado: {{incidencia.estado}}</p>   
                             </div>
                         </div>
                     </a>
