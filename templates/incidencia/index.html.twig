@@ -23,17 +23,19 @@
                         <option value="3">Three</option>
                     </select>    
                 </div>
-                <a href="{{ path('incidencia_new') }}" data-toggle="tooltip" data-placement="top" title="Añadir incidencia"><i class="fas fa-plus fa-3x"></i></i></a>
             </div>
             <div class="row" id="incidencias-cards">
-                <a href=""><div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/imagen/alburquerque.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Fecha de publicación</h5>
-                        <p class="card-text">Asunto</p>
-                        
-                    </div>
-                </div></a> 
+                {% for incidencia in incidencias %}
+                    <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="/imagen/alburquerque.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ incidencia.fecha|date('Y-m-d') }}</h5>
+                                <p>{{incidencia.estado}}</p>   
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
             </div>
         </section>
     </div>

@@ -13,15 +13,12 @@ class IncidenciaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fechahora')
+            ->add('fecha')
             ->add('latitud')
             ->add('longitud')
             ->add('descripcion')
             ->add('estado', ChoiceType::class, array(
-                'choices' => array(
-                    'rechazado' => 'false',
-                    'solucionado' => 'true',
-                )
+                'choices' => Incidencia::ESTADOS
             ))
         ;
     }

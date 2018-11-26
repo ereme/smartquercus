@@ -30,6 +30,48 @@
 #incidencias > section > #incidencias-cards{
    padding: 20px;
 }
+
+#incidencias-cards > a > div.card {
+   margin-right: 10px;
+}
+
+/* Vista de la incidencia */
+
+#incidencia-vista > div.row {
+   border: 1px solid #808b96;
+}
+
+#incidencia-vista > div.row > div.col-4, div.col-7{
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+#incidencia-vista > div.row > div.col-7 > div.card > div.card-body{
+   text-align: center;
+   padding: 25px;
+}
+
+#incidencia-vista > div.row > div.col-4 > img.img-fluid{
+   margin-left: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 
 

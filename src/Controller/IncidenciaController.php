@@ -20,7 +20,7 @@ class IncidenciaController extends AbstractController
      */
     public function index(IncidenciaRepository $incidenciaRepository): Response
     {
-       
+        
         return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findAll()]);
     }
 
@@ -48,10 +48,13 @@ class IncidenciaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="incidencia_show", methods="GET")
+     * @Route("/{id}", name="incidencia", methods="GET")
      */
-    public function show(Incidencia $incidencium): Response
+    public function show(Incidencia $incidencium, $id): Response
     {
+        $incidencia = $this->getDoctrine()
+        ->getRepository(Incidencia::class)
+        ->find($id); 
         return $this->render('incidencia/show.html.twig', ['incidencium' => $incidencium]);
     }
 

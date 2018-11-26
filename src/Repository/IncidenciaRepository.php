@@ -23,12 +23,14 @@ class IncidenciaRepository extends ServiceEntityRepository
 //     * @return Incidencia[] Returns an array of Incidencia objects
 //     */
     
-    public function findByAll($value)
+    public function findByAll($incidencia)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.incidencia = :incidenciaID')
-            ->setParameter('incidencia', $incidencia)
-            ->orderBy('i.id', 'ASC')
+            ->where('i.incidencia = : incidenciaID')
+            ->setParameter(['incidenciaID' => $incidencia])
+            ->select("i.fecha, i.estado")
+            ->groupBy('i.id')
+            ->orderBy('i.fecha', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()

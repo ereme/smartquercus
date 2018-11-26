@@ -9,6 +9,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Incidencia
 {
+
+    const ESTADO_RECIBIDO = "RECIBIDO";
+    const ESTADO_ENPROCESO = "PROCESO";
+    const ESTADO_COMPLETADO = "COMPLETADO";
+    const ESTADO_RECHAZADO = "RECHAZADO";
+
+    const ESTADOS = array(self::ESTADO_RECIBIDO => "Recibido ", 
+                            self::ESTADO_ENPROCESO => " Procesando ", 
+                            self::ESTADO_COMPLETADO => "Completado ", 
+                            self::ESTADO_RECHAZADO=> " Rechazado "
+                        );
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -19,7 +31,7 @@ class Incidencia
     /**
      * @ORM\Column(type="date")
      */
-    private $fechahora;
+    private $fecha;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -46,14 +58,14 @@ class Incidencia
         return $this->id;
     }
 
-    public function getFechahora(): ?\DateInterface
+    public function getFecha(): ?\DateTimeInterface
     {
-        return $this->fechahora;
+        return $this->fecha;
     }
 
-    public function setFechahora(\DateInterface $fechahora): self
+    public function setFecha(\DateTime $fecha): self
     {
-        $this->fechahora = $fechahora;
+        $this->fecha = $fecha;
 
         return $this;
     }
