@@ -16,12 +16,13 @@
                                 <p class="card-text-2">{{ opina.pregunta }}</p>
                                 </div>
                                 
+
                                 <div class="progress">
-                                    <i class="far fa-thumbs-up"></i> <div id="{{opina.id}}favor" class="progress-bar bg-success" role="progressbar" style="width: {{ opina.votosfavor }}%" aria-valuenow="{{ opina.votosfavor }}" aria-valuemin="0" aria-valuemax="100">A Favor {{ opina.votosfavor }}</div>
+                                    <i class="far fa-thumbs-up"></i> <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ opina.PorcentajeFavor }}%" aria-valuenow="{{ opina.PorcentajeFavor }}" aria-valuemin="0" aria-valuemax="100"><span>{{ opina.PorcentajeFavor }} %</span></div>
                                 </div>
                                 <br>
                                 <div class="progress">
-                                    <i class="far fa-thumbs-down"></i> <div id="{{opina.id}}contra" class="progress-bar bg-danger" role="progressbar" style="width: {{ opina.votoscontra }}%" aria-valuenow="{{ opina.votoscontra }}" aria-valuemin="0" aria-valuemax="100">En Contra {{ opina.votoscontra }}</div>
+                                    <i class="far fa-thumbs-down"></i> <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{ opina.PorcentajeContra }}%" aria-valuenow="{{ opina.PorcentajeContra }}" aria-valuemin="0" aria-valuemax="100"><span>{{ opina.PorcentajeContra }} %</span></div>
                                 </div>
                                 <br>
                                 <p>
