@@ -1,0 +1,32 @@
+.card-title{
+	font-weight: bold;
+}
+
+.card-text p{
+	height: 100px;
+}
+
+h1 {
+	margin-top: 20px;
+	color: #069c03;
+	
+}
+
+.final{
+	text-align: center;
+}
+
+a:first-child{
+	color: black;	
+}
+
+
+a:hover{
+	color: #069c03;
+	text-decoration: none;
+}
+
+.final a{
+	color: #069c03;
+}
+

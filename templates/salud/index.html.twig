@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Saludables{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+  <h1>Salud</h1>
+  {% for row in saluds|batch(3) %}
+    <div class="row">
+      {% for salud in row %}
+        <div  class="col-sm-4">
+          <div class="card">
+            <a href="{{salud.id}}">
+              <img class="card-img-top" src="{{ asset('images/salud#{salud.id}.jpg') }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ salud.titulo}}</h5></a>        
+                <div class="card-text">
+                  <p class="card-text">{{ salud.texto|slice(0, 100) }}</p>
+                </div>
+                <div class="final">
+                  <a href="{{salud.id}}">Ver más</a> 
+                  <p>Fecha publicación {{ salud.fechahora ? salud.fechahora|date('d-m-Y') : '' }}</p> 
+                </div>                             
+              </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <br>
+    <br>
+  {% endfor %}
+</div>
+
+
+    <a href="{{ path('salud_new') }}">Nueva noticia</a>   
+
+{% endblock %}
+
