@@ -1,16 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-namespace App\Form;
-
-use App\Entity\Ayuntamiento;
-use App\Entity\Telefono;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-=======
 // src/Form/UserType.php
 namespace App\Form;
 
@@ -23,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
->>>>>>> c6f709b95a55c66a21bafc3f813f77a013c1622f
 
 class AyuntamientoType extends AbstractType
 {

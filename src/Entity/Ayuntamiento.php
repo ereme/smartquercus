@@ -45,6 +45,7 @@ class Ayuntamiento extends User
     {
         parent::__construct();
         $this->telefonos = new ArrayCollection();
+        $this->encuestas = new ArrayCollection();
         $this->roles = array('ROLE_AYTO');
         $this->isActive = true;
     }
@@ -108,8 +109,6 @@ class Ayuntamiento extends User
 
         return $this;
     }
-
-<<<<<<< HEAD
     /**
      * @return Collection|Opina[]
      */
@@ -140,8 +139,4 @@ class Ayuntamiento extends User
 
         return $this;
     }
-=======
-
-    
->>>>>>> c6f709b95a55c66a21bafc3f813f77a013c1622f
 }
