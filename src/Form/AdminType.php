@@ -6,6 +6,9 @@ use App\Entity\Admin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class AdminType extends AbstractType
 {
@@ -13,6 +16,15 @@ class AdminType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Contraseña'),
+                'second_options' => array('label' => 'Confirmar contraseña'),
+            ))
+            ->add('save', SubmitType::class, array(
+               'attr' => array('class' => 'btn btn-primary float-right'),
+               'label' => 'Darme de alta'
+           ))
         ;
     }
 

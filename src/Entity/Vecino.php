@@ -24,17 +24,17 @@ class Vecino extends User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nombre;
+    protected $nombre;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $apellido1;
+    protected $apellido1;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $apellido2;
+    protected $apellido2;
 
 
     public function __construct()
