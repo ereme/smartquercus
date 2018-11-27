@@ -1,49 +1,65 @@
 {{ form_start(form) }}
 
 	{{ dump (form)}}
-	{% if form.nombre is defined %}
-	    <div class="row">
-			<div class="col-md-12">
-				{{ form_row(form.nombre) }}
-			</div>	
-		</div>
-		{% else %}	
-		<div class="row">
-			<div class="col-md-6">
-				{{ form_row(form.apellido1) }}
-			</div>
-			<div class="col-md-6">
-				{{ form_row(form.apellido2) }}
-			</div>		
-		</div>				
 	
-	    <div class="row">
-			<div class="col-md-12">
-				{{ form_row(form.localidad) }}
-			</div>	
-		</div>
-	
+	 <div class="row">
+			{% if (form.nombre) is defined %}    	
+					<div class="col-md-12">
+						{{ form_row(form.nombre) }}
+					</div>	
+		    {% endif %}	
+    </div>
+		    
+	<div class="row">
+			{% if (form.apellido1) is defined %}		
+					<div class="col-md-6">
+						{{ form_row(form.apellido1) }}
+					</div>		
+			{% endif %}	
+			
+			{% if (form.apellido2) is defined %}		
+					<div class="col-md-6">
+						{{ form_row(form.apellido2) }}
+					</div>
+			{% endif %}					
+	</div>				
+	<div class="row">
+			{% if (form.localidad) is defined %}    	
+					<div class="col-md-12">
+						{{ form_row(form.localidad) }}
+					</div>
+			{% endif %}			
+    </div>
+				
 
 	<div class="row">
-		<div class="col-md-4">
-			{{ form_row(form.username) }}
-		</div>
-		<div class="col-md-8">
-			{{ form_row(form.email) }}
-		</div>
+			{% if (form.username) is defined %}	
+				<div class="col-md-4">
+					{{ form_row(form.username) }}
+				</div>
+			{% endif %}	
+			{% if (form.email) is defined %}	
+				<div class="col-md-8">
+					{{ form_row(form.email) }}
+				</div>
+			{% endif %}		
 	</div>
-	{% endif %}			
+			
 	<div class="row">
-		<div class="col-md-6">
-			{{ form_row(form.plainPassword.first) }}
-		</div>
-		<div class="col-md-6">
-			{{ form_row(form.plainPassword.second) }}
-		</div>
+			{% if (form.plainPassword.first) is defined %}	
+				<div class="col-md-6">
+					{{ form_row(form.plainPassword.first) }}
+				</div>
+			{% endif %}	
+			{% if (form.plainPassword.second) is defined %}		
+				<div class="col-md-6">
+					{{ form_row(form.plainPassword.second) }}
+				</div>
+			{% endif %}		
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-			{{ form_row(form.save) }}
-		</div>
+			<div class="col-md-12">
+				{{ form_row(form.save) }}
+			</div>
 	</div>		
 {{ form_end(form) }}

@@ -20,31 +20,12 @@ class AdminController extends AbstractController
      */
     public function index(AdminRepository $adminRepository): Response
     {
-        return $this->render('admin/index.html.twig', ['admins' => $adminRepository->findAll()]);
+        return $this->render('admin/index.html.twig',
+         ['admins' => $adminRepository->
+         findAll()]);
     }
 
-    /**
-     * @Route("/new", name="admin_new", methods="GET|POST")
-     */
-    public function new(Request $request): Response
-    {
-        $admin = new Admin();
-        $form = $this->createForm(AdminType::class, $admin);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($admin);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_index');
-        }
-
-        return $this->render('admin/new.html.twig', [
-            'admin' => $admin,
-            'form' => $form->createView(),
-        ]);
-    }
+  
 
     /**
      * @Route("/{id}", name="admin_show", methods="GET")
