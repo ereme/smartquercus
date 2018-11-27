@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\ORM\Mapping\Column;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SaludRepository")
  */
@@ -27,9 +29,21 @@ class Salud
     private $texto;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $fechahora;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     */
+    private $imagen;
+
+    public function __construct()
+    {
+        $this->imagen = new Imagen();
+    }
+
+   
 
     public function getId(): ?int
     {
@@ -72,5 +86,15 @@ class Salud
         return $this;
     }
 
-  
+    public function getImagen(): Imagen
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(Imagen $img): self
+    {
+        $this->imagen = $img;
+        return $this;
+    }
+
 }

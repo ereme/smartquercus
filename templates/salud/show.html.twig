@@ -5,10 +5,10 @@
 {% block body %}
 
     <div class="container container-fluid">
-        {{ salud.fechahora ? salud.fechahora|date('Y-m-d H:i:s') : '' }}
+        {{ salud.fechahora ? salud.fechahora|date('Y-m-d') : '' }}
         <div class="row">        
             <h1>{{ salud.titulo }}</h1> 
-            <img class="card-img-top" src="{{ asset('images/bienestar1.png') }}" alt="Card image cap">     
+            <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="50" height="50">     
             <p>{{ salud.texto }}</p>          
         </div>
         <a href="{{ path('salud_index') }}">Lista</a>

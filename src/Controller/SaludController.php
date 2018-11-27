@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Salud;
+use App\Entity\Imagen;
 use App\Form\SaludType;
 use App\Repository\SaludRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +35,32 @@ class SaludController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //$datos = $request->get('salud');
+            $fichero = $request->files->get('salud')['fichero'];
+            $fileName = md5(uniqid());
+
+            $imagen = new Imagen();
+            $imagen->setNombre($fileName);
+            $imagen->setOriginal($fichero->getClientOriginalName());
+            $salud->setImagen($imagen);
+            /*dump ($imagen);
+            dump ($fichero);
+            dump ($salud);*/
+
+            // Move the file to the directory where brochures are stored
+            try {
+                $fichero->move(
+                    $this->getParameter('carpeta_imagenes'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
+
             $em = $this->getDoctrine()->getManager();
+            //$em->persist($imagen);  //si no está el cascadepersist en Salud entity
             $em->persist($salud);
             $em->flush();
 
