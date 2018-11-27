@@ -57,12 +57,12 @@ class SecurityController extends Controller
         if ($tipo == Ayuntamiento::USER_AYTO) {
             $user = new Ayuntamiento();
             $form = $this->createForm(AyuntamientoType::class, $user);
-        } else if($tipo == Vecino::USER_VECINO){
-            $user = new Vecino();
-            $form = $this->createForm(VecinoType::class, $user);
-        } else {
+        } else if($tipo == Admin::USER_ADMIN){
             $user = new Admin();
-            $form = $this->createForm(AdminType::class,$user);
+            $form = $this->createForm(AdminType::class, $user);
+        } else {
+            $user = new Vecino();
+            $form = $this->createForm(VecinoType::class,$user);
         }
 
         // 2) handle the submit (will only happen on POST)
