@@ -15,10 +15,16 @@ class Incidencia
     const ESTADO_COMPLETADO = "COMPLETADO";
     const ESTADO_RECHAZADO = "RECHAZADO";
 
-    const ESTADOS = array(self::ESTADO_RECIBIDO => "Recibido ", 
-                            self::ESTADO_ENPROCESO => " Procesando ", 
-                            self::ESTADO_COMPLETADO => "Completado ", 
-                            self::ESTADO_RECHAZADO=> " Rechazado "
+    const ESTADOS = array(self::ESTADO_RECIBIDO => "RECIBIDO", 
+                            self::ESTADO_ENPROCESO => "PROCESO", 
+                            self::ESTADO_COMPLETADO => "COMPLETADO", 
+                            self::ESTADO_RECHAZADO=> "RECHAZADO"
+                        );
+
+    const ESTADOS_COLOR = array(self::ESTADO_RECIBIDO => "primary", 
+                            self::ESTADO_ENPROCESO => "warning", 
+                            self::ESTADO_COMPLETADO => "success", 
+                            self::ESTADO_RECHAZADO=> "danger"
                         );
 
     /**
@@ -116,5 +122,9 @@ class Incidencia
         $this->estado = $estado;
 
         return $this;
+    }
+
+    public function getColorEstado () {
+        return self::ESTADOS_COLOR[$this->getEstado()];
     }
 }

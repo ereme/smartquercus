@@ -12,8 +12,10 @@
                         <div class="card" style="width: 18rem;">
                             <img class="card-img-top" src="/imagen/bache.jpg" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ incidencia.fecha|date('Y-m-d') }}</h5>
-                                <p>Estado: {{incidencia.estado}}</p>   
+                                <h5 class="card-title">Fecha: {{ incidencia.fecha|date('Y-m-d') }}</h5>
+                                <span class="badge badge-{{incidencia.ColorEstado}}">
+                                    {{incidencia.estado}}
+                                </span>      
                             </div>
                         </div>
                     </a>

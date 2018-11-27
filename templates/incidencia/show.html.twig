@@ -11,17 +11,28 @@
             <div class="col-4">
                 <img src="/imagen/bache.jpg" class="img-fluid" alt="Responsive image">
             </div>
-            <div class="col-7">
-                <div class="card">
+            <div class="col-6">
+                
+                <div class="card">    
                     <div class="card-body">
-                        <h5 class="card-title">
-                            Fecha: {{ incidencium.fecha ? incidencium.fecha|date('Y-m-d') }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Latitud: {{ incidencium.latitud }}</h6>
-                        <h6 class="card-subtitle mb-2 text-muted">Longitud: {{ incidencium.longitud }}</h6>
-                        <p class="card-text">Descripcion: {{ incidencium.descripcion }}</p>
+                        <span class="badge badge-{{incidencia.ColorEstado}}">{{incidencia.estado}}</span>
+                        <h6 class="card-title">
+                            {{ incidencia.fecha ? incidencia.fecha|date('Y-m-d') }}
+                        </h6>
+                        <h6 class="card-subtitle mb-2">Latitud: {{ incidencia.latitud }}</h6>
+                        <p class="card-subtitle">Longitud: {{ incidencia.longitud }}</p>
+                        <div class="descripcion">
+                            <p class="card-text">{{ incidencia.descripcion }}</p>
+                        </div> 
                         <a href="{{ path('incidencia_index') }}" class="card-link">Volver a lista</a>
-                    </div>
+                        
+                            <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
+                                Editar
+                            </a>
+                        
+                    </div>    
                 </div>
+                
             </div>
         </div>
     </div>

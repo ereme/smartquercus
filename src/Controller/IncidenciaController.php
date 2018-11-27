@@ -50,30 +50,30 @@ class IncidenciaController extends AbstractController
     /**
      * @Route("/{id}", name="incidencia", methods="GET")
      */
-    public function show(Incidencia $incidencium, $id): Response
+    public function show(Incidencia $incidencia, $id): Response
     {
         $incidencia = $this->getDoctrine()
         ->getRepository(Incidencia::class)
         ->find($id); 
-        return $this->render('incidencia/show.html.twig', ['incidencium' => $incidencium]);
+        return $this->render('incidencia/show.html.twig', ['incidencia' => $incidencia]);
     }
 
     /**
      * @Route("/{id}/edit", name="incidencia_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Incidencia $incidencium): Response
+    public function edit(Request $request, Incidencia $incidencia): Response
     {
-        $form = $this->createForm(IncidenciaType::class, $incidencium);
+        $form = $this->createForm(IncidenciaType::class, $incidencia);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('incidencia_edit', ['id' => $incidencium->getId()]);
+            return $this->redirectToRoute('incidencia_edit', ['id' => $incidencia->getId()]);
         }
 
         return $this->render('incidencia/edit.html.twig', [
-            'incidencium' => $incidencium,
+            'incidencia' => $incidencia,
             'form' => $form->createView(),
         ]);
     }
@@ -81,11 +81,11 @@ class IncidenciaController extends AbstractController
     /**
      * @Route("/{id}", name="incidencia_delete", methods="DELETE")
      */
-    public function delete(Request $request, Incidencia $incidencium): Response
+    public function delete(Request $request, Incidencia $incidencia): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$incidencium->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$incidencia->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($incidencium);
+            $em->remove($incidencia);
             $em->flush();
         }
 
