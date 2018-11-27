@@ -22,6 +22,7 @@ h1{
 #fecha{
 	color: #01254f;
 	font-weight: bold;
+	font-size: 12px;
 }
 
 .btn{
@@ -33,4 +34,12 @@ h1{
 .progress .far{
 
 	margin-right: 5px;
+}
+
+#opina .progress{
+	font-size: 10px;
+}
+
+#opina .progress .far{
+	height: 5px
 }
