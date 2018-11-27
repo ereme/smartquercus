@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Vecino extends User
 {
 
-    const USER_AYTO = "VECINO";
+    const USER_VECINO = "VECINO";
 
     /**
      * @ORM\Id()
