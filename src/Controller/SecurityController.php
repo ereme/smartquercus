@@ -3,7 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Vecino;
+use App\Entity\Ayuntamiento;
+use App\Entity\Admin;
 use App\Form\UserType;
+use App\Form\VecinoType;
+use App\Form\AyuntamientoType;
+use App\Form\AdminType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,13 +50,26 @@ class SecurityController extends Controller
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        //$user = new User();
+        //$form = $this->createForm(UserType::class, $user);
+
+        $tipo = $request->query->get('tipo');
+        if ($tipo == Ayuntamiento::USER_AYTO) {
+            $user = new Ayuntamiento();
+            $form = $this->createForm(AyuntamientoType::class, $user);
+        } else if($tipo == Admin::USER_ADMIN){
+            $user = new Admin();
+            $form = $this->createForm(AdminType::class, $user);
+        } else {
+            $user = new Vecino();
+            $form = $this->createForm(VecinoType::class,$user);
+        }
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+        dump ($form);
+        dump ($request);
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);

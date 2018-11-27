@@ -26,26 +26,26 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
      */
-    private $username;
+    protected $username;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
-    private $plainPassword;
+    protected $plainPassword;
 
     /**
      * The below length depends on the "algorithm" you use for encoding
@@ -53,32 +53,18 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=64)
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="array")
      */
-    private $roles;
+    protected $roles;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    protected $isActive;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nombre;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $apellido1;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $apellido2;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Participacion", mappedBy="user", orphanRemoval=true)
@@ -208,41 +194,6 @@ class User implements UserInterface, \Serializable
         ) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
-    public function getNombre(): ?string
-    {
-        return $this->nombre;
-    }
-
-    public function setNombre(string $nombre): self
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    public function getApellido1(): ?string
-    {
-        return $this->apellido1;
-    }
-
-    public function setApellido1(string $apellido1): self
-    {
-        $this->apellido1 = $apellido1;
-
-        return $this;
-    }
-
-    public function getApellido2(): ?string
-    {
-        return $this->apellido2;
-    }
-
-    public function setApellido2(string $apellido2): self
-    {
-        $this->apellido2 = $apellido2;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Participacion[]
