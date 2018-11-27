@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -138,4 +137,33 @@ class OpinaController extends AbstractController
         $respuesta = new Response($jsonMensaje);       
         return $respuesta;
     }
+
+    /**
+     * @Route("/opina/json", name="json_opina")
+     */
+    public function opinaJson()
+    {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $callback = function ($dateTime) {
+            return $dateTime instanceof \DateTime
+                ? $dateTime->format('d-m-Y H:i')
+                : '';
+        };
+
+        $normalizer->setCallbacks(array('fechahoralimite' => $callback));
+
+        $normalizer->setCircularReferenceLimit(0);
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(Opina::class);
+        $opina = $repo->findAll();
+
+        $jsonMensaje = $serializer->serialize($opina, 'json');      
+        $respuesta = new Response($jsonMensaje);       
+        return $respuesta;
+    }
+    
 }

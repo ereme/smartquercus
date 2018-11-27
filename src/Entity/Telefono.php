@@ -30,7 +30,7 @@ class Telefono
      * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="telefonos")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $aytoid;
+    private $ayto;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class Telefono
         return $this;
     }
 
-    public function getAytoid(): ?Ayuntamiento
+    public function getAyto(): ?Ayuntamiento
     {
-        return $this->aytoid;
+        return $this->ayto;
     }
 
-    public function setAytoid(?Ayuntamiento $aytoid): self
+    public function setAyto(?Ayuntamiento $ayto): self
     {
-        $this->aytoid = $aytoid;
+        $this->ayto = $ayto;
 
         return $this;
     }

@@ -29,7 +29,7 @@ class Ayuntamiento
     private $localidad;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="aytoid")
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="ayto")
      */
     private $telefonos;
 

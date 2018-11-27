@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ayuntamiento{% endblock %}
+
+{% block body %}
+    <h1>Ayuntamiento</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ayuntamiento.id }}</td>
+            </tr>
+            <tr>
+                <th>Imagen escudo</th>
+                <td>{{ ayuntamiento.imagenescudo }}</td>
+            </tr>
+            <tr>
+                <th>Localidad</th>
+                <td>{{ ayuntamiento.localidad }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ayuntamiento_index') }}">back to list</a>
+
+    <a href="{{ path('ayuntamiento_edit', {'id': ayuntamiento.id}) }}">edit</a>
+
+    {{ include('ayuntamiento/_delete_form.html.twig') }}
+{% endblock %}
