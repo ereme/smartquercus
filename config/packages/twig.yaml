@@ -5,4 +5,5 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig']
     globals:
         brand_name: '%brand_name%'
+        ruta_imagenes: /images/
 
