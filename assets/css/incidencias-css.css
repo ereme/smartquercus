@@ -77,32 +77,21 @@
    clear: both;/* limpiar los flotados */
 }
 
-#incidencia-edit > section {
+#form-container{
+   border: 1px solid #808b96;
    margin: 2%;
-   
+   width: 100%; 
 }
 
-#incidencia-edit > section > form {
-   margin: 10px;
-   padding: 20px;
+#form-container > section{
+   margin: 2%; 
 }
 
-#incidencia-edit > section > form  input {
-   width: 20%;
+#form-container > section > .form-group{
+   width:20%; 
 }
 
-#incidencia-edit > section > form  select#incidencia_estado {
-   width: 20%;
-}
 
-#incidencia-edit > section > div.fr-buttons {
-   float: right;
-   margin: 20px;
-}
-
-#incidencia-edit > section > div.fr-buttons > form {
-   display: inline;
-}
 
 
 

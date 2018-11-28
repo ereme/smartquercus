@@ -1,4 +1,39 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+	<div class="container" id="form-container">
+        <section>
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="col-form-label">Fecha</label>
+                    <div class="form-group">
+                        {{ form_widget(form.fecha)}}
+                    </div>
+                    <label class="col-form-label">Latitud</label>
+                    <div class="form-group">
+                        {{ form_widget(form.latitud)}}
+                    </div>
+                    <label class="col-form-label">Longitud</label>
+                    <div class="form-group">
+                        {{ form_widget(form.longitud)}}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="col-form-label">Descripción</label>
+                    <div class="form-group">
+                        {{ form_widget(form.descripcion)}}
+                    </div>
+                    <label class="col-form-label">Estado</label>
+                    <div class="form-group">
+                        {{ form_widget(form.estado)}}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="/imagen/arbol.jpg" class="img-fluid" alt="...">    
+                </div>
+            </div>
+            <div class="text-center">
+                {{ form_widget(form.save)}}
+            </div>
+            <div class="clearfix"></div>
+        </section>
+    </div>		
 {{ form_end(form) }}

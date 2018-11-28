@@ -10,7 +10,9 @@
                 {% for incidencia in incidencias %}
                     <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="/imagen/bache.jpg" alt="Card image cap">
+                            <!-- Slider -->
+                            <img src="/imagen/arbol.jpg" class="img-fluid" alt="Responsive image">
+                            <!-- End Slider -->
                             <div class="card-body">
                                 <h5 class="card-title">Fecha: {{ incidencia.fecha|date('Y-m-d') }}</h5>
                                 <span class="badge badge-{{incidencia.ColorEstado}}">

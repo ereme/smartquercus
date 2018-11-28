@@ -5,23 +5,23 @@
 
 
 {% block body %}
-    <h1>Edit Incidencia</h1>
-    <div class="container" id="incidencia-edit">
-        <section>
-           {{ form_start(form) }}
-           {{ form_end(form) }}
-           <div class="fr-buttons">
-                {{ include('incidencia/_form.html.twig', {'button_label': 'Editar'}) }}
-                {{ include('incidencia/_delete_form.html.twig') }}
-                <a href="{{ path('incidencia_index') }}">Volver a lista</a>
-           </div>
-           <div class="clearfix"></div>
-        </section>
-        
-    </div>
 
-   
-
+<div class="container-fluid contenedor">
+	<div class="row">
+		<div class="col-md-12">
+		 	<h1>Incidencia</h1>
+		</div>
+	</div>
+	<div class="">
+		<div class="">
+            {{ include('incidencia/_form.html.twig') }}
+            {{ include('incidencia/_delete_form.html.twig') }}
+            <a href="{{ path('incidencia_index') }}">Volver a lista</a>
+		</div>
+        <div class="col-md-6">
+        </div>
+	</div>
+</div>
     
 
     
