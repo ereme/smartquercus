@@ -159,8 +159,9 @@ class OpinaController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repo = $this->getDoctrine()->getRepository(Opina::class);
+        
         $opina = $repo->findAll();
-
+    
         $jsonMensaje = $serializer->serialize($opina, 'json');      
         $respuesta = new Response($jsonMensaje);       
         return $respuesta;
