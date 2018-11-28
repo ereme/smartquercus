@@ -154,7 +154,11 @@ class OpinaController extends AbstractController
 
         $normalizer->setCallbacks(array('fechahoralimite' => $callback));
 
-        //$normalizer->setCircularReferenceLimit(0);
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
+        $normalizer->setCircularReferenceLimit(0);
+
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         $em = $this->getDoctrine()->getManager();
