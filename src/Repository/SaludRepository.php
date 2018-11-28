@@ -47,4 +47,12 @@ class SaludRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllOrdenados(){
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.fechahora', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

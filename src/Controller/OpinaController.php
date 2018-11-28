@@ -154,16 +154,16 @@ class OpinaController extends AbstractController
 
         $normalizer->setCallbacks(array('fechahoralimite' => $callback));
 
-        $normalizer->setCircularReferenceLimit(0);
+        //$normalizer->setCircularReferenceLimit(0);
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         $em = $this->getDoctrine()->getManager();
         $repo = $this->getDoctrine()->getRepository(Opina::class);
-        
         $opina = $repo->findAll();
-    
-        $jsonMensaje = $serializer->serialize($opina, 'json');      
-        $respuesta = new Response($jsonMensaje);       
+        dump($opina);   
+
+        $jsonMensaje = $serializer->serialize($opina, 'json');   
+        $respuesta = new Response($jsonMensaje);    
         return $respuesta;
     }
     

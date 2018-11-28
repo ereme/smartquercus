@@ -139,7 +139,7 @@ class SaludController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repo = $this->getDoctrine()->getRepository(Salud::class);
-        $opina = $repo->findAll();
+        $opina = $repo->findAllOrdenados();
 
         $jsonMensaje = $serializer->serialize($opina, 'json');      
         $respuesta = new Response($jsonMensaje);       

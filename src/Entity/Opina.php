@@ -38,6 +38,7 @@ class Opina
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="encuestas")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ayuntamiento;
 
@@ -46,7 +47,6 @@ class Opina
         $this->votosfavor=0;
         $this->votoscontra=0;
     }
-
 
     public function getId(): ?int
     {

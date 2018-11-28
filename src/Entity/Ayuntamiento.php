@@ -36,7 +36,7 @@ class Ayuntamiento extends User
      */
     private $telefonos;
 
-    /** 
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Opina", mappedBy="ayuntamiento")
      */
     private $encuestas;
@@ -45,9 +45,9 @@ class Ayuntamiento extends User
     {
         parent::__construct();
         $this->telefonos = new ArrayCollection();
-        $this->encuestas = new ArrayCollection();
         $this->roles = array('ROLE_AYTO');
         $this->isActive = true;
+        $this->encuestas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +109,7 @@ class Ayuntamiento extends User
 
         return $this;
     }
+
     /**
      * @return Collection|Opina[]
      */

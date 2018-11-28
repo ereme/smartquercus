@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/inicio")
- * @Security("has_role('ROLE_ADMIN')")
  */
 class InicioController extends AbstractController
 {
