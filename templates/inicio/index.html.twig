@@ -7,11 +7,11 @@
 <div class="container-fluid contenedor">
 
 
-    {% if participaciones is empty %}
+    {#{% if participaciones is empty %}
         {% include('inicio/_panel_explotacion_without.html.twig') %}
     {% else %}
         {% include('inicio/_panel_titular_dashboard.html.twig') %}
-    {% endif %}
+    {% endif %}#}
 
 
     {% if is_granted('ROLE_AYTO') %}

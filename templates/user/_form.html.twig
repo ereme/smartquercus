@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 
-	{{ dump (form)}}
+	{#{{ dump (form)}}#}
 	
 	 <div class="row">
 			{% if (form.nombre) is defined %}    	
@@ -30,8 +30,6 @@
 					</div>
 			{% endif %}			
     </div>
-				
-
 	<div class="row">
 			{% if (form.username) is defined %}	
 				<div class="col-md-4">
@@ -43,8 +41,7 @@
 					{{ form_row(form.email) }}
 				</div>
 			{% endif %}		
-	</div>
-			
+	</div>	
 	<div class="row">
 			{% if (form.plainPassword.first) is defined %}	
 				<div class="col-md-6">

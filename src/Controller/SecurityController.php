@@ -36,7 +36,7 @@ class SecurityController extends Controller
 
         // Renderiza la plantilla con dos parámetros: last_username y error (por si ha fallado el login y tiene que mostrar un error de autenticación)
 
-        dump ($security->getUser());
+        //dump ($security->getUser());
         return $this->render('user/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
