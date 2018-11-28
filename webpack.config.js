@@ -23,7 +23,7 @@ Encore
     .addStyleEntry('opina', './assets/css/opina.css')
     .addEntry('saludjs', './assets/js/saludjs.js')    
     .addStyleEntry('salud', './assets/css/salud.css')
-
+    .addStyleEntry('inicio', './assets/css/inicio.css')
 
     /*
      * FEATURE CONFIG

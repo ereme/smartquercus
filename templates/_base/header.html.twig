@@ -8,25 +8,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"><i class="fas fa-home"></i>
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('parcela_index') }}">Explotación</a>
+            <a class="nav-link" href="{{ path('parcela_index') }}">Noticias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('tratamiento_index') }}">Tratamiento</a>
+            <a class="nav-link" href="{{ path('tratamiento_index') }}">Avisos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('tratamiento_index') }}">Salud</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('tratamiento_index') }}">Vecinos</a>
+          </li>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('tratamiento_index') }}">Opina</a>
           </li>
         {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('tratamiento_index') }}">Descubre</a>
-          </li>        
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('tratamiento_index') }}">Precios</a>
-          </li>  
+            <a class="nav-link" href="{{ path('login') }}">Opina</a>
+          </li>
         {% endif %}
       </ul>
       <span class="navbar-text">
