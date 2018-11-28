@@ -3,11 +3,21 @@
 {% block title %}Edit Opina{% endblock %}
 
 {% block body %}
-    <h1>Edit Opina</h1>
+    <h1>Editar las pregutnas</h1>
+
+    <div class="container">
 
     {{ include('opina/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('opina_index') }}">back to list</a>
+
+
+    <a href="{{ path('opina_index') }}">Volver a las preguntas</a>
+
+    <hr>
+
 
     {{ include('opina/_delete_form.html.twig') }}
+
+
+    </div>
 {% endblock %}
