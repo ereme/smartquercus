@@ -21,6 +21,7 @@ Encore
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
     .addStyleEntry('app', './assets/css/app.css')
+    .addStyleEntry('inicio', './assets/css/inicio.css')
 
     /*
      * FEATURE CONFIG
