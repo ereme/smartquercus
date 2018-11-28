@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ayuntamiento index{% endblock %}
+
+{% block body %}
+    <h1>Ayuntamiento index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imagenescudo</th>
+                <th>Localidad</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ayuntamiento in ayuntamientos %}
+            <tr>
+                <td>{{ ayuntamiento.id }}</td>
+                <td>{{ ayuntamiento.imagenescudo }}</td>
+                <td>{{ ayuntamiento.localidad }}</td>
+                <td>
+                    <a href="{{ path('ayuntamiento_show', {'id': ayuntamiento.id}) }}">show</a>
+                    <a href="{{ path('ayuntamiento_edit', {'id': ayuntamiento.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ayuntamiento_new') }}">Create new</a>
+{% endblock %}

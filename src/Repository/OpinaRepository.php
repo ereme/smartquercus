@@ -47,5 +47,20 @@ class OpinaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult() //puedo poner: getResult() para muchos, getSingleResult() para uno
         ;
+
     }*/
+
+
+    public function findByAyto($aytoid)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.ayuntamiento = :val')
+            ->setParameter('val', $aytoid)
+            ->orderBy('o.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

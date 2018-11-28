@@ -36,12 +36,17 @@ class Opina
      */
     private $fechahoralimite;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="encuestas")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ayuntamiento;
+
     public function __construct()
     {
         $this->votosfavor=0;
         $this->votoscontra=0;
     }
-
 
     public function getId(): ?int
     {
@@ -124,6 +129,18 @@ class Opina
     public function setFechahoralimite(\DateTimeInterface $fechahoralimite): self
     {
         $this->fechahoralimite = $fechahoralimite;
+
+        return $this;
+    }
+
+    public function getAyuntamiento(): ?Ayuntamiento
+    {
+        return $this->ayuntamiento;
+    }
+
+    public function setAyuntamiento(?Ayuntamiento $ayuntamiento): self
+    {
+        $this->ayuntamiento = $ayuntamiento;
 
         return $this;
     }

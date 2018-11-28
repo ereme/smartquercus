@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * @Route("/salud")
@@ -113,5 +116,33 @@ class SaludController extends AbstractController
         }
 
         return $this->redirectToRoute('salud_index');
+    }
+
+    /**
+     * @Route("/salud/json", name="json_salud")
+     */
+    public function jsonSalud()
+    {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $callback = function ($dateTime) {
+            return $dateTime instanceof \DateTime
+                ? $dateTime->format('d-m-Y H:i')
+                : '';
+        };
+
+        $normalizer->setCallbacks(array('fechahora' => $callback));
+
+        $normalizer->setCircularReferenceLimit(0);
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(Salud::class);
+        $opina = $repo->findAllOrdenados();
+
+        $jsonMensaje = $serializer->serialize($opina, 'json');      
+        $respuesta = new Response($jsonMensaje);       
+        return $respuesta;
     }
 }

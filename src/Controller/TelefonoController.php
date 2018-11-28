@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * @Route("/telefono")
@@ -86,5 +89,25 @@ class TelefonoController extends AbstractController
         }
 
         return $this->redirectToRoute('telefono_index');
+    }
+
+    /**
+     * @Route("/telefono/json", name="json_telefono")
+     */
+    public function telefonoJson()
+    {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->setCircularReferenceLimit(0);
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(Telefono::class);
+        $opina = $repo->findAll();
+
+        $jsonMensaje = $serializer->serialize($opina, 'json');      
+        $respuesta = new Response($jsonMensaje);       
+        return $respuesta;
     }
 }

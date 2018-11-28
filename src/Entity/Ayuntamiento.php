@@ -32,9 +32,14 @@ class Ayuntamiento extends User
     private $localidad;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="aytoid")
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="ayto")
      */
     private $telefonos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Opina", mappedBy="ayuntamiento")
+     */
+    private $encuestas;
 
     public function __construct()
     {
@@ -42,6 +47,7 @@ class Ayuntamiento extends User
         $this->telefonos = new ArrayCollection();
         $this->roles = array('ROLE_AYTO');
         $this->isActive = true;
+        $this->encuestas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -104,6 +110,34 @@ class Ayuntamiento extends User
         return $this;
     }
 
+    /**
+     * @return Collection|Opina[]
+     */
+    public function getEncuestas(): Collection
+    {
+        return $this->encuestas;
+    }
 
-    
+    public function addEncuesta(Opina $encuesta): self
+    {
+        if (!$this->encuestas->contains($encuesta)) {
+            $this->encuestas[] = $encuesta;
+            $encuesta->setAyuntamiento($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEncuesta(Opina $encuesta): self
+    {
+        if ($this->encuestas->contains($encuesta)) {
+            $this->encuestas->removeElement($encuesta);
+            // set the owning side to null (unless already changed)
+            if ($encuesta->getAyuntamiento() === $this) {
+                $encuesta->setAyuntamiento(null);
+            }
+        }
+
+        return $this;
+    }
 }
