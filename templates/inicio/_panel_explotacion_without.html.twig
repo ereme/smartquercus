@@ -5,15 +5,14 @@
             Bienvenido a {{ brand_name }}
           </div>
           <div class="card-body">
-            <h5 class="card-title">Aún no has dado de alta ninguna explotación</h5>
-            <p class="card-text">Para comenzar es necesario dar de alta las parcelas</p>
+            <h5 class="card-title">Aún no has subido ninguna consulta y/o incidencia.</h5>
             <ol>
-                <li>Una <strong>explotación</strong> engloba varias agrupaciones</li>
-                <li>Una <strong>agrupación</strong> engloba varias parcelas</li>
+                <li>Los vecinos pueden subir cualquier tipo de <strong>incidencia o participación</strong>, adjuntando una foto y una pequeña descripción.</li>
+                <li>También se puede subir una <strong>encuesta o consulta</strong> para que los vecinos puedan votar a favor o en contra y ver los resultados después.</li>
             </ol>
-            <p class="card-text"><strong>Es muy sencillo.</strong> Comienza por dar de alta una explotación. Después, crea una agrupación.<br>
-                            Finalmente, añade las parcelas.</p>
-            <a class="btn btn-primary float-right" href="{{ path('explotacion_new') }}" >Crear explotación</a>
+            <p class="card-text"><strong>Es muy sencillo.</strong></p>
+            <a class="btn btn-primary float-right" href="{{ path('explotacion_new') }}" >Crear consulta</a>
+            <a class="btn btn-primary float-right" href="{{ path('explotacion_new') }}" >Crear participación</a>
           </div>
         </div>    
     </div>
