@@ -22,11 +22,11 @@
    color: black;
    margin: 0 auto;
 }
-#incidencias-cards > a:hover{
-   -ms-transform: scale(1.10); /* IE 9 */
-   -webkit-transform: scale(1.10); /* Safari 3-8 */
+/* #incidencias-cards > a:hover{
+   -ms-transform: scale(1.10); /* IE 9 
+   -webkit-transform: scale(1.10); /* Safari 3-8 
    transform: scale(1.10); 
-}
+} */
 
 /*--- Fin Lista Incidencias ---*/
 
@@ -89,6 +89,16 @@
 
 #form-container > section > .form-group{
    width:20%; 
+}
+
+#form-container > section > div.text-center > button#incidencia_delete{
+   margin-right: 10px; 
+}
+
+#form-container > section > div.text-center > a {
+   float: right;
+   margin-right: 10px;
+   text-decoration: none; 
 }
 
 

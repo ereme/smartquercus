@@ -48,6 +48,10 @@ class IncidenciaType extends AbstractType
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-primary float-right'),
                 'label' => 'Guardar'
+            ))
+            ->add('delete', SubmitType::class, array(
+                'attr' => array('class' => 'btn btn-primary float-right'),
+                'label' => 'Borrar'
             ))   
         ;
     }

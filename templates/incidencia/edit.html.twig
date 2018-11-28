@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Incidencia{% endblock %}
-{% block stylesheets %}<link rel="stylesheet" href="{{ asset('build/incidencias-css.css') }}">{% endblock %}
-
-
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('build/incidencias-css.css') }}">
+{% endblock %}
 {% block body %}
 
 <div class="container-fluid contenedor">
@@ -16,16 +16,12 @@
 		<div class="">
             {{ include('incidencia/_form.html.twig') }}
             {{ include('incidencia/_delete_form.html.twig') }}
-            <a href="{{ path('incidencia_index') }}">Volver a lista</a>
 		</div>
         <div class="col-md-6">
         </div>
 	</div>
 </div>
-    
+        
+{% endblock %}
 
-    
-{% endblock %}
-{% block javascripts%}
-    <script src="{{ asset('build/incidencias-js.js') }}"></script>
-{% endblock %}
+
