@@ -16,7 +16,7 @@ class OpinaType extends AbstractType
         $builder
             ->add('pregunta')
             ->add('fechahoralimite',  DateType::class, array(
-              'label' => 'name',
+              'label' => 'Fecha',
               'widget' => 'single_text',
               'html5' => true,
               'required' => true

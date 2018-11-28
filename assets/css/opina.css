@@ -11,6 +11,7 @@ h1{
 	color: #01254f;
 	font-weight: bold;
 	margin-left: 20px;
+	margin-bottom: 30px;
 	
 }
 
@@ -25,12 +26,6 @@ h1{
 	font-size: 12px;
 }
 
-.btn{
-
-	font-weight: bold;
-	border-radius: 10px;
-}
-
 .progress .far{
 
 	margin-right: 5px;
@@ -42,4 +37,9 @@ h1{
 
 #opina .progress .far{
 	height: 5px
+}
+
+#opina a{
+	color: #01254f;
+	font-size: 12px;
 }

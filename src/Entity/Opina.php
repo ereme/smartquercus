@@ -81,7 +81,11 @@ class Opina
     }
 
     public function getPorcentajeFavor () {
-        return round(100 * $this->votosfavor / ($this->votosfavor + $this->votoscontra));
+        if (($this->votosfavor + $this->votoscontra) == 0) {
+            return 0;
+        } else {
+            return round(100 * $this->votosfavor / ($this->votosfavor + $this->votoscontra));
+        }
     }
 
     public function getVotoscontra(): ?int
@@ -105,7 +109,11 @@ class Opina
     }
 
     public function getPorcentajeContra () {
-        return round(100 * $this->votoscontra / ($this->votoscontra + $this->votosfavor));
+        if (($this->votosfavor + $this->votoscontra) == 0) {
+            return 0;
+        } else {
+            return round(100 * $this->votoscontra / ($this->votosfavor + $this->votoscontra));
+        }
     }
 
     public function getFechahoralimite(): ?\DateTimeInterface
