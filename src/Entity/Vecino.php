@@ -13,6 +13,7 @@ class Vecino extends User
 {
 
     const USER_VECINO = "VECINO";
+    const ROLE_VECINO = "ROLE_VECINO";
 
     /**
      * @ORM\Id()
@@ -84,5 +85,6 @@ class Vecino extends User
 
         return $this;
     }
+   
 
 }

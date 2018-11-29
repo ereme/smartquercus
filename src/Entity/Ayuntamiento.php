@@ -13,6 +13,7 @@ class Ayuntamiento extends User
 {
 
     const USER_AYTO = "AYTO";
+    const ROLE_AYTO = "ROLE_AYTO";
 
     /**
      * @ORM\Id()

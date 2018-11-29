@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administrador{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid contenedor">
+	<h2 style="color:#5499C7 ">PANEL DE GESTIÓN DEL ADMINISTRADOR</h2>
+	<div class="card-group">
+	    <div class="col-md-9">
+	           <div class="row">
+			       <div class="col">
+			  	       <div class="card" >
+						  <div class="card-body">
+						    <h3 class="card-title"> Incidencias</h3>
+						    <p class="card-text">Aquí irá información relevante sobre las últimas incidencias.</p>
+						    <a href="#" class="card-link">Salir</a>
+						    <a href="#" class="card-link">Todas las incidencias.</a>
+						  </div>
+					   </div>
+			  	   </div>
+			    </div>
+			    <div class="w-100"><br></div>
+			    <div class="row">
+			       <div class="col">
+			  	        <div class="card" >
+						  <div class="card-body">
+						    <h3 class="card-title">Eventos</h3>
+						    <p class="card-text">Aquí irá información relevante sobre los últimos Eventos.</p>
+						    <a href="#" class="card-link">Ir a</a>
+						    <a href="#" class="card-link">Todas los eventos.</a>
+						  </div>
+					    </div>
+			        </div>
+			    </div>
+			    <div class="w-100"><br></div>
+			    <div class="row">
+			       <div class="col">
+			  	        <div class="card" >
+						  <div class="card-body">
+						    <h3 class="card-title">Opinión</h3>
+						    <p class="card-text">Aquí irá información relevante sobre los últimos Eventos.</p>
+						    <a href="{{ path('opina_index') }}" class="card-link">Ir a </a>
+						    <a href="#" class="card-link">Todas los eventos.</a>
+						  </div>
+					    </div>
+			        </div>
+			    </div> 
+			    <div class="w-100"><br></div>
+			    <div class="row">
+			       <div class="col">
+			  	        <div class="card" >
+						  <div class="card-body">
+						    <h3 class="card-title">Salud</h3>
+						    <p class="card-text">Aquí irá información relevante sobre los últimos Eventos.</p>
+						    <a href="{{ path('salud_index') }}" class="card-link">Ir a </a>
+						    <a href="#" class="card-link">Todas los eventos.</a>
+						  </div>
+					    </div>
+			        </div>
+			    </div>   
+	    </div>
+	    <div class="col-md-3">
+			<div class="card">
+			    <div class="card-body">
+					Ayuntamientos <span class="float-right">{{ ayuntamientos|length }}</span>
+					<br>
+                    Vecinos <span class="float-right">{{ vecinos|length }}</span>
+			    </div>
+		        <div class="centered">
+				  <center><button type="button" class="btn btn-primary " text-aling="center">Añadir</button></center>
+				</div>
+			</div>
+	    </div>
+	</div>
+</div>
+ 
+
+{% endblock %}
