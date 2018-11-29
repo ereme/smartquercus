@@ -9,12 +9,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Form\ImagenType;
+use Symfony\Component\HttpFoundation\File\File;
+
+
 class OpinaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('pregunta')
+            ->add('fichero', FileType::class, array(
+                'label' => 'Imagen',
+                'mapped' => false
+            ))
             ->add('fechahoralimite',  DateType::class, array(
               'label' => 'Fecha',
               'widget' => 'single_text',

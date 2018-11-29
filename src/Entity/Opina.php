@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OpinaRepository")
@@ -41,6 +44,11 @@ class Opina
      * @ORM\JoinColumn(nullable=false)
      */
     private $ayuntamiento;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", cascade={"all"})
+     */
+    private $imagen;
 
     public function __construct()
     {
@@ -143,5 +151,16 @@ class Opina
         $this->ayuntamiento = $ayuntamiento;
 
         return $this;
+    }
+
+    public function getImagen(): Imagen
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(Imagen $img): self
+    {
+        $this->imagen = $img;
+        return $this;;
     }
 }

@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Opina{% endblock %}
+    
+{% block stylesheets %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="{{ asset('build/opina.css') }}">
+            
+{% endblock %}
+
+
 
 {% block body %}
     <h1>Opina</h1>
@@ -10,7 +21,7 @@
                 {% for opina in row %}
                     <div id="opina" class="col-sm-4">
                         <div class="card">
-                            <img class="card-img-top" src="{{ asset('imagen/alburquerque.jpg')}}" alt="Card image cap" width="50">
+                            <img class="card-img-top" src="{{ asset(ruta_imagenes ~ opina.imagen.nombre) }}" alt="Card image cap" width="50">
                             <div class="card-body">
                                 <div class="card-text">
                                 <p class="card-text-2">{{ opina.pregunta }}</p>
@@ -41,18 +52,19 @@
         {% endfor %}
     </div>
 
+    {% if is_granted('ROLE_AYTO') %}
+        <a href="{{ path('opina_new') }}">Crear un nuevo Opina</a>
+    {% endif %}
 
-    <a href="{{ path('opina_new') }}">Create new</a>
+    
 
 
     
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-
+   
+    {{ parent() }}
 
     <script src="{{ asset('build/opinajs.js') }}"></script>
 {% endblock %}
