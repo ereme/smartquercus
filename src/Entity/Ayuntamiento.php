@@ -22,11 +22,6 @@ class Ayuntamiento extends User
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $imagenescudo;
-
-    /**
      * @ORM\Column(type="string", length=100)
      */
     private $localidad;
@@ -41,6 +36,11 @@ class Ayuntamiento extends User
      */
     private $encuestas;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     */
+    private $imagen;
+
     public function __construct()
     {
         parent::__construct();
@@ -52,19 +52,7 @@ class Ayuntamiento extends User
 
     public function getId(): ?int
     {
-        return $this->id;
-    }
-
-    public function getImagenescudo(): ?string
-    {
-        return $this->imagenescudo;
-    }
-
-    public function setImagenescudo(string $imagenescudo): self
-    {
-        $this->imagenescudo = $imagenescudo;
-
-        return $this;
+        return $this->id; 
     }
 
     public function getLocalidad(): ?string
@@ -137,6 +125,18 @@ class Ayuntamiento extends User
                 $encuesta->setAyuntamiento(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImagen(): ?Imagen
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?Imagen $imagen): self
+    {
+        $this->imagen = $imagen;
 
         return $this;
     }

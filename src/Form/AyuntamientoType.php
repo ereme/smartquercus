@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class AyuntamientoType extends AbstractType
 {
@@ -26,6 +28,10 @@ class AyuntamientoType extends AbstractType
                 'second_options' => array('label' => 'Confirmar contraseña'),
             ))
             ->add('localidad')
+            ->add('imagen', FileType::class, array(
+                'label' => 'Imagen escudo',
+                'mapped' => false
+            ))
             ->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),
                'label' => 'Darme de alta'

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ayuntamiento;
+use App\Entity\Imagen;
 use App\Form\AyuntamientoType;
 use App\Repository\AyuntamientoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +34,10 @@ class AyuntamientoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+        // Cargar imagen
+            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($ayuntamiento);
             $em->flush();

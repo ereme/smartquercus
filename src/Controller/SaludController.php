@@ -47,9 +47,6 @@ class SaludController extends AbstractController
             $imagen->setNombre($fileName);
             $imagen->setOriginal($fichero->getClientOriginalName());
             $salud->setImagen($imagen);
-            /*dump ($imagen);
-            dump ($fichero);
-            dump ($salud);*/
 
             // Move the file to the directory where brochures are stored
             try {

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Vecino;
 use App\Entity\Ayuntamiento;
 use App\Entity\Admin;
+use App\Entity\Imagen;
 use App\Form\UserType;
 use App\Form\VecinoType;
 use App\Form\AyuntamientoType;
@@ -73,6 +74,25 @@ class SecurityController extends Controller
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
+
+            if ($tipo == Ayuntamiento::USER_AYTO) {
+                $fichero = $request->files->get('ayuntamiento')['imagen'];
+                $fileName = md5(uniqid());
+
+                $imagen = new Imagen();
+                $imagen->setNombre($fileName);
+                $imagen->setOriginal($fichero->getClientOriginalName());
+                $user->setImagen($imagen);
+          
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
 
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
