@@ -95,7 +95,6 @@ class User implements UserInterface, \Serializable
     }
 
 
-
     // other properties and methods
 
     public function getId()

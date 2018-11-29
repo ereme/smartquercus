@@ -3,36 +3,42 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>IsActive</th>
-                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-md-4">
+                        <h1>Mi perfil</h1>
+                        <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><b>Nombre</b></p>
+                                    <p><b>1º apellido</b></p>
+                                    <p><b>2º apellido</b></p>
+                                    <p><b>Usuario</b></p>
+                                    <p><b>Email</b></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{ user.nombre }}</p>
+                                    <p>{{ user.apellido1 }}</p>
+                                    <p>{{ user.apellido2 }}</p>
+                                    <p>{{ user.username }}</p>
+                                    <p>{{ user.email }}</p>
+                                </div>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+                                {{ form_start(form) }}
+                                        <div class="col-md-12">
+                                            {{ form_row(form.fichero) }}
+                                         </div>
+                                {{ form_end(form) }}
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                            </div>
 
-    {{ include('user/_delete_form.html.twig') }}
+                <a href="{{ path('user_index') }}">back to list</a>
+
+                <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+                {{ include('user/_delete_form.html.twig') }}
+            </div>
+    </div>
+</div>
 {% endblock %}

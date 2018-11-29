@@ -4,6 +4,9 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Ayuntamiento;
+use App\Entity\Vecino;
+use App\Entity\Admin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,9 +28,6 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Contraseña'),
                 'second_options' => array('label' => 'Confirmar contraseña'),
             ))
-            ->add('nombre')
-            ->add('apellido1')
-            ->add('apellido2')
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-primary float-right'),
                 'label' => 'Darme de alta'
