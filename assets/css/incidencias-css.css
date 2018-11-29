@@ -8,8 +8,7 @@
    
    margin-left: 40px;
    margin-right: 40px;
-   margin-bottom: 20px;
-   
+   margin-bottom: 20px;   
 }
 
 /* cards */
@@ -22,11 +21,12 @@
    color: black;
    margin: 0 auto;
 }
-/* #incidencias-cards > a:hover{
-   -ms-transform: scale(1.10); /* IE 9 
-   -webkit-transform: scale(1.10); /* Safari 3-8 
+
+ #incidencias-cards > a:hover{
+   -ms-transform: scale(1.10); /* IE 9 */
+   -webkit-transform: scale(1.10); /* Safari 3-8 */
    transform: scale(1.10); 
-} */
+} 
 
 /*--- Fin Lista Incidencias ---*/
 
@@ -38,13 +38,22 @@
 }
 
 #incidencia-vista > div.row > div.col-4, div.col-6{
+   margin-left: 20px;
+}
+
+#incidencia-vista > div.row > div.col-4{
    margin-top: 20px;
    margin-bottom: 20px;
 }
 
+#incidencia-vista > div.row > div.col-6{
+   margin-top: 20px;
+  
+}
+
 #incidencia-vista > div.row > div.col-6 > div.card{
    margin-left: 50px;
-   padding-bottom: 40px;
+   padding-bottom: 75px;
 }
 
 #incidencia-vista > div.row > div.col-6 > div.card > div.card-body{
@@ -69,6 +78,14 @@
 #incidencia-vista > div.row > div.col-6 > div.card > div.card-body > a{
    float: right;
    margin-right: 20px;
+}
+
+#incidencia-vista .carousel-item{
+   height: 200px;
+}
+
+#incidencia-vista #carouselExampleControls{
+   border: 1px solid #f2f2f2;
 }
 
 /*-- Editar incidencia ---*/
@@ -99,6 +116,18 @@
    float: right;
    margin-right: 10px;
    text-decoration: none; 
+}
+
+#form-container .carousel-item{
+   height: 200px;
+}
+
+#form-container #carouselExampleControls{
+   border: 1px solid #f2f2f2;
+}
+
+#incidencia_descripcion {
+   height: 90px;
 }
 
 

@@ -13,15 +13,22 @@
             <div class="col-4">
                 <!-- Slider -->
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <!-- indicadores -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleControls" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleControls" data-slide-to="2"></li>
+                            </ol>
+                        <!-- end indicadores -->
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="/imagen/arbol.jpg" alt="First slide">
+                                <img class="img-fluid" src="/imagen/arbol.jpg" alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="/imagen/bache.jpg" alt="Second slide">
+                                <img class="img-fluid" src="/imagen/bache.jpg" alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="/imagen/calle.jpg" alt="Third slide">
+                                <img class="img-fluid" src="/imagen/calle.jpg" alt="Third slide">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -47,10 +54,11 @@
                             <p class="card-text">{{ incidencia.descripcion }}</p>
                         </div> 
                         <a href="{{ path('incidencia_index') }}" class="card-link">Volver a lista</a>
-                        
+                           
                             <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
                                 Editar
                             </a>
+                            
                         
                     </div>    
                 </div>
