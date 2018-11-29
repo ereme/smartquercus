@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Eventos{% endblock %}
+
+{% block body %}
+
+    <div class="container container-fluid">
+        {{ evento.fechahora ? evento.fechahora|date('Y-m-d') : '' }}
+        <div class="row">        
+            <h1>{{ evento.titular }}</h1> 
+            <img class="card-img-top" src="{{ asset(ruta_imagenes ~ eventos.imagen.nombre) }}" alt="Card image cap" width="50" height="50">     
+            <p>{{ evento.texto }}</p>          
+        </div>
+        <a href="{{ path('evento_index') }}">Lista</a>
+        <a href="{{ path('evento_edit', {'id': evento.id}) }}">Editar</a>
+        {{ include('evento/_delete_form.html.twig') }}
+    </div> 
+{% endblock %}
