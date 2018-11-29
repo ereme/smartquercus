@@ -27,6 +27,8 @@ Encore
     .addStyleEntry('inicio', './assets/css/inicio.css')
     .addEntry('incidencias-js', './assets/js/incidencias-js.js')
     .addStyleEntry('incidencias-css', './assets/css/incidencias-css.css')
+    .addStyleEntry('register', './assets/css/register_footer.css')
+
 
 
     /*

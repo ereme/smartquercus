@@ -3,8 +3,13 @@
 
 {% block body %}
 
+    {% set tipo = app.request.get('tipo') %}
+
+
+
+
 <!-- Header - set the background image for the header in the line below -->
-    <header class="py-5 bg-image-full" style="background-image: url({{ asset('images/01_landscape.jpg') }});">
+   <header class="py-5 bg-image-full" style="background-image: url('https://www.nuevosvecinos.com/support2/img/nv/banner3.png');">
       <img class="img-fluid d-block mx-auto" src="http://placehold.it/200x200&text=Logo" alt="">
     </header>
 
@@ -13,10 +18,20 @@
       <div class="container">
       	<div class="row">
 	      	<div class="col-md-6">
-		        <h1>Mejora tus explotaciones</h1>
-		        <p class="lead">Completo programa de gestión de explotaciones agroganaderas</p>
-		        <p>Ahora puedes tener el control de tus explotaciones, permitir que tu asesor acceda a tus datos y generar los cuadernos de forma automática. Porque lo único que te hace falta es tiempo para tu familia y amigos.</p>	      		
-	      	</div>      		
+            
+
+            {% if (tipo == 'AYTO') %}
+		            {{ include('user/texto_ayto.html.twig') }}
+
+	      	  {% elseif (tipo == 'ADMIN') %}
+                {{ include('user/texto_admin.html.twig') }}
+
+            {% else %}
+                {{ include('user/texto_vecino.html.twig') }}
+
+            {% endif %}
+          </div>
+
 	      	<div class="col-md-6">
 	      		{{ include('user/_form.html.twig') }}
 	      	</div>  
@@ -25,26 +40,29 @@
     </section>
 
     <!-- Image Section - set the background image for the header in the line below -->
-    <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
+    <!--<section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">-->
       <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
-      <div style="height: 200px;"></div>
-    </section>
+      <!--<div style="height: 200px;"></div>
+    </section>-->
 
     <!-- Content section -->
-    <section class="py-5">
+    <!--<section class="py-5">
       <div class="container">
         <h1>Section Heading</h1>
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
       </div>
-    </section>
+    </section>-->
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-      </div>
-      <!-- /.container -->
+    <footer  class="" >
+        {{ include('user/register_footer.html.twig') }}
     </footer>
 
+
+{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('build/register.css') }}">
 {% endblock %}
