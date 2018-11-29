@@ -36,7 +36,6 @@ class AyuntamientoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
         // Cargar imagen
-            
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($ayuntamiento);
@@ -68,6 +67,22 @@ class AyuntamientoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $fichero = $request->files->get('ayuntamiento')['imagen'];
+            $fileName = md5(uniqid());
+
+            $imagen = new Imagen();
+            $imagen->setNombre($fileName);
+            $imagen->setOriginal($fichero->getClientOriginalName());
+            $ayuntamiento->setImagen($imagen);
+
+            try {
+                $fichero->move(
+                    $this->getParameter('carpeta_imagenes'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('ayuntamiento_edit', ['id' => $ayuntamiento->getId()]);
