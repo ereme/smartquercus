@@ -34,7 +34,7 @@ class Salud
     private $fechahora;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", mappedBy="opina", cascade={"all"})
      */
     private $imagen;
 

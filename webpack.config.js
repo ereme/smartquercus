@@ -21,7 +21,7 @@ Encore
     .addEntry('opinajs', './assets/js/opina.js')    
     .addStyleEntry('app', './assets/css/app.css')
     .addStyleEntry('opina', './assets/css/opina.css')
-    .addEntry('saludjs', './assets/js/saludjs.js')    
+    .addEntry('saludjs', './assets/js/salud.js')    
     .addStyleEntry('salud', './assets/css/salud.css')
     .addStyleEntry('inicio', './assets/css/inicio.css')
 

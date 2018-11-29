@@ -37,6 +37,7 @@ class Imagen
     public function __construct()
     {
         $this->saluds = new ArrayCollection();
+        $this->opinas = new ArrayCollection();
     }
 
     /**
@@ -87,8 +88,6 @@ class Imagen
 
         return $this;
     }
-
-
 
    
 }
