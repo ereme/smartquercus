@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Incidencia index{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('build/incidencias-css.css') }}">{% endblock %}
+
+{% block body %}
+    <div class="container" id="incidencias">
+        <section>
+            <div class="row" id="incidencias-cards">
+                {% for incidencia in incidencias %}
+                    <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
+                        <div class="card" style="width: 18rem;">
+                            <!-- Slider -->
+                            <img class="img-fluid" src="/imagen/bache.jpg" alt="First slide">
+                            <!-- End Slider -->
+                            <div class="card-body">
+                                <h5 class="card-title">Fecha: {{ incidencia.fecha|date('Y-m-d') }}</h5>
+                                <span class="badge badge-{{incidencia.ColorEstado}}">
+                                    {{incidencia.estado}}
+                                </span>      
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascripts%}
+    <script src="{{ asset('build/incidencias-js.js') }}"></script>
+{% endblock %}
