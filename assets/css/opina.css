@@ -1,0 +1,47 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+#opina .card{
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#opina .card-text p{
+	height: 100px;
+}
+
+h1{
+	color: #01254f;
+	font-weight: bold;
+	margin-left: 20px;
+	margin-bottom: 30px;
+	
+}
+
+#opina .card-text-2{
+	color: #01254f;
+	font-weight: bold;
+}
+
+#fecha{
+	color: #01254f;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.progress .far{
+
+	margin-right: 5px;
+}
+
+#opina .progress{
+	font-size: 10px;
+}
+
+#opina .progress .far{
+	height: 5px
+}
+
+#opina a{
+	color: #01254f;
+	font-size: 12px;
+}

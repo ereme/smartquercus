@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear consulta ciudadana{% endblock %}
+
+{% block body %}
+<div class="container-fluid contenedor">
+	<div class="row">
+		<div class="col-md-12">
+		 	<h1>Crear consulta ciudadana</h1>
+		</div>
+	</div>
+	<div class="row justify-content-md-center">
+		<div class="col-md-6">
+		    {{ include('opina/_form.html.twig') }}
+		</div>
+	</div>
+</div>
+
+
+    <a href="{{ path('opina_index') }}">Volver a la lista opiniones</a>
+{% endblock %}

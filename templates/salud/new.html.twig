@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Artículo{% endblock %}
+
+{% block body %}
+<div class="container-fluid contenedor">
+	<div class="row">
+		<div class="col-md-12">
+		 	<h3>Crear artículo</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		    
+		</div>
+		<div class="col-md-6">			
+		    {{ include('salud/_form.html.twig') }}
+		</div>
+	</div>
+</div>
+
+    <a href="{{ path('salud_index') }}">Lista</a>
+{% endblock %}

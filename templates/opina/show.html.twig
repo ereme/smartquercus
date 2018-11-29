@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Opina{% endblock %}
+
+{% block body %}
+    <h1>Opina</h1>
+
+    <div class="container">
+
+        <table id="mostrar" class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ opina.id }}</td>
+                </tr>
+                <tr>
+                    <th>Pregunta</th>
+                    <td>{{ opina.pregunta }}</td>
+                </tr>
+                <tr>
+                    <th>Votos a favor</th>
+                    <td>{{ opina.votosfavor }}</td>
+                </tr>
+                <tr>
+                    <th>Votos en contra</th>
+                    <td>{{ opina.votoscontra }}</td>
+                </tr>
+                <tr>
+                    <th>Fecha limite</th>
+                    <td>{{ opina.fechahoralimite ? opina.fechahoralimite|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <a href="{{ path('opina_index') }}">Volver a la lista</a>
+
+        <hr>
+
+        <a href="{{ path('opina_edit', {'id': opina.id}) }}">Editar</a>
+
+    
+    </div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Añadir nuevo ayuntamiento{% endblock %}
+
+{% block body %}
+    <h1>Añadir nuevo ayuntamiento</h1>
+
+    {{ include('ayuntamiento/_form.html.twig') }}
+
+    <a href="{{ path('ayuntamiento_index') }}">back to list</a>
+{% endblock %}
