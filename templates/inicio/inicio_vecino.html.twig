@@ -3,6 +3,7 @@
 {% block title %}Vecino{% endblock %}
 
 {% block body %}
+  <div class="container">
 
   <div class="card-group">
     <div class="col-md-3">
@@ -10,7 +11,7 @@
   			<div class="card-header">Agenda de Eventos</div>
   			    <section class="py-5 bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2018/05/31/12/02/celebration-3443810__340.jpg');"></section>
 				  <div class="card-body text-primary">
-				    <h5 class="card-title" style="color:#5499C7  ">Qué hacemos hoy</h5>
+				    <a href=""><h5 class="card-title" style="color:#5499C7 ">Qué hacemos hoy</h5></a>
 				    <p class="card-text"></p>
 				  </div>
         </div>
@@ -20,7 +21,7 @@
   			<div class="card-header">Incidencias</div>
   			    <section class="py-5 bg-image-full" style="background-image: url('https://s3.amazonaws.com/StartupStockPhotos/uploads/20160503/5.jpg');"></section>
 				  <div class="card-body text-primary">
-				    <h5 class="card-title" style="color:#FF0000">Describe tú incidencia</h5>
+				    <a href=""><h5 class="card-title" style="color:#FF0000">Describe tú incidencia</h5></a>
 				    <p class="card-text"></p>
 				  </div>
 			
@@ -31,7 +32,7 @@
   			<div class="card-header">Salud</div>
   				<section class="py-5 bg-image-full" style="background-image: url('http://politecnicocartagena.es/wp-content/uploads/2018/07/salud-port.jpg');"></section>
 				  <div class="card-body text-primary">
-				    <h5 class="card-title" style="color:#1E8449">Cuídate</h5>
+				    <a href="{{ path('salud_index') }}"><h5 class="card-title" style="color:#1E8449">Cuídate</h5></a>
 				    <p class="card-text"></p>
 				  </div>
         </div>
@@ -41,7 +42,7 @@
   			<div class="card-header">Opina</div>
   			    <section class="py-5 bg-image-full" style="background-image: url('http://politecnicocartagena.es/wp-content/uploads/2018/07/saloud-2.jpg');"></section>
 				  <div class="card-body text-primary">
-				    <h5 class="card-title" style="color:#F4D03F">Propón ideas</h5>
+				     <a href="{{ path('opina_index') }}"><h5 class="card-title" style="color:#D68D05">Propón ideas</h5></a>
 				    <p class="card-text"></p>
 				  </div>
 			

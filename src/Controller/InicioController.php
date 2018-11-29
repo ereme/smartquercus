@@ -7,7 +7,8 @@ use App\Entity\Vecino;
 use App\Entity\Ayuntamiento;
 use App\Entity\Admin;
 use App\Form\LocalidadType;
-use App\Repository\ParcelaRepository;
+use App\Repository\AyuntamientoRepository;
+use App\Repository\VecinoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class InicioController extends AbstractController
     /**
      * @Route("/", name="inicio", methods="GET")
      */
-    public function index(ParcelaRepository $parcelaRepository): Response
+    public function index(AyuntamientoRepository $aytoRepo,VecinoRepository $vecinoRepo): Response
     {
 
         if ($this->isGranted(Vecino::ROLE_VECINO)) {
@@ -39,8 +40,12 @@ class InicioController extends AbstractController
                 'incidencias' => $this->getUser()->getParticipaciones()
             ]);
         } elseif ($this->isGranted(Admin::ROLE_ADMIN)) {
+
+
             return $this->render('inicio/inicio_admin.html.twig', [
-                'participaciones' => $this->getUser()->getParticipaciones()
+                'ayuntamientos' => $aytoRepo->findAll(),
+                'vecinos' => $vecinoRepo->findAll()
+
             ]);
         } else {
 
