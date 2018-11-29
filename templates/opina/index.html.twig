@@ -12,19 +12,27 @@
                         <div class="card">
                             <img class="card-img-top" src="{{ asset('imagen/alburquerque.jpg')}}" alt="Card image cap" width="50">
                             <div class="card-body">
-                                <h5 class="card-title">ALBURQUERQUE</h5>
                                 <div class="card-text">
                                 <p class="card-text-2">{{ opina.pregunta }}</p>
                                 </div>
+                                
+
+                                <div class="progress">
+                                    <i class="far fa-thumbs-up"></i> <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ opina.PorcentajeFavor }}%" aria-valuenow="{{ opina.PorcentajeFavor }}" aria-valuemin="0" aria-valuemax="100"><span>{{ opina.PorcentajeFavor }} %</span></div>
+                                </div>
+                                <br>
+                                <div class="progress">
+                                    <i class="far fa-thumbs-down"></i> <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{ opina.PorcentajeContra }}%" aria-valuenow="{{ opina.PorcentajeContra }}" aria-valuemin="0" aria-valuemax="100"><span>{{ opina.PorcentajeContra }} %</span></div>
+                                </div>
+                                <br>
                                 <p>
-                                <input type="hidden" value="{{ opina.id }}">
-                                <button type="button" class="btn btn-outline-success botonopina" valor="F">A favor</button>
-                                <button type="button" class="btn btn-outline-danger botonopina" valor="C">En contra</button>
+                                    <input type="hidden" value="{{ opina.id }}">
+                                    <button type="button" class="btn btn-outline-success botonopina" valor="F">A favor</button>
+                                    <button type="button" class="btn btn-outline-danger botonopina" valor="C">En contra</button>
                                 </p>
-                                <p>Tienes de fecha hasta: {{ opina.fechahoralimite ? opina.fechahoralimite|date('d-m-Y') : '' }}</p>
+                                <p id="fecha">Tienes de fecha hasta: {{ opina.fechahoralimite ? opina.fechahoralimite|date('d-m-Y') : '' }}</p>
 
                                 <a href="{{ path('opina_show', {'id': opina.id}) }}">Mostrar</a>
-                                <a href="{{ path('opina_edit', {'id': opina.id}) }}">Editar</a>
                             </div>
                         </div>
                     </div>
@@ -46,5 +54,5 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
 
-    <script src="{{ asset('build/opina.js') }}"></script>
+    <script src="{{ asset('build/opinajs.js') }}"></script>
 {% endblock %}
