@@ -14,7 +14,6 @@ class TelefonoType extends AbstractType
         $builder
             ->add('nombre')
             ->add('telefono')
-            ->add('ayto')
         ;
     }
 

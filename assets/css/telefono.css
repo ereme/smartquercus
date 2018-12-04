@@ -1,0 +1,21 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+h1{
+	font-weight: bold;
+	margin: 30px;
+    text-align: center;
+}
+
+form {
+    padding: 25px;
+    padding-left: 500px;
+}
+
+form > #telefono > div > input{
+    width: 350px;
+}
+
+form > button {
+    width: 100px;
+}
+
