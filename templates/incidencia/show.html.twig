@@ -54,10 +54,11 @@
                             <p class="card-text">{{ incidencia.descripcion }}</p>
                         </div> 
                         <a href="{{ path('incidencia_index') }}" class="card-link">Volver a lista</a>
-                           
-                            <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
-                                Editar
-                            </a>
+                           {% if is_granted('USER_ADMIN') %}
+                                <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
+                                    Editar
+                                </a>
+                            {% endif %}
                             
                         
                     </div>    
