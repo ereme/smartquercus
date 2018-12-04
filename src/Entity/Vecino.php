@@ -38,10 +38,8 @@ class Vecino extends User
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="vecinos")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $ayuntamiento;
-
 
     public function __construct()
     {

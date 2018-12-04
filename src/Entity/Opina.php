@@ -52,6 +52,7 @@ class Opina
 
     public function __construct()
     {
+        $this->imagen = new Imagen();
         $this->votosfavor=0;
         $this->votoscontra=0;
     }

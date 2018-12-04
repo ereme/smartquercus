@@ -38,10 +38,11 @@ class Ayuntamiento extends User
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $imagen;
 
-    /*
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Vecino", mappedBy="ayuntamiento")
      */
     private $vecinos;
@@ -54,6 +55,7 @@ class Ayuntamiento extends User
         $this->isActive = true;
         $this->encuestas = new ArrayCollection();
         $this->vecinos = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -143,6 +145,8 @@ class Ayuntamiento extends User
     public function setImagen(?Imagen $imagen): self
     {
         $this->imagen = $imagen;
+        return $this;
+    }
 
     /**
      * @return Collection|Vecino[]
@@ -174,4 +178,5 @@ class Ayuntamiento extends User
 
         return $this;
     }
+    
 }

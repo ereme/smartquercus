@@ -34,7 +34,7 @@ class OpinaController extends AbstractController
         if ($this->isGranted('ROLE_AYTO')) { //soy ayto
             $opinas = $this->getUser()->getEncuestas();
         } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
-            $opinas = $this->getUser()->getAyuntamiento()->getAyuntamiento();
+            $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
         }
 
         return $this->render('opina/index.html.twig', [
