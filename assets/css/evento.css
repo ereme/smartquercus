@@ -1,0 +1,27 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+
+.card{
+	height: 100%;
+}
+.card .card-img-top{
+
+	width: 418px;
+	height: 300px;
+}
+
+.iconos_evento{
+	margin-top: 20px;
+	margin-left: 100px;
+}
+#eventoicon{
+	color: #cacbcc;
+	font-size: 30px;	
+}
+#eventoicon:hover{
+	color: #8c8f94;
+
+
+}
+

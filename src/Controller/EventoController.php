@@ -24,7 +24,7 @@ class EventoController extends AbstractController
      */
     public function index(EventoRepository $eventoRepository): Response
     {
-        return $this->render('evento/index.html.twig', ['eventos' => $eventoRepository->findAll()]);
+        return $this->render('evento/index.html.twig', ['evento' => $eventoRepository->findAll()]);
     }
 
    
@@ -93,13 +93,13 @@ class EventoController extends AbstractController
      */
     public function edit(Request $request, Evento $evento): Response
     {
-        $form = $this->createForm(EventosType::class, $evento);
+        $form = $this->createForm(EventoType::class, $evento);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('eventos_edit', ['id' => $evento->getId()]);
+            return $this->redirectToRoute('evento_edit', ['id' => $evento->getId()]);
         }
 
         return $this->render('evento/edit.html.twig', [
