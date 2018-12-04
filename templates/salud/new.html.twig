@@ -21,3 +21,10 @@
 
     <a href="{{ path('salud_index') }}">Lista</a>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}  
+
+    <script src="{{ asset('build/saludjs.js') }}"></script>
+            
+{% endblock %}

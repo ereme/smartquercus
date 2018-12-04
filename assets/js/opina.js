@@ -19,8 +19,8 @@ $( document ).ready(function() {
             dataType: 'json',
             success: function success(datos) {
      
-     			mas = Math.round(100 * datos.votosfavor / (datos.votosfavor + datos.votoscontra));
-     			menos = Math.round(100-mas);
+     			var mas = Math.round(100 * datos.votosfavor / (datos.votosfavor + datos.votoscontra));
+     			var menos = Math.round(100-mas);
 
             	favor.find('span').text(mas +' ' + '%');          	
             	favor.attr({
@@ -45,5 +45,10 @@ $( document ).ready(function() {
         });
 
 	});
+
+
+    $('#opina_fichero').on('change',function (e) {
+        $(this).next('.custom-file-label').html(e.target.files[0].name);
+    });
 
 });
