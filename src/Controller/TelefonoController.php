@@ -25,9 +25,11 @@ class TelefonoController extends AbstractController
     public function index(TelefonoRepository $telefonoRepository): Response
     {
 
-        if ($this->isGranted('ROLE_AYTO')) { //soy ayto
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $telefonos = $telefonoRepository->findAll();
+        } elseif ($this->isGranted('ROLE_AYTO')) { 
             $telefonos = $this->getUser()->getTelefonos();
-        } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
+        } elseif ($this->isGranted('ROLE_VECINO')) { 
             $telefonos = $this->getUser()->getAyuntamiento()->getTelefonos();
         }
 

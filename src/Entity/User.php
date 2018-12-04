@@ -66,16 +66,9 @@ class User implements UserInterface, \Serializable
     protected $isActive;
 
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participacion", mappedBy="user", orphanRemoval=true)
-     */
-    private $participaciones;
-
-
     public function __construct() {
         $this->roles = array('ROLE_USER');
         $this->isActive = true;
-        $this->participaciones = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -192,38 +185,6 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized, ['allowed_classes' => false]);
-    }
-
-
-    /**
-     * @return Collection|Participacion[]
-     */
-    public function getParticipaciones(): Collection
-    {
-        return $this->participaciones;
-    }
-
-    public function addParticipacione(Participacion $participacione): self
-    {
-        if (!$this->participaciones->contains($participacione)) {
-            $this->participaciones[] = $participacione;
-            $participacione->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipacione(Participacion $participacione): self
-    {
-        if ($this->participaciones->contains($participacione)) {
-            $this->participaciones->removeElement($participacione);
-            // set the owning side to null (unless already changed)
-            if ($participacione->getUser() === $this) {
-                $participacione->setUser(null);
-            }
-        }
-
-        return $this;
     }
 
 }
