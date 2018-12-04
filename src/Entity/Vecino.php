@@ -36,6 +36,10 @@ class Vecino extends User
      */
     protected $apellido2;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="vecinos")
+     */
+    private $ayuntamiento;
 
     public function __construct()
     {
@@ -81,6 +85,18 @@ class Vecino extends User
     public function setApellido2(string $apellido2): self
     {
         $this->apellido2 = $apellido2;
+
+        return $this;
+    }
+
+    public function getAyuntamiento(): ?Ayuntamiento
+    {
+        return $this->ayuntamiento;
+    }
+
+    public function setAyuntamiento(?Ayuntamiento $ayuntamiento): self
+    {
+        $this->ayuntamiento = $ayuntamiento;
 
         return $this;
     }

@@ -19,3 +19,10 @@
 
     <a href="{{ path('opina_index') }}">Volver a la lista opiniones</a>
 {% endblock %}
+
+{% block javascripts %}
+            {{ parent() }}  
+
+                <script src="{{ asset('build/opinajs.js') }}"></script>
+
+{% endblock %}

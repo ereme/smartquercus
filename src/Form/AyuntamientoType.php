@@ -30,7 +30,8 @@ class AyuntamientoType extends AbstractType
             ->add('localidad')
             ->add('imagen', FileType::class, array(
                 'label' => 'Imagen escudo',
-                'mapped' => false
+                'mapped' => false,
+                'required' => false,
             ))
             ->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),

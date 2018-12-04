@@ -38,8 +38,14 @@ class Ayuntamiento extends User
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $imagen;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Vecino", mappedBy="ayuntamiento")
+     */
+    private $vecinos;
 
     public function __construct()
     {
@@ -48,6 +54,8 @@ class Ayuntamiento extends User
         $this->roles = array('ROLE_AYTO');
         $this->isActive = true;
         $this->encuestas = new ArrayCollection();
+        $this->vecinos = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -137,7 +145,38 @@ class Ayuntamiento extends User
     public function setImagen(?Imagen $imagen): self
     {
         $this->imagen = $imagen;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vecino[]
+     */
+    public function getVecinos(): Collection
+    {
+        return $this->vecinos;
+    }
+
+    public function addVecino(Vecino $vecino): self
+    {
+        if (!$this->vecinos->contains($vecino)) {
+            $this->vecinos[] = $vecino;
+            $vecino->setAyuntamiento($this);
+        }
 
         return $this;
     }
+
+    public function removeVecino(Vecino $vecino): self
+    {
+        if ($this->vecinos->contains($vecino)) {
+            $this->vecinos->removeElement($vecino);
+            // set the owning side to null (unless already changed)
+            if ($vecino->getAyuntamiento() === $this) {
+                $vecino->setAyuntamiento(null);
+            }
+        }
+
+        return $this;
+    }
+    
 }

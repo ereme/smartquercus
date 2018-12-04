@@ -75,24 +75,28 @@ class SecurityController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            if ($tipo == Ayuntamiento::USER_AYTO) {
-                $fichero = $request->files->get('ayuntamiento')['imagen'];
-                $fileName = md5(uniqid());
+            if ($request->files->get('ayuntamiento')['imagen'] != null) {
+                if ($tipo == Ayuntamiento::USER_AYTO) {
+                    $fichero = $request->files->get('ayuntamiento')['imagen'];
+                    $fileName = md5(uniqid());
 
-                $imagen = new Imagen();
-                $imagen->setNombre($fileName);
-                $imagen->setOriginal($fichero->getClientOriginalName());
-                $user->setImagen($imagen);
-          
-                try {
-                    $fichero->move(
-                        $this->getParameter('carpeta_imagenes'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
+                    $imagen = new Imagen();
+                    $imagen->setNombre($fileName);
+                    $imagen->setOriginal($fichero->getClientOriginalName());
+                    $user->setImagen($imagen);
+              
+                    try {
+                        $fichero->move(
+                            $this->getParameter('carpeta_imagenes'),
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+                }                
             }
+
+
 
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();

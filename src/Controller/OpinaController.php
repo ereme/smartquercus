@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Opina;
+use App\Entity\Ayuntamiento;
+use App\Entity\Imagen;
 use App\Form\OpinaType;
 use App\Repository\OpinaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,6 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+
+
 
 /**
  * @Route("/opina")
@@ -23,20 +29,54 @@ class OpinaController extends AbstractController
      */
     public function index(OpinaRepository $opinaRepository): Response
     {
+
+        $opinas = array();
+        if ($this->isGranted('ROLE_AYTO')) { //soy ayto
+            $opinas = $this->getUser()->getEncuestas();
+        } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
+            $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
+        }
+
         return $this->render('opina/index.html.twig', [
-            'opinas' => $opinaRepository->findAll()]);
+            'opinas' => $opinas
+        ]);
     }
 
     /**
      * @Route("/new", name="opina_new", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function new(Request $request): Response
     {
         $opina = new Opina();
+        $opina->setAyuntamiento($this->getUser());
         $form = $this->createForm(OpinaType::class, $opina);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //$datos = $request->get('salud');
+            $fichero = $request->files->get('opina')['fichero'];
+            $fileName = md5(uniqid());
+
+            $imagen = new Imagen();
+            $imagen->setNombre($fileName);
+            $imagen->setOriginal($fichero->getClientOriginalName());
+            $opina->setImagen($imagen);
+            /*dump ($imagen);
+            dump ($fichero);
+            dump ($salud);*/
+
+            // Move the file to the directory where brochures are stored
+            try {
+                $fichero->move(
+                    $this->getParameter('carpeta_imagenes'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($opina);
             $em->flush();
@@ -51,8 +91,9 @@ class OpinaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="opina_show", methods="GET")
-     */
+    * @Route("/{id}", name="opina_show", methods="GET")
+    * @Security("has_role('ROLE_AYTO')")
+    */
     public function show(Opina $opina): Response
     {
         return $this->render('opina/show.html.twig', ['opina' => $opina]);
@@ -60,6 +101,7 @@ class OpinaController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="opina_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function edit(Request $request, Opina $opina): Response
     {
@@ -80,6 +122,7 @@ class OpinaController extends AbstractController
 
     /**
      * @Route("/{id}", name="opina_delete", methods="DELETE")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function delete(Request $request, Opina $opina): Response
     {
