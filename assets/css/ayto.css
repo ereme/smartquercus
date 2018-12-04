@@ -1,0 +1,6 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+form {
+    padding-left: 200px;
+    padding-right: 200px;
+}
