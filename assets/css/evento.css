@@ -21,7 +21,15 @@
 }
 #eventoicon:hover{
 	color: #8c8f94;
+}
+.container .botonesedit{
+	margin-left: 81%;
+}
 
-
+.container .botonesedit .dos{
+	margin-top: 4px;
+}
+.btn:hover{
+	background-color: #c2c4c3;
 }
 

@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{asset('build/evento.css')}}">
+
+{% endblock %}
 
 {% block title %}Edit Eventos{% endblock %}
 
@@ -6,21 +11,20 @@
     <h1>Edit Eventos</h1>
 
     <div class="container container-fluid"> 
+
         <div class="row">
             <div class="col-sm-3">
-                <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
-                {{ form_row(form.fichero) }}  
-                <a href="">Editar imagen</a> 
-            </div>
-            <div class="col-sm-9"> 
-               {{ form_row(form.titulo) }}
-               {{ form_row(form.texto) }}
-               {{ form_row(form.fechahora) }}
+                <img class="card-img-top" src="{{ asset(ruta_imagenes ~ evento.imagen.nombre) }}" alt="Card image cap">
             </div> 
-            <div class="row">
-              {{ include('salud/_form.html.twig', {'button_label': 'Update'}) }}
-              {{ include('salud/_delete_form.html.twig') }}
-            </div>   
-         </div>
-    </div>
+        </div>	
+        <div class="row botonesedit">
+         <div class="col uno">
+          {{ include('evento/_form.html.twig') }} 
+         </div>  
+         <div class="col dos">  
+          {{ include('evento/_delete_form.html.twig') }} 
+         </div> 
+        </div>  	 
+     </div>
+</div>
 {% endblock %}
