@@ -68,15 +68,14 @@ class User implements UserInterface, \Serializable
     
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $imagen;
-
 
     public function __construct() {
         $this->roles = array('ROLE_USER');
         $this->isActive = true;
         $this->participaciones = new ArrayCollection();
-        $this->imagen = new Imagen();
     }
 
 

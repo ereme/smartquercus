@@ -37,15 +37,10 @@ class Ayuntamiento extends User
     private $encuestas;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $imagen;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Vecino", mappedBy="ayuntamiento")
      */
     private $vecinos;
+
 
     public function __construct()
     {
@@ -134,17 +129,6 @@ class Ayuntamiento extends User
             }
         }
 
-        return $this;
-    }
-
-    public function getImagen(): ?Imagen
-    {
-        return $this->imagen;
-    }
-
-    public function setImagen(?Imagen $imagen): self
-    {
-        $this->imagen = $imagen;
         return $this;
     }
 
