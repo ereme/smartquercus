@@ -35,9 +35,10 @@ class EventoType extends AbstractType
                                 'rows'=>'5')
                 ))
             ->add('save', SubmitType::class, array(
-                'attr' => array('class' => 'btn btn-primary float-right'),
+                'attr' => array('class' => 'btn float-right'),
                 'label' => 'Guardar'
             ));
+            
         ;
     }
 

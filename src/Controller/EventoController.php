@@ -97,8 +97,30 @@ class EventoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            dump('entra');
+
+
+           // Si viene imagen nueva ---> borrar la antigua de bd y disco y subir la nueva
+           // Si viene imagen nueva: if (nombre antiguo es distinta a nombre nuevo || tamaño antiguo distinto a tamaño nuevo)
+            dump($request->files);
+            $nombre_antiguo = $evento->getFichero()->OriginalName;
+            $nombre_nuevo = $fichero->getClientOriginalName();
+            $tamano_antiguo = 0;
+            $tamano_nuevo = 0;
+
+            if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)) {
+ $tamano_antiguo = 0;
+            } 
+
+            //borrar la imagen
+            $em->remove($evento->getImagen());
+            $em->flush();
             $this->getDoctrine()->getManager()->flush();
 
+        return $this->render('evento/edit.html.twig', [
+            'evento' => $evento,
+            'form' => $form->createView(),
+        ]);
             return $this->redirectToRoute('evento_edit', ['id' => $evento->getId()]);
         }
 

@@ -15,7 +15,7 @@
 {% block body %}
     <div class="container-fluid">
   <h1>evento</h1>
-  {% for row in eventos|batch(3) %}
+  {% for row in evento|batch(3) %}
     <div class="row">
       {% for evento in row %}
         <div  class="col-sm-4">
@@ -25,7 +25,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ evento.titular}}</h5></a>        
                 <div class="card-text">
-                  <p class="card-text">{{ evento.texto|slice(0, 100) }}</p>
+                  <p class="card-text">{{ evento.texto|slice(0, 120) }}</p>
                 </div>
                 <div class="final">
                   <a href="{{evento.id}}">Ver más</a> 
