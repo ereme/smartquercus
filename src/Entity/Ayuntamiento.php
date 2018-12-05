@@ -49,6 +49,7 @@ class Ayuntamiento extends User
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Incidencia", mappedBy="ayuntamiento", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $incidencias;
 
