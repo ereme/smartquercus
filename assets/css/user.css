@@ -1,0 +1,21 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.row{
+	margin-left: 10px;
+}
+
+.img-rounded{
+    border-radius:180px;
+    border:5px solid #e6f3ff;
+}
+
+#boton{
+	background-color: #b3daff;
+	border-color: #b3daff;
+}
+
+#boton:hover{
+	background-color: #e6f3ff;
+	color: black;
+	border-color: #b3daff;
+}

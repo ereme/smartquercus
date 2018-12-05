@@ -2,6 +2,10 @@
 
 {% block title %}Edit User{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/user.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>Edit User</h1>
 
@@ -10,4 +14,6 @@
     <a href="{{ path('user_index') }}">back to list</a>
 
     {{ include('user/_delete_form.html.twig') }}
+
+    {{ include('user/imagen_form.html.twig') }}
 {% endblock %}

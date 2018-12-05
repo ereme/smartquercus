@@ -3,36 +3,72 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>IsActive</th>
-                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container-fluid">
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('ROLE_VECINO') %}
+            <h1>
+            <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200"> {{ user.nombre }} {{ user.apellido1 }} {{ user.apellido2 }}</h1>
+            <hr>
+            <div class="row">
+                    <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><b>Nombre</b></p>
+                                            <p><b>1º apellido</b></p>
+                                            <p><b>2º apellido</b></p>
+                                            <p><b>Usuario</b></p>
+                                            <p><b>Email</b></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>{{ user.nombre }}</p>
+                                            <p>{{ user.apellido1 }}</p>
+                                            <p>{{ user.apellido2 }}</p>
+                                            <p>{{ user.username }}</p>
+                                            <p>{{ user.email }}</p>
+                                            <p>
+                                                <a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a>
+                                                {{ include('user/_delete_form.html.twig') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                    </div>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_AYTO') %}
+            <h1>
+            <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200"> {{ user.nombre }}</h1>
+            <hr>
+            <div class="row">
+                    <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><b>Nombre</b></p>
+                                            <p><b>Localidad</b></p>
+                                            <p><b>Teléfonos</b></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>{{ user.nombre }}</p>
+                                            <p>{{ user.localidad }}</p>
+                                            <p>{{ user.telefonos }}</p>
+                                            <p>
+                                                <a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a>
+                                                {{ include('user/_delete_form.html.twig') }}
+                                                </p>
+                                        </div>
+                                    </div>
+                    </div>
+            </div>
+            {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+{% block javascripts %}
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+ {{ parent() }}
 
-    {{ include('user/_delete_form.html.twig') }}
+
+ <script src="{{ asset('build/userjs.js') }}"></script>
+
 {% endblock %}
