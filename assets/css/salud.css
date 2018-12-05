@@ -1,3 +1,4 @@
+/* INDEX */
 .card-title{
 	font-weight: bold;
 }
@@ -6,27 +7,70 @@
 	height: 100px;
 }
 
-h1 {
+h1.salud {
 	margin-top: 20px;
+	color: #069c03;	
+}
+
+.salud1:hover, .salud3:hover{
 	color: #069c03;
-	
+	text-decoration: none;	
+}
+
+.salud1, .salud3{
+	color: black;
 }
 
 .final{
 	text-align: center;
 }
 
-a:first-child{
-	color: black;	
+/* SHOW */
+.salud2, img.saludimg{
+	margin-top: 40px;
 }
 
-
-a:hover{
-	color: #069c03;
-	text-decoration: none;
-}
-
-.final a{
+.salud2{
 	color: #069c03;
 }
 
+.salud4{
+	text-align: justify;
+}
+
+.col-md-3 img{
+	margin-bottom:20px;
+}
+
+.container-fluid .row .col-sm-4 .card{
+	height: 100%;
+}
+
+#saludicon{
+	color: #cacbcc;
+	font-size: 30px;
+}
+
+#saludicon:hover{
+	color: #8c8f94;
+}
+
+.iconos{
+	margin-top: 20px;
+	margin-left: 100px;
+}
+
+.imgtodas{
+	height: 300px; 
+	width: 396px;
+}
+
+
+/* EDIT */
+
+
+
+/*DELETE y FORMTYPE*/
+#btnsalud:hover, .saludbtn:hover{
+	background-color: #c2c4c3;	
+}

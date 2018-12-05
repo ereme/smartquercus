@@ -33,6 +33,11 @@ class Imagen
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $size;
+
 
     public function __construct()
     {
@@ -84,6 +89,18 @@ class Imagen
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
 
         return $this;
     }

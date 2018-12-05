@@ -35,6 +35,7 @@ class Salud
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $imagen;
 
