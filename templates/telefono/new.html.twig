@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}New Telefono{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/telefono.css') }}">
+{% endblock %}
+{% block title %}Añadir teléfono{% endblock %}
 
 {% block body %}
-    <h1>Create new Telefono</h1>
+    <h1>Añadir teléfono</h1>
 
     {{ include('telefono/_form.html.twig') }}
 

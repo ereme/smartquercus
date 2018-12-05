@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Ayuntamiento</th>
                 <th>Nombre</th>
                 <th>Telefono</th>
                 <th>actions</th>
@@ -17,7 +17,7 @@
         <tbody>
         {% for telefono in telefonos %}
             <tr>
-                <td>{{ telefono.id }}</td>
+                <td>{{ telefono.ayto.localidad }}</td>
                 <td>{{ telefono.nombre }}</td>
                 <td>{{ telefono.telefono }}</td>
                 <td>

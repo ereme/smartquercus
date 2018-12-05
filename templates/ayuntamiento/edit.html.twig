@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/ayto.css') }}">        
+{% endblock %}
+
+
 {% block title %}Edit Ayuntamiento{% endblock %}
 
 {% block body %}
     <h1>Edit Ayuntamiento</h1>
 
-    {{ include('ayuntamiento/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('ayuntamiento/_form.html.twig', {'button_label': 'Actualizar datos'}) }}
 
     <a href="{{ path('ayuntamiento_index') }}">back to list</a>
 

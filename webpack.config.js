@@ -24,6 +24,8 @@ Encore
     .addStyleEntry('opina', './assets/css/opina.css')
     .addEntry('saludjs', './assets/js/salud.js')    
     .addStyleEntry('salud', './assets/css/salud.css')
+    .addStyleEntry('telefono', './assets/css/telefono.css')
+    .addStyleEntry('ayto', './assets/css/ayto.css')
     .addStyleEntry('inicio', './assets/css/inicio.css')
     .addEntry('incidencias-js', './assets/js/incidencias-js.js')
     .addStyleEntry('incidencias-css', './assets/css/incidencias-css.css')

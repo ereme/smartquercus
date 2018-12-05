@@ -1,7 +1,34 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+	<div class="row">
+		<div class="col-md-12">
+			{{ form_row(form.email) }}
+		</div>		
+		<div class="col-md-12">
+			{{ form_row(form.username) }}
+		</div>
+		<div class="col-md-12">
+			{{ form_row(form.plainPassword) }}
+		</div>	
+		<div class="col-md-12">
+			{{ form_row(form.localidad) }}
+		</div>
+	</div>	
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{{ asset(ruta_imagenes ~ ayuntamiento.imagen.nombre) }}"height="100" width="100">
+        </div>	
+        <div class="col-md-10">
+            {{ form_row(form.imagen) }}
+        </div>	
+    </div>
+	<div class="row">
+		<div class="col-md-12">
+            <button class="btn">{{ button_label|default('Save') }}</button>
+		</div>
+	</div>		
 {{ form_end(form) }}
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script type="text/javascript">

@@ -29,11 +29,6 @@ class Localidad
      */
     private $provincia;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Parcela", mappedBy="localidad")
-     */
-    private $parcelas;
-
     public function __construct()
     {
         $this->parcelas = new ArrayCollection();
@@ -68,34 +63,4 @@ class Localidad
         return $this;
     }
 
-    /**
-     * @return Collection|Parcela[]
-     */
-    public function getParcelas(): Collection
-    {
-        return $this->parcelas;
-    }
-
-    public function addParcela(Parcela $parcela): self
-    {
-        if (!$this->parcelas->contains($parcela)) {
-            $this->parcelas[] = $parcela;
-            $parcela->setLocalidad($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParcela(Parcela $parcela): self
-    {
-        if ($this->parcelas->contains($parcela)) {
-            $this->parcelas->removeElement($parcela);
-            // set the owning side to null (unless already changed)
-            if ($parcela->getLocalidad() === $this) {
-                $parcela->setLocalidad(null);
-            }
-        }
-
-        return $this;
-    }
 }
