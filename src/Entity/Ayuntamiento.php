@@ -48,7 +48,7 @@ class Ayuntamiento extends User
     private $vecinos;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Incidencia", mappedBy="ayuntamiento", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Incidencia", mappedBy="ayuntamiento", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $incidencias;
 

@@ -53,6 +53,7 @@ class IncidenciaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $incidencium->setAyuntamiento($ayuntamiento);
+            //$ayuntamiento->addIncidencia($incidencium);
             $em = $this->getDoctrine()->getManager();
             $em->persist($incidencium);
             $em->flush();
@@ -110,4 +111,5 @@ class IncidenciaController extends AbstractController
 
         return $this->redirectToRoute('incidencia_index');
     }
+    
 }
