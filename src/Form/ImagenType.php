@@ -16,8 +16,14 @@ class ImagenType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre') 
-        ;
+            ->add('fichero', FileType::class, array(
+                'label' => 'Imagen',
+                'mapped' => false
+            ))
+            ->add('save', SubmitType::class, array(
+                'attr' => array('class' => 'btn btn-primary float-right'),
+                'label' => 'Guardar'
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

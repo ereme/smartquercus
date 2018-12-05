@@ -19,12 +19,12 @@ class Imagen
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nombre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $original;
 
@@ -37,6 +37,7 @@ class Imagen
     public function __construct()
     {
         $this->saluds = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     /**

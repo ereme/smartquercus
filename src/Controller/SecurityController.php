@@ -68,11 +68,33 @@ class SecurityController extends Controller
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-        dump ($form);
-        dump ($request);
+        /*dump ($form);
+        dump ($request);*/
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
+
+            if ($request->files->get('ayuntamiento')['imagen'] != null) {
+                if ($tipo == Ayuntamiento::USER_AYTO) {
+                    $fichero = $request->files->get('ayuntamiento')['imagen'];
+                    $fileName = md5(uniqid());                    
+
+                    $imagen = new Imagen();
+                    $imagen->setNombre($fileName);
+                    $imagen->setOriginal($fichero->getClientOriginalName());
+                    $user->setImagen($imagen);                    
+
+                    try {
+                    $fichero->move(
+                            $this->getParameter('carpeta_imagenes'),
+                            $fileName
+                        );
+                    } 
+                    catch (FileException $e) {
+                       // ... handle exception if something happens during file upload
+                    }
+                }
+            }
 
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();

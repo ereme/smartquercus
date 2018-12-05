@@ -39,3 +39,12 @@
 
     <a href="{{ path('user_registration') }}">Create new</a>
 {% endblock %}
+
+{% block javascripts %}
+
+ {{ parent() }}
+
+
+ <script src="{{ asset('build/userjs.js') }}"></script>
+
+{% endblock %}
