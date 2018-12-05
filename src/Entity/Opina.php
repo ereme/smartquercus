@@ -35,7 +35,7 @@ class Opina
     private $votoscontra;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $fechahoralimite;
 
@@ -135,7 +135,7 @@ class Opina
         return $this->fechahoralimite;
     }
 
-    public function setFechahoralimite(\DateTimeInterface $fechahoralimite): self
+    public function setFechahoralimite(\Date $fechahoralimite): self
     {
         $this->fechahoralimite = $fechahoralimite;
 
@@ -162,6 +162,6 @@ class Opina
     public function setImagen(Imagen $img): self
     {
         $this->imagen = $img;
-        return $this;;
+        return $this;
     }
 }

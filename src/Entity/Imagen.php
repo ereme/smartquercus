@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UrlRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Imagen
 {
@@ -33,19 +34,12 @@ class Imagen
      */
     private $createdAt;
 
-
-    public function __construct()
-    {
-        $this->saluds = new ArrayCollection();
-        $this->opinas = new ArrayCollection();
-    }
-
     /**
     * @ORM\PrePersist
     */
     public function setCreatedAtValue()
     {
-        $this->createdAt = new \DateTime();
+        $this->setCreatedAt(new \DateTime);
     }
 
     public function getId(): ?int
