@@ -2,11 +2,20 @@
 
 {% block title %}Crear consulta ciudadana{% endblock %}
 
+
+{% block stylesheets %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="{{ asset('build/opina.css') }}">
+            
+{% endblock %}
+
 {% block body %}
-<div class="container-fluid contenedor">
+<div id="new" class="container-fluid contenedor">
 	<div class="row">
 		<div class="col-md-12">
-		 	<h1>Crear consulta ciudadana</h1>
+		 	<h1> <i class="far fa-edit"></i> Crear consulta ciudadana</h1>
 		</div>
 	</div>
 	<div class="row justify-content-md-center">
@@ -14,10 +23,12 @@
 		    {{ include('opina/_form.html.twig') }}
 		</div>
 	</div>
+
+	<a href="{{ path('opina_index') }}"><i class="fas fa-arrow-circle-left"></i> Volver a la lista opiniones</a>
 </div>
 
 
-    <a href="{{ path('opina_index') }}">Volver a la lista opiniones</a>
+   
 {% endblock %}
 
 {% block javascripts %}

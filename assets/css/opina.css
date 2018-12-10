@@ -72,3 +72,17 @@ h1{
 #mostrar > tbody > tr:nth-child(2) > td{
 	color:red;
 }
+
+#opina .card-body{
+	height : 355px;
+}
+
+
+
+#editarpregunta, #volver, #editar, #new a, #new h1, #nuevaopinion{
+
+	margin-left: 20px;
+	color: #01254f;
+	font-weight: bold;
+}
+

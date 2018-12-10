@@ -7,15 +7,16 @@ $( document ).ready(function() {
 
 	$('.botonopina').on('click', function(){
 		var idopina = $(this).parent().find('input').val();
+        var idvecino = $('#usuarioid').val();
 		var valor = $(this).attr('valor');
 		//console.log('Has pinchado en el botón de A favor'+idopina+valor);
-            var favor = $(this).parent().parent().find('.bg-success');
-            var contra = $(this).parent().parent().find('.bg-danger');
+            var favor = $(this).parent().parent().parent().find('.bg-success');
+            var contra = $(this).parent().parent().parent().find('.bg-danger');
             var clase = $(this).attr('class');
             var elemento = $(this);
                 
 		$.ajax({
-            url: '/opina/' + idopina + '/' + valor + '/json',
+            url: '/opina/' + idopina + '/' + idvecino + '/' + valor + '/json',
             dataType: 'json',
             success: function success(datos) {
      

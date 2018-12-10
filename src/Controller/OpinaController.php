@@ -7,6 +7,7 @@ use App\Entity\Ayuntamiento;
 use App\Entity\Imagen;
 use App\Form\OpinaType;
 use App\Repository\OpinaRepository;
+use App\Repository\VecinoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,9 @@ class OpinaController extends AbstractController
         } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
             $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
         }
+
+        //Modificar esto para incluir un campo de si el usuario está o no en esta encuesta
+        dump ($opinas->toArray());
 
         return $this->render('opina/index.html.twig', [
             'opinas' => $opinas
@@ -103,13 +107,58 @@ class OpinaController extends AbstractController
      * @Route("/{id}/edit", name="opina_edit", methods="GET|POST")
      * @Security("has_role('ROLE_AYTO')")
      */
+    
     public function edit(Request $request, Opina $opina): Response
     {
         $form = $this->createForm(OpinaType::class, $opina);
         $form->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            if ($request->files->get('opina')['fichero'] != null){
+                $fichero = $request->files->get('opina')['fichero'];
+
+                $nombre_antiguo_borrar = $opina->getImagen()->getNombre();
+                $nombre_antiguo = $opina->getImagen()->getOriginal();
+                $nombre_nuevo = $fichero->getClientOriginalName();
+                $tamano_antiguo = $opina->getImagen()->getSize();
+                $tamano_nuevo = $fichero->getSize();
+
+
+
+
+                if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)){
+                    $fileName = md5(uniqid());
+
+                    $imagen = new Imagen();
+                    $imagen->setNombre($fileName);
+                    $imagen->setOriginal($nombre_nuevo);
+                    $imagen->setSize($tamano_nuevo);
+
+
+                    //Base de datos -> lo borra de la base de datos
+
+                    $em->remove($opina->getImagen());
+                    $opina->setImagen($imagen);
+
+
+                    //Disco duro -> lo borra del disco duro
+                    unlink($this->getParameter('carpeta_imagenes')) ."/". $nombre_antiguo_borrar);
+                    try{
+                        $fichero->move(
+                            $this->getParameter('carpeta_imagenes'),
+                            $fileName
+                        );
+                    }
+                }
+            }
+
+
+            $em->persist($opina);
+            $em->flush();
+            $this->getDoctrine()->getManager()->flush();            
 
             return $this->redirectToRoute('opina_edit', ['id' => $opina->getId()]);
         }
@@ -119,6 +168,8 @@ class OpinaController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 
     /**
      * @Route("/{id}", name="opina_delete", methods="DELETE")
@@ -136,13 +187,15 @@ class OpinaController extends AbstractController
     }
 
     /**
-     * @Route("/{idopina}/{valor}/json", name="opina_json", requirements={"idopina"="\d+" })
+     * @Route("/{idopina}/{idvecino}/{valor}/json", name="opina_json", requirements={"idopina"="\d+","idvecino"="\d+" })
      */
-    public function jsonOpina($idopina, $valor, Request $request)
+    public function jsonOpina($idopina, $idvecino, $valor, Request $request, VecinoRepository $vecinoRepo)
     {
 
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
+
+
 
 
         $callback = function ($dateTime) {
@@ -150,8 +203,41 @@ class OpinaController extends AbstractController
                 ? $dateTime->format('d-m-Y H:i')
                 : '';
         };
+        $callback2 = function ($imagen) {
+            if ($imagen != null) {
+                /*return $imagen->getCreatedAt() instanceof \DateTime
+                    ? $imagen->getCreatedAt()->format('d-m-Y H:i')
+                    : '';
+                    */
+                    return $this->getParameter('carpeta_imagenes') . "/" . $imagen->getNombre();
+            } else {
+                return null;
+            }
+        };
+
+        $normalizer->setCallbacks(array('fechahoralimite' => $callback,
+                                        'imagen' => $callback2,
+                                        ));
+
+
+
+
+
+
+/*
+        $callback = function ($dateTime) {
+            return $dateTime instanceof \DateTime
+                ? $dateTime->format('d-m-Y')
+                : '';
+        };
+        $callback2 = function ($dateTime) {
+            return $dateTime instanceof \DateTime
+                ? $dateTime->format('d-m-Y')
+                : '';
+        };
 
         $normalizer->setCallbacks(array('fechahoralimite' => $callback));
+        $normalizer->setCallbacks(array('createdAt' => $callback2));*/
 
         $normalizer->setCircularReferenceHandler(
             function ($object) {
@@ -173,8 +259,16 @@ class OpinaController extends AbstractController
         } elseif ($valor == 'F') {
             $opina->subirVotosFavor();
         }
+
+        $vecino = $vecinoRepo->find($idvecino);
+        dump ($vecino);
+        $opina->addVecino($vecino);
+        dump ($opina);
         $em->persist($opina);
         $em->flush();
+
+
+
 
         $jsonMensaje = $serializer->serialize($opina, 'json');      
         $respuesta = new Response($jsonMensaje);       
@@ -206,8 +300,7 @@ class OpinaController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repo = $this->getDoctrine()->getRepository(Opina::class);
-        $opina = $repo->findAll();
-        dump($opina);   
+        $opina = $repo->findAll(); 
 
         $jsonMensaje = $serializer->serialize($opina, 'json');   
         $respuesta = new Response($jsonMensaje);    

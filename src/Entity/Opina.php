@@ -34,11 +34,7 @@ class Opina
      */
     private $votoscontra;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $fechahoralimite;
-
+    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="encuestas")
      * @ORM\JoinColumn(nullable=false)
@@ -50,11 +46,24 @@ class Opina
      */
     private $imagen;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $fechahoralimite;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Vecino", mappedBy="opinas", cascade={"all"})
+     */
+    private $vecinos;
+
+    
+
     public function __construct()
     {
         $this->imagen = new Imagen();
         $this->votosfavor=0;
         $this->votoscontra=0;
+        $this->vecinos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,17 +139,6 @@ class Opina
         }
     }
 
-    public function getFechahoralimite(): ?\DateTimeInterface
-    {
-        return $this->fechahoralimite;
-    }
-
-    public function setFechahoralimite(\Date $fechahoralimite): self
-    {
-        $this->fechahoralimite = $fechahoralimite;
-
-        return $this;
-    }
 
     public function getAyuntamiento(): ?Ayuntamiento
     {
@@ -164,4 +162,46 @@ class Opina
         $this->imagen = $img;
         return $this;
     }
+
+    public function getFechahoralimite(): ?\DateTimeInterface
+    {
+        return $this->fechahoralimite;
+    }
+
+    public function setFechahoralimite(\DateTimeInterface $fechahoralimite): self
+    {
+        $this->fechahoralimite = $fechahoralimite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vecino[]
+     */
+    public function getVecinos(): Collection
+    {
+        return $this->vecinos;
+    }
+
+    public function addVecino(Vecino $vecino): self
+    {
+        if (!$this->vecinos->contains($vecino)) {
+            $this->vecinos[] = $vecino;
+            $vecino->addOpina($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVecino(Vecino $vecino): self
+    {
+        if ($this->vecinos->contains($vecino)) {
+            $this->vecinos->removeElement($vecino);
+            $vecino->removeOpina($this);
+        }
+
+        return $this;
+    }
+
+    
 }
