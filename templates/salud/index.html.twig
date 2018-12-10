@@ -5,21 +5,21 @@
 {% block body %}
 
 <div class="container-fluid">
-  <h1>Salud</h1>
+  <h1 class="salud">Salud</h1>
   {% for row in saluds|batch(3) %}
     <div class="row">
       {% for salud in row %}
         <div  class="col-sm-4">
           <div class="card">
-            <a href="{{salud.id}}">
-              <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
+            <a class="salud1" href="{{salud.id}}">
+              <img class="card-img-top imgtodas" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{ salud.titulo}}</h5></a>        
                 <div class="card-text">
-                  <p class="card-text">{{ salud.texto|slice(0, 100) }}</p>
+                  <p>{{ salud.texto|slice(0, 130) }}</p>
                 </div>
                 <div class="final">
-                  <a href="{{salud.id}}">Ver más</a> 
+                  <a class="salud3" href="{{salud.id}}">Ver más</a> 
                   <p>Fecha publicación {{ salud.fechahora ? salud.fechahora|date('d-m-Y') : '' }}</p> 
                 </div>                             
               </div>

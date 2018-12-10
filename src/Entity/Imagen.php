@@ -35,6 +35,18 @@ class Imagen
     private $createdAt;
 
     /**
+    * @ORM\Column(type="integer")
+     */
+    private $size;
+
+
+    public function __construct()
+    {
+        $this->saluds = new ArrayCollection();
+        $this->opinas = new ArrayCollection();
+    }
+
+    /**
     * @ORM\PrePersist
     */
     public function setCreatedAtValue()
@@ -82,6 +94,20 @@ class Imagen
 
         return $this;
     }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+
 
    
 }
