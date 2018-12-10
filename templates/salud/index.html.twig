@@ -10,9 +10,11 @@
 {% block body %}
 
 <div class="container-fluid">
-  <!--<h1 class="salud">Salud</h1>-->
-  
-  <a class="saludicon3" href="{{ path('salud_new') }}">_<i class="fas fa-pencil-alt"></i></a>
+  <!--<h1 class="salud">Salud</h1>--> 
+  {% if is_granted('ROLE_ADMIN') %} 
+    <button id="nuevosalud" type="button" class="btn btn-primary" href="{{ path('salud_new') }}">Nuevo artículo</button>
+  {% endif %}  
+
   {% for row in saluds|batch(3) %}
     <div class="row">
       {% for salud in row %}

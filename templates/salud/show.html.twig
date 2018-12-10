@@ -13,14 +13,18 @@
                  <img class="saludimg"src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="100%"> 
                 <div class="iconos"> 
                     <a class="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
-                    <a class="saludicon" href="{{ path('salud_edit', {'id': salud.id}) }}"><i class="far fa-edit"></i></a>                    
+                    {% if is_granted('ROLE_ADMIN') %}            
+                        <a class="saludicon" href="{{ path('salud_edit', {'id': salud.id}) }}"><i class="far fa-edit"></i></a>        
+                    {% endif %}                                
                 </div>                               
             </div>         
             <div class="col-sm-9">
                <h1 class="salud2">{{ salud.titulo }}</h1>
                <p class="salud4"> {{ salud.texto }}</p>
             </div>
-            <a class="saludicon4">{{ include('salud/_delete_form.html.twig') }}</a>
+            {% if is_granted('ROLE_ADMIN') %}            
+                <a class="saludicon4">{{ include('salud/_delete_form.html.twig') }}</a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
