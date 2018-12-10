@@ -38,10 +38,12 @@ class SaludType extends AbstractType
                     'html5' => true,
                     'required' => true
                 ))
+            
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn saludbtn float-right'),
                 'label' => 'Guardar'
-            ));
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

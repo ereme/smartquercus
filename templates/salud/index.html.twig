@@ -2,10 +2,17 @@
 
 {% block title %}Saludables{% endblock %}
 
+  {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+  {% endblock %}
+
+
 {% block body %}
 
 <div class="container-fluid">
-  <h1 class="salud">Salud</h1>
+  <!--<h1 class="salud">Salud</h1>-->
+  
+  <a class="saludicon3" href="{{ path('salud_new') }}">_<i class="fas fa-pencil-alt"></i></a>
   {% for row in saluds|batch(3) %}
     <div class="row">
       {% for salud in row %}
@@ -18,9 +25,8 @@
                 <div class="card-text">
                   <p>{{ salud.texto|slice(0, 130) }}</p>
                 </div>
-                <div class="final">
-                  <a class="salud3" href="{{salud.id}}">Ver más</a> 
-                  <p>Fecha publicación {{ salud.fechahora ? salud.fechahora|date('d-m-Y') : '' }}</p> 
+                <div class="final">                  
+                  <p>{{ salud.fechahora ? salud.fechahora|date('d-m-Y') : '' }}</p> 
                 </div>                             
               </div>
           </div>
@@ -30,10 +36,7 @@
     <br>
     <br>
   {% endfor %}
-</div>
-
-
-    <a href="{{ path('salud_new') }}">Nueva noticia</a>   
+</div>      
 
 {% endblock %}
 

@@ -47,6 +47,7 @@ class SaludController extends AbstractController
             $imagen->setNombre($fileName);
             $imagen->setOriginal($fichero->getClientOriginalName());
             $salud->setImagen($imagen);
+            $imagen->setSize($fichero->getSize());
 
             // Move the file to the directory where brochures are stored
             try {
@@ -89,6 +90,8 @@ class SaludController extends AbstractController
         $form = $this->createForm(SaludType::class, $salud);
         $form->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             if ($request->files->get('salud')['fichero'] != null) {
@@ -106,7 +109,7 @@ class SaludController extends AbstractController
                 dump ($tamano_nuevo);
 
 
-                $em = $this->getDoctrine()->getManager();
+                
                 if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)) {
                     $fileName = md5(uniqid());
                     
@@ -120,7 +123,7 @@ class SaludController extends AbstractController
                     $salud->setImagen($imagen);
 
                     //Disco duro
-                    dump ($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
+                   /* dump ($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar); */
                     unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
                     try {
                         $fichero->move(
@@ -130,12 +133,14 @@ class SaludController extends AbstractController
                     } catch (FileException $e) {
                         // ... handle exception if something happens during file upload
                     }
+                    
                 }
+                
             }
 
             $em->persist($salud);
             $em->flush();
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()->getManager()->flush();       
 
             return $this->redirectToRoute('salud_show', ['id' => $salud->getId()]);
         }
