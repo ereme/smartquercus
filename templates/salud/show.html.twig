@@ -2,22 +2,25 @@
 
 {% block title %}Saludables{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container container-fluid">
         <div class="row">
             <div class="col-md-3">
                  <img class="saludimg"src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="100%"> 
                 <div class="iconos"> 
-                    <a id="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
-                    <a id="saludicon" href="{{ path('salud_edit', {'id': salud.id}) }}"><i class="far fa-edit"></i></a>
+                    <a class="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
+                    <a class="saludicon" href="{{ path('salud_edit', {'id': salud.id}) }}"><i class="far fa-edit"></i></a>                    
                 </div>                               
             </div>         
             <div class="col-sm-9">
                <h1 class="salud2">{{ salud.titulo }}</h1>
                <p class="salud4"> {{ salud.texto }}</p>
             </div>
-         </div>       
-           
-          
+            <a class="saludicon4">{{ include('salud/_delete_form.html.twig') }}</a>
+        </div>
     </div>
 {% endblock %}
