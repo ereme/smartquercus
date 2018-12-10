@@ -203,5 +203,11 @@ class Opina
         return $this;
     }
 
-    
+    public function getHaVotado (Vecino $vecino): bool {
+       
+        //Tenqo que buscar un vecino dentro de la lista de vecinos de este opina
+        return $this->vecinos->contains($vecino);
+            
+       
+    }
 }

@@ -51,8 +51,8 @@
                                     <input type="hidden" value="{{ opina.id }}">
                                     {% if is_granted('ROLE_VECINO') %}
                                         {% if (date(opina.fechahoralimite) > date('-1days')) or (0==1) %}
-                                            <button type="button" class="btn btn-outline-success botonopina" valor="F">A favor</button>
-                                            <button type="button" class="btn btn-outline-danger botonopina" valor="C">En contra</button>
+                                            <button type="button" class="btn btn-outline-success botonopina" valor="F" {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>A favor</button>
+                                            <button type="button" class="btn btn-outline-danger botonopina" valor="C"  {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>En contra</button>
                                             {% else %}
 
                                                     <table id="mostrar" class="table">

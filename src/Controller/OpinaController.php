@@ -38,9 +38,6 @@ class OpinaController extends AbstractController
             $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
         }
 
-        //Modificar esto para incluir un campo de si el usuario está o no en esta encuesta
-        dump ($opinas->toArray());
-
         return $this->render('opina/index.html.twig', [
             'opinas' => $opinas
         ]);
@@ -145,12 +142,14 @@ class OpinaController extends AbstractController
 
 
                     //Disco duro -> lo borra del disco duro
-                    unlink($this->getParameter('carpeta_imagenes')) ."/". $nombre_antiguo_borrar);
+                    unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
                     try{
                         $fichero->move(
                             $this->getParameter('carpeta_imagenes'),
                             $fileName
                         );
+                    } catch (FileException $e) {
+                        // ...handle exception if something happens during file upload 
                     }
                 }
             }
@@ -261,14 +260,9 @@ class OpinaController extends AbstractController
         }
 
         $vecino = $vecinoRepo->find($idvecino);
-        dump ($vecino);
         $opina->addVecino($vecino);
-        dump ($opina);
         $em->persist($opina);
         $em->flush();
-
-
-
 
         $jsonMensaje = $serializer->serialize($opina, 'json');      
         $respuesta = new Response($jsonMensaje);       
