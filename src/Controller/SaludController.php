@@ -38,32 +38,36 @@ class SaludController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->files->get('salud')['fichero'] != null) {
+                
+                
+                $fichero = $request->files->get('salud')['fichero'];
+                $fileName = md5(uniqid());
+                
+                $imagen = new Imagen();
+                $imagen->setNombre($fileName);
+                $imagen->setOriginal($fichero->getClientOriginalName());
+                $salud->setImagen($imagen);
+                $imagen->setSize($fichero->getSize());
 
-            //$datos = $request->get('salud');
-            $fichero = $request->files->get('salud')['fichero'];
-            $fileName = md5(uniqid());
-
-            $imagen = new Imagen();
-            $imagen->setNombre($fileName);
-            $imagen->setOriginal($fichero->getClientOriginalName());
-            $salud->setImagen($imagen);
-
-            // Move the file to the directory where brochures are stored
-            try {
-                $fichero->move(
-                    $this->getParameter('carpeta_imagenes'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
+                // Move the file to the directory where brochures are stored
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
             }
+            
 
 
             $em = $this->getDoctrine()->getManager();
             //$em->persist($imagen);  //si no está el cascadepersist en Salud entity
-            $em->persist($salud);
+            $em->persist($salud); 
             $em->flush();
-
+            die;
             return $this->redirectToRoute('salud_index');
         }
 
@@ -89,10 +93,59 @@ class SaludController extends AbstractController
         $form = $this->createForm(SaludType::class, $salud);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('salud_edit', ['id' => $salud->getId()]);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($request->files->get('salud')['fichero'] != null) {
+                $fichero = $request->files->get('salud')['fichero'];
+
+                $nombre_antiguo_borrar = $salud->getImagen()->getNombre();
+                $nombre_antiguo = $salud->getImagen()->getOriginal(); 
+                $nombre_nuevo = $fichero->getClientOriginalName();
+                $tamano_antiguo = $salud->getImagen()->getSize();
+                $tamano_nuevo = $fichero->getSize();
+
+                dump ($nombre_antiguo);
+                dump ($nombre_nuevo);
+                dump ($tamano_antiguo);
+                dump ($tamano_nuevo);
+
+
+                
+                if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)) {
+                    $fileName = md5(uniqid());
+                    
+                    $imagen = new Imagen();
+                    $imagen->setNombre($fileName);
+                    $imagen->setOriginal($nombre_nuevo);
+                    $imagen->setSize($tamano_nuevo);
+                    
+                    //Base de datos
+                    $em->remove($salud->getImagen());
+                    $salud->setImagen($imagen);
+
+                    //Disco duro
+                   /* dump ($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar); */
+                    unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
+                    try {
+                        $fichero->move(
+                            $this->getParameter('carpeta_imagenes'),
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+                    
+                }
+                
+            }
+
+            $em->persist($salud);
+            $em->flush();
+            $this->getDoctrine()->getManager()->flush();       
+
+            return $this->redirectToRoute('salud_show', ['id' => $salud->getId()]);
         }
 
         return $this->render('salud/edit.html.twig', [
