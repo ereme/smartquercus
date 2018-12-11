@@ -59,6 +59,12 @@ class Incidencia
      */
     private $estado;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="incidencias")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ayuntamiento;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,5 +132,17 @@ class Incidencia
 
     public function getColorEstado () {
         return self::ESTADOS_COLOR[$this->getEstado()];
+    }
+
+    public function getAyuntamiento(): ?Ayuntamiento
+    {
+        return $this->ayuntamiento;
+    }
+
+    public function setAyuntamiento(?Ayuntamiento $ayuntamiento): self
+    {
+        $this->ayuntamiento = $ayuntamiento;
+
+        return $this;
     }
 }

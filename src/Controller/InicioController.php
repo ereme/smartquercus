@@ -56,5 +56,7 @@ class InicioController extends AbstractController
             ]);
         }
 
+        return $this->render('inicio/inicio_vecino.html.twig', [
+        ]);
     }
 }

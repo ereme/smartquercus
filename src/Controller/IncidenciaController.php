@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
+use App\Entity\Vecino;
+use App\Entity\Ayuntamiento;
 use App\Entity\Incidencia;
 use App\Form\IncidenciaType;
 use App\Repository\IncidenciaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,9 +22,21 @@ class IncidenciaController extends AbstractController
     /**
      * @Route("/", name="incidencia_index", methods="GET")
      */
-    public function index(IncidenciaRepository $incidenciaRepository): Response
+    public function index(IncidenciaRepository $incidenciaRepository, AuthorizationCheckerInterface $authChecker): Response
     {
+        if ($this->isGranted(Vecino::USER_VECINO) ) {
+            $ayuntamiento = $this->getAyuntamiento();
+            $incidencias = $ayuntamiento->getIncidencias(); 
+            return $this->render('incidencia/index.html.twig', 
+            ['incidencias' => $incidencias->findAll()]);
+        }elseif ($this->isGranted(Ayuntamiento::USER_AYTO)) {
+            $incidencias = $this->getIncidencias();
+            return $this->render('incidencia/index.html.twig', ['incidencias' => $incidencias->findAll()]);
+        }elseif ($this->isGranted(Admin::USER_ADMIN)) {
+            return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findAll()]);
+        }
         
+
         return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findAll()]);
     }
 
@@ -29,11 +45,15 @@ class IncidenciaController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $usuario = $this->getUser();
+        $ayuntamiento = $usuario->getAyuntamiento();
         $incidencium = new Incidencia();
         $form = $this->createForm(IncidenciaType::class, $incidencium);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $incidencium->setAyuntamiento($ayuntamiento);
+            //$ayuntamiento->addIncidencia($incidencium);
             $em = $this->getDoctrine()->getManager();
             $em->persist($incidencium);
             $em->flush();
@@ -91,4 +111,5 @@ class IncidenciaController extends AbstractController
 
         return $this->redirectToRoute('incidencia_index');
     }
+    
 }

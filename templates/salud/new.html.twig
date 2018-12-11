@@ -1,30 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Nuevo Artículo{% endblock %}
+	{% block stylesheets %}
+    	<link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+  	{% endblock %}
 
 {% block body %}
-<div class="container-fluid contenedor">
-	<div class="row">
-		<div class="col-md-12">
-		 	<h3>Crear artículo</h3>
+	<div class="container-fluid contenedor">
+		<div class="row texto_nuevo">
+			<div class="col-md-6">				
+			    <h4>¿Cómo podemos cuidar nuestra salud física?</h4>
+				<p>Disfrutar de un buen estado de salud puede conseguirse a partir de variadas acciones y mantenerse durante mucho tiempo o bien perderse debido a diversas razones. Para estar sana, una persona debería:<p>
+				<ul>
+    				<li>Seguir una dieta saludable y equilibrada.</li>
+    				<li>Realizar ejercicio de manera regular</li>
+    				<li>Evitar el consumo de sustancias tóxicas o adictivas como el tabaco, alcohol o cualquier tipo de droga.</li>
+    				<li>Realizar las revisiones médicas pertinentes o controlar posibles complicaciones. Aquí juega un papel fundamental contar con un buen seguro de salud que pueda respaldarte ante cualquier enfermedad con los mejores profesionales y coberturas.</li>
+    			</ul>
+    			<a class="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
+			</div>
+			<div class="col-md-6">			
+			    {{ include('salud/_form.html.twig') }}			    	   
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-6">
-		    
-		</div>
-		<div class="col-md-6">			
-		    {{ include('salud/_form.html.twig') }}
-		</div>
-	</div>
-</div>
-
-    <a href="{{ path('salud_index') }}">Lista</a>
+       
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}  
+    {{ parent() }}
+<script src="{{ asset('build/saludjs.js') }}"></script>  
+  
 
-    <script src="{{ asset('build/saludjs.js') }}"></script>
-            
 {% endblock %}

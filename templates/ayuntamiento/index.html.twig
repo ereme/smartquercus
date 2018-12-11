@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Imagenescudo</th>
+                <th>Imagen escudo</th>
                 <th>Localidad</th>
                 <th>actions</th>
             </tr>
@@ -18,7 +18,7 @@
         {% for ayuntamiento in ayuntamientos %}
             <tr>
                 <td>{{ ayuntamiento.id }}</td>
-                <td>{{ ayuntamiento.imagenescudo }}</td>
+                <td><img src="{{ asset(ruta_imagenes ~ ayuntamiento.imagen.nombre) }}"></td>
                 <td>{{ ayuntamiento.localidad }}</td>
                 <td>
                     <a href="{{ path('ayuntamiento_show', {'id': ayuntamiento.id}) }}">show</a>

@@ -6,6 +6,7 @@ use App\Entity\Telefono;
 use App\Form\TelefonoType;
 use App\Repository\TelefonoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,15 +24,28 @@ class TelefonoController extends AbstractController
      */
     public function index(TelefonoRepository $telefonoRepository): Response
     {
-        return $this->render('telefono/index.html.twig', ['telefonos' => $telefonoRepository->findAll()]);
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $telefonos = $telefonoRepository->findAll();
+        } elseif ($this->isGranted('ROLE_AYTO')) { 
+            $telefonos = $this->getUser()->getTelefonos();
+        } elseif ($this->isGranted('ROLE_VECINO')) { 
+            $telefonos = $this->getUser()->getAyuntamiento()->getTelefonos();
+        }
+
+        return $this->render('telefono/index.html.twig', ['telefonos' => $telefonos]);
     }
 
     /**
      * @Route("/new", name="telefono_new", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function new(Request $request): Response
     {
+        $ayto = $this->getUser();
+
         $telefono = new Telefono();
+        $telefono->setAyto($ayto);
         $form = $this->createForm(TelefonoType::class, $telefono);
         $form->handleRequest($request);
 
@@ -39,7 +53,7 @@ class TelefonoController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($telefono);
             $em->flush();
-
+ 
             return $this->redirectToRoute('telefono_index');
         }
 
