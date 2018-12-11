@@ -1,0 +1,24 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+h1{
+	font-weight: bold;
+	margin: 30px;
+    text-align: center;
+    color: #01254f;
+}
+
+div#vecinos{
+    padding: 20px;
+}
+
+div#vecinos .card h5{
+    color: black;
+}
+
+div#vecinos a:hover{
+    text-decoration: none;
+}
+
+div#vecinos .card:hover{
+    border: 1px solid #01254f;
+}
