@@ -96,38 +96,57 @@ class EventoController extends AbstractController
         $form = $this->createForm(EventoType::class, $evento);
         $form->handleRequest($request);
 
+
+        $em = $this->getDoctrine()->getManager();
+
         if ($form->isSubmitted() && $form->isValid()) {
-            dump('entra');
 
+            if ($request->files->get('evento')['fichero'] != null){
+               $fichero = $request->files->get('evento')['fichero'];
 
-           // Si viene imagen nueva ---> borrar la antigua de bd y disco y subir la nueva
-           // Si viene imagen nueva: if (nombre antiguo es distinta a nombre nuevo || tamaño antiguo distinto a tamaño nuevo)
-            dump($request->files);
-            $nombre_antiguo = $evento->getFichero()->OriginalName;
-            $nombre_nuevo = $fichero->getClientOriginalName();
-            $tamano_antiguo = 0;
-            $tamano_nuevo = 0;
+               $nombre_antiguo_borrar = $evento->getImagen()->getNombre();
+               $nombre_antiguo = $evento->getImagen()->getOriginal();
+               $nombre_nuevo = $fichero->getClientOriginalName();
+               $tamano_antiguo = $evento->getImagen()->getSize();
+               $tamano_nuevo = $fichero->getSize();
 
-            if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)) {
- $tamano_antiguo = 0;
-            } 
+               if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)){
+                   $fileName = md5(uniqid());
 
-            //borrar la imagen
-            $em->remove($evento->getImagen());
-            $em->flush();
-            $this->getDoctrine()->getManager()->flush();
+                   $imagen = new Imagen();
+                   $imagen->setNombre($fileName);
+                   $imagen->setOriginal($nombre_nuevo);
+                   $imagen->setSize($tamano_nuevo);
 
-        return $this->render('evento/edit.html.twig', [
-            'evento' => $evento,
-            'form' => $form->createView(),
-        ]);
-            return $this->redirectToRoute('evento_edit', ['id' => $evento->getId()]);
-        }
+            //Base de datos -> lo borra de la base de datos
 
-        return $this->render('evento/edit.html.twig', [
-            'evento' => $evento,
-            'form' => $form->createView(),
-        ]);
+                   $em->remove($evento->getImagen());
+                   $evento->setImagen($imagen);
+
+            //Disco duro -> lo borra del disco duro
+                   unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
+                   try{
+                       $fichero->move(
+                           $this->getParameter('carpeta_imagenes'),
+                           $fileName
+                       );
+                   } catch (FileException $e) {
+                       // ...handle exception if something happens during file upload
+                   }
+               }
+           }
+
+           $em->persist($evento);
+           $em->flush();
+           $this->getDoctrine()->getManager()->flush();
+
+           return $this->redirectToRoute('evento_index');
+       }
+
+       return $this->render('evento/index.html.twig', [
+           'evento' => $evento,
+           'form' => $form->createView(),
+       ]); 
     }
 
     /**
@@ -143,4 +162,7 @@ class EventoController extends AbstractController
 
         return $this->redirectToRoute('evento_index');
     }
+
 }
+
+

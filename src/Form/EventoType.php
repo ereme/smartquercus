@@ -28,7 +28,8 @@ class EventoType extends AbstractType
                 ))
             ->add('fichero', FileType::class, array(
                 'label' => 'Imagen',
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ))
             ->add('texto', TextareaType::class, array(
                 'attr' => array('class' => 'tinymce', 

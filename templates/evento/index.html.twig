@@ -14,7 +14,7 @@
 
 {% block body %}
     <div class="container-fluid">
-  <h1>evento</h1>
+  <h1>Eventos</h1>
   {% for row in evento|batch(3) %}
     <div class="row">
       {% for evento in row %}
@@ -28,9 +28,9 @@
                   <p class="card-text">{{ evento.texto|slice(0, 120) }}</p>
                 </div>
                 <div class="final">
-                  <a href="{{evento.id}}">Ver más</a> 
                   
-                  <p>Fecha   {{ evento.fechahora ? evento.fechahora|date('d-m-Y') : '' }}</p>
+                  
+                  <p id="fecha"><i class="fas fa-clock"></i>   {{ evento.fechahora ? evento.fechahora|date('d-m-Y') : '' }}</p>
 
                 </div>                             
               </div>

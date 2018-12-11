@@ -33,3 +33,14 @@
 	background-color: #c2c4c3;
 }
 
+a:hover{
+	color: #2956b2;
+	text-decoration: none;
+
+}
+
+
+#fecha{
+	text-align: right;
+	
+}
