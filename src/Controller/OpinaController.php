@@ -55,28 +55,30 @@ class OpinaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->files->get('opina')['fichero'] != null){
+                $fichero = $request->files->get('opina')['fichero'];
+                $fileName = md5(uniqid());
 
-            $fichero = $request->files->get('opina')['fichero'];
-            $fileName = md5(uniqid());
+                $imagen = new Imagen();
+                $imagen->setNombre($fileName);
+                $imagen->setOriginal($fichero->getClientOriginalName());
+                $opina->setImagen($imagen);
+                $imagen->setSize($fichero->getSize());
 
-            $imagen = new Imagen();
-            $imagen->setNombre($fileName);
-            $imagen->setOriginal($fichero->getClientOriginalName());
-            $opina->setImagen($imagen);
-            $imagen->setSize($fichero->getSize());
+                /*dump ($imagen);
+                dump ($fichero);
+                dump ($salud);*/
 
-            /*dump ($imagen);
-            dump ($fichero);
-            dump ($salud);*/
+                // Move the file to the directory where brochures are stored
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
 
-            // Move the file to the directory where brochures are stored
-            try {
-                $fichero->move(
-                    $this->getParameter('carpeta_imagenes'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
             }
 
             $em = $this->getDoctrine()->getManager();
