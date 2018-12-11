@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UrlRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Imagen
 {
@@ -33,6 +34,11 @@ class Imagen
      */
     private $createdAt;
 
+    /**
+    * @ORM\Column(type="integer")
+     */
+    private $size;
+
 
     public function __construct()
     {
@@ -43,7 +49,7 @@ class Imagen
     */
     public function setCreatedAtValue()
     {
-        $this->createdAt = new \DateTime();
+        $this->setCreatedAt(new \DateTime);
     }
 
     public function getId(): ?int
@@ -86,6 +92,20 @@ class Imagen
 
         return $this;
     }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+
 
    
 }
