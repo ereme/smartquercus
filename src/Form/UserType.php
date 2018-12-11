@@ -26,7 +26,8 @@ class UserType extends AbstractType
         $builder
             ->add('fichero', FileType::class, array(
                 'label' => 'Imagen',
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ))
             ->add('email', EmailType::class)
             ->add('username', TextType::class)

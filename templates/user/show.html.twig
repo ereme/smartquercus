@@ -2,36 +2,64 @@
 
 {% block title %}User{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="{{ asset('build/user.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="container-fluid">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {% if is_granted('ROLE_VECINO') %}
-            <h1>
-            <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200"> {{ user.nombre }} {{ user.apellido1 }} {{ user.apellido2 }}</h1>
+            <h1><b>
+            {% if user.imagen.nombre is defined %}
+                <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
+            {% endif %}
+            {{ user.nombre }} {{ user.apellido1 }} {{ user.apellido2 }}
+            </b></h1>
             <hr>
             <div class="row">
                     <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Nombre</b></p>
-                                            <p><b>1º apellido</b></p>
-                                            <p><b>2º apellido</b></p>
-                                            <p><b>Usuario</b></p>
-                                            <p><b>Email</b></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p>{{ user.nombre }}</p>
-                                            <p>{{ user.apellido1 }}</p>
-                                            <p>{{ user.apellido2 }}</p>
-                                            <p>{{ user.username }}</p>
-                                            <p>{{ user.email }}</p>
-                                            <p>
-                                                <a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a>
-                                                {{ include('user/_delete_form.html.twig') }}
-                                            </p>
-                                        </div>
-                                    </div>
+                        <div class="card">
+                            <div class="col-md-12">
+                                <h2>Información</h2>
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Nombre</th>
+                                            <td>{{ user.nombre }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1º apellido</th>
+                                            <td>{{ user.apellido1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2º apellido</th>
+                                            <td>{{ user.apellido2 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Usuario</th>
+                                            <td>{{ user.username }}</td>
+                                        </tr>
+                                            <th scope="row">Email</th>
+                                            <td>{{ user.email }}</td>
+                                        </tr>
+                                            <th scope="row">Ayuntamiento</th>
+                                            <td>{{ user.ayuntamiento }}</td>
+                                        </tr>
+                                        <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a></caption>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row" id="publicaciones">
+
+                        </div>
                     </div>
             </div>
         {% endif %}
@@ -41,25 +69,45 @@
             <hr>
             <div class="row">
                     <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Nombre</b></p>
-                                            <p><b>Localidad</b></p>
-                                            <p><b>Teléfonos</b></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p>{{ user.nombre }}</p>
-                                            <p>{{ user.localidad }}</p>
-                                            <p>{{ user.telefonos }}</p>
-                                            <p>
-                                                <a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a>
-                                                {{ include('user/_delete_form.html.twig') }}
-                                                </p>
-                                        </div>
-                                    </div>
+                        <div class="card">
+                            <div class="col-md-12">
+                                <h2>Información</h2>
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Nombre</th>
+                                            <td>{{ user.nombre }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Usuario</th>
+                                            <td>{{ user.username }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Localidad</th>
+                                            <td>{{ user.localidad }}</td>
+                                        </tr>
+                                        </tr>
+                                            <th scope="row">Email</th>
+                                            <td>{{ user.email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Teléfonos</th>
+                                            <td>{{ user.telefonos }}</td>
+                                        </tr>
+                                        <tr>
+                                        <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a></caption>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row" id="publicaciones">
+
+                        </div>
                     </div>
             </div>
-            {% endif %}
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}

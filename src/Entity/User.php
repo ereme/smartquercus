@@ -70,7 +70,7 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $imagen;
+    protected $imagen;
 
     public function __construct() {
         $this->roles = array('ROLE_USER');
@@ -192,7 +192,7 @@ class User implements UserInterface, \Serializable
     }
 
 
-    public function getImagen(): Imagen
+    public function getImagen()
     {
         return $this->imagen;
     }

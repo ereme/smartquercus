@@ -72,41 +72,60 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user): Response
     {
-        $imagen = new Imagen();
-        $form = $this->createForm(ImagenType::class, $imagen);
+       
+
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $fichero = $request->files->get('imagen')['fichero'];
-            $fileName = md5(uniqid());
-            
-            /*dump ($imagen);
-            dump ($fichero);
-            dump ($user);
-            dump ($request->files);*/
-            $imagen->setNombre($fileName);
-            $imagen->setOriginal($fichero->getClientOriginalName());
-            $user->setImagen($imagen);
-            
-            /*dump ($imagen);
+            if ($request->files->get('user')['fichero'] != nulll){
 
-            dump ($fichero);
-            dump ($salud);*/
+            $fichero = $request->files->get('user')['fichero'];
 
-            // Move the file to the directory where brochures are stored
-            try {
-                $fichero->move(
-                    $this->getParameter('carpeta_imagenes'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
+            $nombre_antiguo_borrar = $user->getImagen()->getNombre();
+            $nombre_antiguo = $user->getImagen()->getOriginal();
+            $nombre_nuevo = $fichero->getClientOriginalName();
+            $tamano_antiguo = $user->getImagen()->getSize();
+            $tamano_nuevo = $fichero->getSize();
+
+                if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)){
+                    $fileName = md5(uniqid());
+                    
+                    $imagen = new Imagen();
+                    $imagen->setNombre($fileName);
+                    $imagen->setOriginal($nombre_nuevo));
+                    $imagen->setSize($tamano_nuevo);
+                
+                //Base de datos
+
+                    $em->remove($user->getImagen());
+                    $user->setImagen($imagen);
+
+
+                // Disco duro
+
+                    unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
+
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
             }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
- 
-            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+
+        }
+
+        $em->persist($user);
+        $em->flush();
+        $this->getDoctrine()->getManager()->flush();
+        
+
+        return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
  
         return $this->render('user/edit.html.twig', [
