@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    brand_name: Explota 3.0
+    brand_name: Smartquercus
     carpeta_imagenes: '%kernel.project_dir%/public/images'
 
 services:

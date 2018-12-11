@@ -1,37 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Telefono index{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/telefono.css') }}">
+{% endblock %}
+
+{% block title %}Teléfonos {% endblock %}
 
 {% block body %}
-    <h1>Telefono index</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1> Listado de teléfonos </h1>
+    {% else %}
+        <h1> Listado de teléfonos del Ayuntamiento de {{localidad}} </h1>
+    {% endif %}
 
+<div id="telefonos">
+    {% if is_granted('ROLE_AYTO') %}
+        <a id="new_telefono" href="{{ path('telefono_new') }}"> <i class="fas fa-plus-circle"></i> Añadir nuevo teléfono </a>
+    {% endif %}
     <table class="table">
         <thead>
             <tr>
-                <th>Ayuntamiento</th>
                 <th>Nombre</th>
-                <th>Telefono</th>
-                <th>actions</th>
+                <th>Teléfono</th>
+                {% if is_granted('ROLE_AYTO') %}
+                <th>Editar</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for telefono in telefonos %}
             <tr>
-                <td>{{ telefono.ayto.localidad }}</td>
                 <td>{{ telefono.nombre }}</td>
                 <td>{{ telefono.telefono }}</td>
+                {% if is_granted('ROLE_AYTO') %}
                 <td>
-                    <a href="{{ path('telefono_show', {'id': telefono.id}) }}">show</a>
-                    <a href="{{ path('telefono_edit', {'id': telefono.id}) }}">edit</a>
+                    <a href="{{ path('telefono_edit', {'id': telefono.id}) }}"><i class="far fa-edit"></i></a>
                 </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4"> No hay télefonos añadidos</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('telefono_new') }}">Create new</a>
+</div>
 {% endblock %}
