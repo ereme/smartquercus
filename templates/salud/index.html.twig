@@ -12,24 +12,24 @@
 <div class="container-fluid">
   <!--<h1 class="salud">Salud</h1>--> 
   {% if is_granted('ROLE_ADMIN') %} 
-    <button id="nuevosalud" type="button" class="btn btn-primary" href="{{ path('salud_new') }}">Nuevo artículo</button>
+    <a id="nuevosalud" class="btn btn-primary" href="{{ path('salud_new') }}">Nuevo artículo</a>
+
   {% endif %}  
 
   {% for row in saluds|batch(3) %}
     <div class="row">
       {% for salud in row %}
         <div  class="col-sm-4">
-          <div class="card">
+          <div class="card h-100">
             <a class="salud1" href="{{salud.id}}">
               <img class="card-img-top imgtodas" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{ salud.titulo}}</h5></a>        
                 <div class="card-text">
                   <p>{{ salud.texto|slice(0, 130) }}</p>
+                  <p class="final">{{ salud.fechahora ? salud.fechahora|date('d-m-Y') : '' }}</p> 
                 </div>
-                <div class="final">                  
-                  <p>{{ salud.fechahora ? salud.fechahora|date('d-m-Y') : '' }}</p> 
-                </div>                             
+                            
               </div>
           </div>
         </div>

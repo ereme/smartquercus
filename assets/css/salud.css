@@ -3,9 +3,7 @@
 	font-weight: bold;
 }
 
-.card-text p{
-	height: 100px;
-}
+
 
 h1.salud {
 	margin-top: 20px;
@@ -22,7 +20,9 @@ h1.salud {
 }
 
 .final{
-	text-align: center;
+	text-align: right;
+	color: #98999a;
+	font-size: 0.8em;
 }
 
 #nuevosalud{
