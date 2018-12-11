@@ -2,18 +2,29 @@
 
 {% block title %}Saludables{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+{% endblock %}
+
 {% block body %}
-
     <div class="container container-fluid">
-        {{ salud.fechahora ? salud.fechahora|date('Y-m-d') : '' }}
-        <div class="row">        
-            <h1>{{ salud.titulo }}</h1> 
-            <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="50" height="50">     
-            <p>{{ salud.texto }}</p>          
+        <div class="row">
+            <div class="col-md-3">
+                 <img class="saludimg"src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="100%"> 
+                <div class="iconos"> 
+                    <a class="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
+                    {% if is_granted('ROLE_ADMIN') %}            
+                        <a class="saludicon" href="{{ path('salud_edit', {'id': salud.id}) }}"><i class="far fa-edit"></i></a>        
+                    {% endif %}                                
+                </div>                               
+            </div>         
+            <div class="col-sm-9">
+               <h3 class="salud2">{{ salud.titulo }}</h3>
+               <p class="salud4"> {{ salud.texto }}</p>
+            </div>
+            {% if is_granted('ROLE_ADMIN') %}            
+                <a class="saludicon4">{{ include('salud/_delete_form.html.twig') }}</a>
+            {% endif %}
         </div>
-        <a href="{{ path('salud_index') }}">Lista</a>
-        <a href="{{ path('salud_edit', {'id': salud.id}) }}">Editar</a>
-        {{ include('salud/_delete_form.html.twig') }}
-    </div> 
-
+    </div>
 {% endblock %}

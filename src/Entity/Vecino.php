@@ -41,11 +41,19 @@ class Vecino extends User
      */
     private $ayuntamiento;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Opina", inversedBy="vecinos")
+     */
+    private $opinas;
+
+    
+
     public function __construct()
     {
         parent::__construct();
         $this->roles = array('ROLE_VECINO');
         $this->isActive = true;
+        $this->opinas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,5 +108,32 @@ class Vecino extends User
 
         return $this;
     }
+
+    /**
+     * @return Collection|Opina[]
+     */
+    public function getOpinas(): Collection
+    {
+        return $this->opinas;
+    }
+
+    public function addOpina(Opina $opina): self
+    {
+        if (!$this->opinas->contains($opina)) {
+            $this->opinas[] = $opina;
+        }
+
+        return $this;
+    }
+
+    public function removeOpina(Opina $opina): self
+    {
+        if ($this->opinas->contains($opina)) {
+            $this->opinas->removeElement($opina);
+        }
+
+        return $this;
+    }
+
 
 }

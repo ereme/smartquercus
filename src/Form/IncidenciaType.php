@@ -43,6 +43,7 @@ class IncidenciaType extends AbstractType
 
             ))
             ->add('estado', ChoiceType::class, array(
+                'attr' => array('class' => 'custom-select'),
                 'choices' => Incidencia::ESTADOS
             ))
             ->add('save', SubmitType::class, array(
