@@ -76,6 +76,7 @@ class User implements UserInterface, \Serializable
         $this->roles = array('ROLE_USER');
         $this->isActive = true;
         $this->participaciones = new ArrayCollection();
+        $this->imagen = new Imagen();
     }
 
 

@@ -9,11 +9,24 @@
 {% block body %}
     <h1>Edit User</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('vecino/_form.html.twig') }}
 
     <a href="{{ path('user_index') }}">back to list</a>
 
     {{ include('user/_delete_form.html.twig') }}
 
-    {{ include('user/imagen_form.html.twig') }}
 {% endblock %}
+
+{% block javascripts %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+
+    $('#vecino_fichero').on('change',function (e) {
+        $(this).next('.custom-file-label').html(e.target.files[0].name);
+    });
+
+	</script>
+
+{% endblock %}
+
