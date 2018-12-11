@@ -26,5 +26,4 @@ class UserController extends Controller
     {
         return $this->render('user/index.html.twig', ['users' => $userRepository->findAll()]);
     }
-
 }

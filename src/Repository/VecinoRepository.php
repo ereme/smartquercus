@@ -19,6 +19,19 @@ class VecinoRepository extends ServiceEntityRepository
         parent::__construct($registry, Vecino::class);
     }
 
+
+    public function findByAyuntamiento($ayto)
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.id', 't.nombre', 't.apellido1', 't.apellido2')
+            ->where('t.ayuntamiento = :val')
+            ->setParameter('val', $ayto)
+            ->orderBy('t.apellido1', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Vecino[] Returns an array of Vecino objects
 //     */

@@ -182,7 +182,9 @@ class SaludController extends AbstractController
                 : '';
         };
 
-        $normalizer->setCallbacks(array('fechahora' => $callback));
+        $normalizer->setCallbacks(array('fechahora' => $callback,
+            'createdAt' => $callback
+        ));
 
         $normalizer->setCircularReferenceLimit(0);
         $serializer = new Serializer(array($normalizer), array($encoder));
