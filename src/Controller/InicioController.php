@@ -33,9 +33,6 @@ class InicioController extends AbstractController
             ]);            
         } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) {
 
-
-
-
             return $this->render('inicio/inicio_ayto.html.twig', [
                 'incidencias' => $this->getUser()->getParticipaciones()
             ]);
