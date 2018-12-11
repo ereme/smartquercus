@@ -3,9 +3,7 @@
 	font-weight: bold;
 }
 
-.card-text p{
-	height: 100px;
-}
+
 
 h1.salud {
 	margin-top: 20px;
@@ -22,8 +20,17 @@ h1.salud {
 }
 
 .final{
-	text-align: center;
+	text-align: right;
+	color: #98999a;
+	font-size: 0.8em;
 }
+
+#nuevosalud{
+	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-left: 89%;
+}
+
 
 /* SHOW */
 .salud2, img.saludimg{
@@ -46,12 +53,12 @@ h1.salud {
 	height: 100%;
 }
 
-#saludicon{
+.saludicon, .saludicon3{
 	color: #cacbcc;
 	font-size: 30px;
 }
 
-#saludicon:hover{
+.saludicon:hover, .saludicon3:hover{
 	color: #8c8f94;
 }
 
@@ -65,6 +72,10 @@ h1.salud {
 	width: 396px;
 }
 
+.saludicon4{
+	margin-left: 95%;
+}
+
 
 /* EDIT */
 
@@ -74,3 +85,16 @@ h1.salud {
 #btnsalud:hover, .saludbtn:hover{
 	background-color: #c2c4c3;	
 }
+
+
+/* NUEVA NOTICIA */
+.contenedor .texto_nuevo > .col-md-6 h4{
+	color: #44445b;
+}
+
+.contenedor .texto_nuevo > .col-md-6:first-child p, .contenedor .texto_nuevo > .col-md-6:first-child li{
+	color: #6c7272;
+	text-align: justify;
+}
+
+

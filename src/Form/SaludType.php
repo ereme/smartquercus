@@ -26,7 +26,7 @@ class SaludType extends AbstractType
             ->add('fichero', FileType::class, array(
                 'label' => 'Imagen',
                 'mapped' => false,
-                'required' => false,
+                'required' => false
             ))
             ->add('texto', TextareaType::class, array(
                 'attr' => array('class' => 'tinymce', 
@@ -38,10 +38,12 @@ class SaludType extends AbstractType
                     'html5' => true,
                     'required' => true
                 ))
+            
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn saludbtn float-right'),
                 'label' => 'Guardar'
-            ));
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
