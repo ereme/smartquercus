@@ -9,6 +9,7 @@ use App\Entity\Admin;
 use App\Form\LocalidadType;
 use App\Repository\AyuntamientoRepository;
 use App\Repository\VecinoRepository;
+use App\Repository\AdminRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class InicioController extends AbstractController
     /**
      * @Route("/", name="inicio", methods="GET")
      */
-    public function index(AyuntamientoRepository $aytoRepo,VecinoRepository $vecinoRepo): Response
+    public function index(AyuntamientoRepository $aytoRepo,VecinoRepository $vecinoRepo, AdminRepository $adminRepo): Response
     {
 
         if ($this->isGranted(Vecino::ROLE_VECINO)) {
