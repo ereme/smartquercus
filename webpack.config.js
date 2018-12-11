@@ -22,7 +22,7 @@ Encore
     .addEntry('opinajs', './assets/js/opina.js')    
     .addStyleEntry('app', './assets/css/app.css')
     .addStyleEntry('opina', './assets/css/opina.css')
-    .addEntry('saludjs', './assets/js/salud.js')    
+    .addEntry('saludjs', './assets/js/saludjs.js')    
     .addStyleEntry('salud', './assets/css/salud.css')
     .addStyleEntry('telefono', './assets/css/telefono.css')
     .addStyleEntry('ayto', './assets/css/ayto.css')

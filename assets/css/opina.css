@@ -5,8 +5,17 @@
 	margin-top: 30px;
 }
 
+#pregunta a{
+	font-size: 18px;
+	color: #01254f ;
+}
+
 #opina .card-text p{
 	height: 100px;
+}
+
+#opina > .card > p {
+	width: 100%;
 }
 
 h1{
@@ -17,10 +26,7 @@ h1{
 	
 }
 
-#opina .card-text-2{
-	color: #01254f;
-	font-weight: bold;
-}
+
 
 #fecha{
 	color: #01254f;
@@ -41,7 +47,42 @@ h1{
 	height: 5px
 }
 
-#opina a{
-	color: #01254f;
-	font-size: 12px;
+
+#opina .fa-thumbs-up{
+	color: green;
 }
+
+#opina .fa-thumbs-down{
+	color: red;
+}
+
+
+#mostrar > tbody > tr:nth-child(1) > th{
+	color: green;
+}
+
+#mostrar > tbody > tr:nth-child(1) > td{
+	color: green;
+}
+
+#mostrar > tbody > tr:nth-child(2) > th{
+	color:red;
+}
+
+#mostrar > tbody > tr:nth-child(2) > td{
+	color:red;
+}
+
+#opina .card-body{
+	height : 355px;
+}
+
+
+
+#editarpregunta, #volver, #editar, #new a, #new h1, #nuevaopinion{
+
+	margin-left: 20px;
+	color: #01254f;
+	font-weight: bold;
+}
+
