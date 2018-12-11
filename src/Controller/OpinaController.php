@@ -56,7 +56,6 @@ class OpinaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //$datos = $request->get('salud');
             $fichero = $request->files->get('opina')['fichero'];
             $fileName = md5(uniqid());
 
@@ -64,6 +63,8 @@ class OpinaController extends AbstractController
             $imagen->setNombre($fileName);
             $imagen->setOriginal($fichero->getClientOriginalName());
             $opina->setImagen($imagen);
+            $imagen->setSize($fichero->getSize());
+
             /*dump ($imagen);
             dump ($fichero);
             dump ($salud);*/
@@ -159,7 +160,7 @@ class OpinaController extends AbstractController
             $em->flush();
             $this->getDoctrine()->getManager()->flush();            
 
-            return $this->redirectToRoute('opina_edit', ['id' => $opina->getId()]);
+            return $this->redirectToRoute('opina_index');
         }
 
         return $this->render('opina/edit.html.twig', [
