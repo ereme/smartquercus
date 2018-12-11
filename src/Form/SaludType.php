@@ -26,7 +26,7 @@ class SaludType extends AbstractType
             ->add('fichero', FileType::class, array(
                 'label' => 'Imagen',
                 'mapped' => false,
-                'required' => false,
+                'required' => false
             ))
             ->add('texto', TextareaType::class, array(
                 'attr' => array('class' => 'tinymce', 
