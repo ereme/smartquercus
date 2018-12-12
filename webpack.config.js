@@ -32,13 +32,10 @@ Encore
     .addEntry('incidencias-js', './assets/js/incidencias-js.js')
     .addStyleEntry('incidencias-css', './assets/css/incidencias-css.css')
     .addStyleEntry('register', './assets/css/register_footer.css')
-<<<<<<< HEAD
     .addStyleEntry('vecino', './assets/css/vecino.css')
-=======
     .addEntry('eventojs', './assets/js/evento.js')  
     .addStyleEntry('evento', './assets/css/evento.css')
   
->>>>>>> 7902a54f14e64c5d6e1996c40e39c584f6bc0b12
 
 
 

@@ -13,7 +13,7 @@
             <div class="col-sm-2">
                 <div class="card h-100">
                     <div>
-                        <img class="card-img-top" src="https://cdn.oem.com.mx/elsoldemazatlan//3863934-615x384.jpg" width=0alt="Imagen vecino">
+                        <img class="card-img-top" src="{{ asset(ruta_imagenes ~ vecino.imagen.nombre) }}" alt="Imagen vecino">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{vecino.apellido1|capitalize}} {{vecino.apellido2|capitalize}}, {{ vecino.nombre|capitalize}}</h5>
