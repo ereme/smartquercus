@@ -21,19 +21,15 @@ div#vecinos .card > div {
     padding: 15px;
 }
 
-div#vecinos .card h5{
-    color: black;
-    text-align: center;
-}
-
-div#vecinos img {
+div#vecinos .card > div > img {
     border-radius: 100px;
     width: 150px;
     height: 150px;
 }
 
-div#vecinos a:hover{
-    text-decoration: none;
+div#vecinos .card > div > h5{
+    color: black;
+    text-align: center;
 }
 
 div#vecinos .card:hover{
