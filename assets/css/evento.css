@@ -1,46 +1,83 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+/*INDEX*/
 
-
-.card{
-	height: 100%;
+a#nuevoevento.btn.btn-primary{
+	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-left: 1190px;
 }
-.card .card-img-top{
-
+.container-fluid .row .col-sm-4 .card a img.card-img-top{ 
 	width: 418px;
 	height: 300px;
 }
 
-.iconos_evento{
+.container-fluid .row .col-sm-4 .card .card-body a{	 
+	color: rgb(78  ,81, 80);
+	text-decoration: none;	
+}
+
+.container-fluid .row .col-sm-4 .card .card-body a:hover{ 
+	color:black;
+	text-decoration: none;	
+}
+.container-fluid .row .col-sm-4 .card .card-text{
+	font-size: 14px;
+	text-align: justify;
+}
+
+
+.container-fluid .row .col-sm-4 .card .card-body a h5{ 
+	font-weight: bolder;
+	text-align: center;
+}
+
+.container-fluid .row .col-sm-4 .card .card-body .card-text p.fecha_evento{
+	text-align: right;
+	color: #98999a;
+	font-size: 0.8em;
+	letter-spacing: 0.2em;
+	text-align: right;
+}
+/*SHOW*/
+
+.container-fluid .row .col-md-3 .iconos_evento {
 	margin-top: 20px;
 	margin-left: 100px;
 }
-#eventoicon{
+
+ .container-fluid .row .col-md-3 a#eventoicon{
 	color: #cacbcc;
 	font-size: 30px;	
 }
-#eventoicon:hover{
+
+.container-fluid .row .col-md-3 a#eventoicon:hover{
 	color: #8c8f94;
 }
-.container .botonesedit{
-	margin-left: 81%;
-}
 
-.container .botonesedit .dos{
-	margin-top: 4px;
-}
-.btn:hover{
+.container-fluid .row .btn:hover {
 	background-color: #c2c4c3;
 }
 
-a:hover{
-	color: #2956b2;
-	text-decoration: none;
+.container-fluid .row .icono_borrar{
+	margin-left: 95%;
+}
+
+.container-fluid .row  .col-sm-9 p.texto_show{
+	text-align: justify;
 
 }
 
+/*EDIT*/
+ .container-fluid .row  .col-sm-3 .icono_edit{
+	color: #cacbcc;	
+	font-size:25px;
+}
+ .container-fluid .row  .col-sm-3 .icono_edit{
+	color: #8c8f94;
+}
 
-#fecha{
-	text-align: right;
-	
+ .card-img-top{
+
+	margin-bottom: 40px;
 }

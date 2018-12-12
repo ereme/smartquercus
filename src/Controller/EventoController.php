@@ -37,28 +37,32 @@ class EventoController extends AbstractController
         $form = $this->createForm(EventoType::class, $evento);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->files->get('evento')['fichero']!=null){
 
-            $fichero = $request->files->get('evento')['fichero'];
-            $fileName = md5(uniqid());
+              $fichero = $request->files->get('evento')['fichero'];
+              $fileName = md5(uniqid());
 
-            $imagen = new Imagen();
-            $imagen->setNombre($fileName);
-            $imagen->setOriginal($fichero->getClientOriginalName());
-            $evento->setImagen($imagen);
-            /*dump ($imagen);
-            dump ($fichero);
-            dump ($salud);*/
+              $imagen = new Imagen();
+              $imagen->setNombre($fileName);
+              $imagen->setOriginal($fichero->getClientOriginalName());
+              $evento->setImagen($imagen);
+              $imagen->setSize($fichero->getSize());
+              /*dump ($imagen);
+              dump ($fichero);
+              dump ($salud);*/
 
-            // Move the file to the directory where brochures are stored
-            try {
-                $fichero->move(
-                    $this->getParameter('carpeta_imagenes'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
-            }
+              // Move the file to the directory where brochures are stored
+              try {
+                  $fichero->move(
+                      $this->getParameter('carpeta_imagenes'),
+                      $fileName
+                  );
+              } catch (FileException $e) {
+                  // ... handle exception if something happens during file upload
+              }
+          }
 
 
             $em = $this->getDoctrine()->getManager();
@@ -143,7 +147,7 @@ class EventoController extends AbstractController
            return $this->redirectToRoute('evento_index');
        }
 
-       return $this->render('evento/index.html.twig', [
+       return $this->render('evento/edit.html.twig', [
            'evento' => $evento,
            'form' => $form->createView(),
        ]); 
