@@ -1,9 +1,16 @@
 /* INDEX */
-.card-title{
+.container-fluid .row .col-sm-4 .h-100 .card-body .card-title{
 	font-weight: bold;
 }
 
-
+.imgtodas{
+	height: 270px; 
+	width: 396px;
+} 
+.texto_card{
+	text-align: justify;
+	font-size: 14px;
+}
 
 h1.salud {
 	margin-top: 20px;
@@ -22,7 +29,8 @@ h1.salud {
 .final{
 	text-align: right;
 	color: #98999a;
-	font-size: 0.8em;
+	font-size: 0.7em;
+	letter-spacing: 0.2em;
 }
 
 #nuevosalud{
@@ -46,7 +54,8 @@ h1.salud {
 }
 
 .col-md-3 img{
-	margin-bottom:20px;
+	margin-bottom: 20px;
+	margin-top: 30px;
 }
 
 .container-fluid .row .col-sm-4 .card{
@@ -55,22 +64,13 @@ h1.salud {
 
 .saludicon, .saludicon3{
 	color: #cacbcc;
-	font-size: 30px;
+	font-size: 25px;
 }
 
 .saludicon:hover, .saludicon3:hover{
 	color: #8c8f94;
 }
 
-.iconos{
-	margin-top: 20px;
-	margin-left: 100px;
-}
-
-.imgtodas{
-	height: 300px; 
-	width: 396px;
-}
 
 .saludicon4{
 	margin-left: 95%;
@@ -79,6 +79,13 @@ h1.salud {
 
 /* EDIT */
 
+.contenedor_edit{
+	padding-top: 30px;
+}
+
+.contenedor_edit .row .col-sm-3 .card-img-top{
+	padding-bottom: 20px;
+}
 
 
 /*DELETE y FORMTYPE*/
