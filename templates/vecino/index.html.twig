@@ -6,14 +6,16 @@
 
 {% block body %}
 <h1>Vecinos de {{localidad}}</h1>
-<div id="vecinos">
+<div id="vecinos"> 
     {% for row in vecinos|batch(6) %}
     <div class="row">
-        {% for vecino in row %}
+        {% for vecino in row %} 
             <div class="col-sm-2">
                 <a href="#">
                 <div class="card h-100">
-                    <img class="card-img-top" src="#" alt="Imagen vecino">
+                    <div>
+                        <img class="card-img-top" src="https://cdn.oem.com.mx/elsoldemazatlan//3863934-615x384.jpg" width=0alt="Imagen vecino">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">{{vecino.apellido1|capitalize}} {{vecino.apellido2|capitalize}}, {{ vecino.nombre|capitalize}}</h5>
                     </div>

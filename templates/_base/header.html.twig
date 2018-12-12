@@ -17,11 +17,6 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ path('salud_index') }}">Salud</a>
           </li>
-        {% if is_granted('ROLE_AYTO') %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('vecino_listado') }}">Vecinos</a>
-          </li>
-        {% endif %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('opina_index') }}">Opina</a>
@@ -29,6 +24,11 @@
         {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('login') }}">Opina</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_AYTO') %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('vecino_listado') }}">Vecinos</a>
           </li>
         {% endif %}
           <li class="nav-item">

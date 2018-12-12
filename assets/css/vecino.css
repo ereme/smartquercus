@@ -8,11 +8,28 @@ h1{
 }
 
 div#vecinos{
-    padding: 20px;
+    padding: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+div#vecinos .card {
+    border: none;
+}
+
+div#vecinos .card > div {
+    padding: 15px;
 }
 
 div#vecinos .card h5{
     color: black;
+    text-align: center;
+}
+
+div#vecinos img {
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
 }
 
 div#vecinos a:hover{
@@ -21,4 +38,5 @@ div#vecinos a:hover{
 
 div#vecinos .card:hover{
     border: 1px solid #01254f;
+    border-radius: 20px;
 }

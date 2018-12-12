@@ -19,8 +19,7 @@ class VecinoRepository extends ServiceEntityRepository
         parent::__construct($registry, Vecino::class);
     }
 
-
-    public function findByAyuntamiento($ayto)
+    public function findByAyto($ayto)
     {
         return $this->createQueryBuilder('t')
             ->select('t.id', 't.nombre', 't.apellido1', 't.apellido2')

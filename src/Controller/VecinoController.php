@@ -60,7 +60,7 @@ class VecinoController extends AbstractController
 
         $serializer = new Serializer(array($normalizer), array($encoder));
 
-        $vecinos = $vecinoRepository->findByAyuntamiento($ayto_id); 
+        $vecinos = $vecinoRepository->findByAyto($ayto_id); 
 
         $jsonMensaje = $serializer->serialize($vecinos, 'json');   
         $respuesta = new Response($jsonMensaje);    
