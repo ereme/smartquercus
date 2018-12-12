@@ -14,7 +14,7 @@
 
 {% block body %}
     <div class="container-fluid">
-       {% if is_granted('ROLE_ADMIN') %} 
+       {% if is_granted('ROLE_AYTO') %} 
     <a id="nuevoevento" class="btn btn-primary" href="{{ path('evento_new') }}">Nuevo artículo</a>
 
   {% endif %}  
