@@ -79,11 +79,12 @@ class SecurityController extends Controller
                 if ($tipo == Ayuntamiento::USER_AYTO) {
                     $fichero = $request->files->get('ayuntamiento')['imagen'];
                     $fileName = md5(uniqid());
-
+                    dump ($fichero);
                     $imagen = new Imagen();
                     $imagen->setNombre($fileName);
                     $imagen->setOriginal($fichero->getClientOriginalName());
-
+                    $imagen->setSize($fichero->getSize());
+                    dump ($imagen);
                     $user->setImagen($imagen);
               
                     try {

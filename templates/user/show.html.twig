@@ -13,11 +13,13 @@
 
 <div class="container-fluid">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {% if is_granted('ROLE_VECINO') %}
+        {% if user.imagen.nombre is defined %}
+            <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+        {% elseif is_granted('ROLE_VECINO') %}
             <h1><b>
-            {% if user.imagen.nombre is defined %}
-                <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
-            {% endif %}
             {{ user.nombre }} {{ user.apellido1 }} {{ user.apellido2 }}
             </b></h1>
             <hr>
@@ -48,7 +50,7 @@
                                             <td>{{ user.email }}</td>
                                         </tr>
                                             <th scope="row">Ayuntamiento</th>
-                                            <td>{{ user.ayuntamiento }}</td>
+                                            <td>{{ user.ayuntamiento.localidad}}</td>
                                         </tr>
                                         <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a></caption>
                                     </tbody>
@@ -62,10 +64,10 @@
                         </div>
                     </div>
             </div>
-        {% endif %}
-        {% if is_granted('ROLE_AYTO') %}
+        {% elseif is_granted('ROLE_AYTO') %}
             <h1>
-            <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200"> {{ user.nombre }}</h1>
+                {{ user.localidad }}
+            </h1>
             <hr>
             <div class="row">
                     <div class="col-md-4">
@@ -74,10 +76,6 @@
                                 <h2>Información</h2>
                                 <table class="table table-hover">
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">Nombre</th>
-                                            <td>{{ user.nombre }}</td>
-                                        </tr>
                                         <tr>
                                             <th scope="row">Usuario</th>
                                             <td>{{ user.username }}</td>
@@ -92,7 +90,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">Teléfonos</th>
-                                            <td>{{ user.telefonos }}</td>
+                                            <td>AQUI VA UN FOREACH QUE RECORRA TELEFONOS (LO SUBE ESTHER ANTES)</td>
                                         </tr>
                                         <tr>
                                         <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a></caption>

@@ -4,6 +4,8 @@
 namespace App\Form;
 
 use App\Entity\Vecino;
+use App\Entity\Ayuntamiento;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,6 +30,10 @@ class VecinoType extends AbstractType
             ->add('nombre')
             ->add('apellido1')
             ->add('apellido2')
+            ->add('ayuntamiento', EntityType::class, array(
+                'class' => Ayuntamiento::class,
+                'choice_label' => 'localidad',
+            ))           
             ->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),
                'label' => 'Darme de alta'

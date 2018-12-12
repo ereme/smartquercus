@@ -28,6 +28,13 @@
 					</div>
 			{% endif %}			
     </div>
+	<div class="row">
+			{% if (form.ayuntamiento) is defined %}    	
+					<div class="col-md-12">
+						{{ form_row(form.ayuntamiento) }}
+					</div>
+			{% endif %}			
+    </div>
 
 	<div class="row">
 			{% if (form.imagen) is defined %}    	

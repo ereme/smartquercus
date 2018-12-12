@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 
+use App\Form\UserType;
 use App\Form\AdminType;
 use App\Form\VecinoType;
 use App\Form\AyuntamientoType;
@@ -57,35 +58,33 @@ class UserController extends Controller
             $clase = VecinoType::class;
         } 
 
-        $form = $this->createForm($clase, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if($request->files->get('user')['fichero'] == null){
-                        $fichero = $request->files->get('user')['fichero'];
-                        $fileName = md5(uniqid());
-                        dump ($fichero);
-                        dump($this->getUser());
+                $fichero = $request->files->get('user')['fichero'];
+                $fileName = md5(uniqid());
+                dump ($fichero);
+                dump($this->getUser());
 
-                        $imagen = new Imagen();
+                $imagen = new Imagen();
+                $imagen->setNombre($fileName);
+                $imagen->setOriginal($fichero->getClientOriginalName());
+                $imagen->setSize($fichero->getSize());
+                $user->setImagen($imagen);
 
-                        $imagen->setNombre($fileName);
-                        dump($imagen);
-                        $imagen->setOriginal($fichero->getClientOriginalName());
-                        $user->setImagen($imagen);
-
-                        dump ($user);
-                        // Move the file to the directory where brochures are stored
-                        try {
-                            $fichero->move(
-                                $this->getParameter('carpeta_imagenes'),
-                                $fileName
-                            );
-                        } catch (FileException $e) {
-                            // ... handle exception if something happens during file upload
-                        }
+                dump ($user);
+                // Move the file to the directory where brochures are stored
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
             }elseif ($request->files->get('user')['fichero'] != null ){
-
                 $fichero = $request->files->get('user')['fichero'];
                 $nombre_antiguo_borrar = $user->getImagen()->getNombre();
                 $nombre_antiguo = $user->getImagen()->getOriginal();
