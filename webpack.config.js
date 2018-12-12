@@ -19,6 +19,8 @@ Encore
      */
 
 
+    .addEntry('userjs', './assets/js/user.js')  
+    .addStyleEntry('user', './assets/css/user.css') 
     .addEntry('opinajs', './assets/js/opina.js')    
     .addStyleEntry('app', './assets/css/app.css')
     .addStyleEntry('opina', './assets/css/opina.css')
