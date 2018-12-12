@@ -36,7 +36,7 @@ h1.salud {
 #nuevosalud{
 	margin-bottom: 20px;
 	margin-top: 20px;
-	margin-left: 89%;
+	margin-left: 78%;
 }
 
 
@@ -102,6 +102,12 @@ h1.salud {
 .contenedor .texto_nuevo > .col-md-6:first-child p, .contenedor .texto_nuevo > .col-md-6:first-child li{
 	color: #6c7272;
 	text-align: justify;
+}
+
+.titulo_edit{
+	color: #6c7272;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 
