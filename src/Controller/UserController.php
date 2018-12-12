@@ -52,73 +52,60 @@ class UserController extends Controller
     {
         if ($this->isGranted('ROLE_ADMIN')) { //soy ayto
             $clase = AdminType::class;
+            $tipo = 'admin';
         } elseif ($this->isGranted('ROLE_AYTO')) { //soy ayto
             $clase = AyuntamientoType::class;
+            $tipo = 'ayto';
         } else { //soy vecino
             $clase = VecinoType::class;
+            $tipo = 'vecino';
         } 
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm($clase, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($request->files->get('user')['fichero'] == null){
-                $fichero = $request->files->get('user')['fichero'];
-                $fileName = md5(uniqid());
-                dump ($fichero);
-                dump($this->getUser());
+            dump ($request->files->get($tipo)['fichero'] != null );
+            if ($request->files->get($tipo)['fichero'] != null ){
 
-                $imagen = new Imagen();
-                $imagen->setNombre($fileName);
-                $imagen->setOriginal($fichero->getClientOriginalName());
-                $imagen->setSize($fichero->getSize());
-                $user->setImagen($imagen);
-
-                dump ($user);
-                // Move the file to the directory where brochures are stored
-                try {
-                    $fichero->move(
-                        $this->getParameter('carpeta_imagenes'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-            }elseif ($request->files->get('user')['fichero'] != null ){
-                $fichero = $request->files->get('user')['fichero'];
-                $nombre_antiguo_borrar = $user->getImagen()->getNombre();
-                $nombre_antiguo = $user->getImagen()->getOriginal();
+                $fichero = $request->files->get($tipo)['fichero'];
                 $nombre_nuevo = $fichero->getClientOriginalName();
-                $tamano_antiguo = $user->getImagen()->getSize();
                 $tamano_nuevo = $fichero->getSize();
 
-                    if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)){
-                        $fileName = md5(uniqid());
-                        
-                        $imagen = new Imagen();
-                        $imagen->setNombre($fileName);
-                        $imagen->setOriginal($nombre_nuevo);
-                        $imagen->setSize($tamano_nuevo);
-                        
-                    //Base de datos
+                if ($user->getImagen() != null) {
+                    $nombre_antiguo_borrar = $user->getImagen()->getNombre();
+                    $nombre_antiguo = $user->getImagen()->getOriginal();
+                    $tamano_antiguo = $user->getImagen()->getSize();                    
+                } else {
+                    $nombre_antiguo = $nombre_antiguo_borrar = '';
+                    $tamano_antiguo = 0;
+                }
 
-                        $em->remove($user->getImagen());
-                        $user->setImagen($imagen);
+                if (($nombre_nuevo != $nombre_antiguo) || ($tamano_nuevo != $tamano_antiguo)){
 
-
-                    // Disco duro
-
-                        unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
-
-                        try {
-                            $fichero->move(
-                                $this->getParameter('carpeta_imagenes'),
-                                $fileName
-                            );
-                        } catch (FileException $e) {
-                            // ... handle exception if something happens during file upload
-                        }
+                    $fileName = md5(uniqid());
+                    
+                    $imagen = new Imagen();
+                    $imagen->setNombre($fileName);
+                    $imagen->setOriginal($nombre_nuevo);
+                    $imagen->setSize($tamano_nuevo);
+                    
+                    dump ($imagen);
+                    if ($user->getImagen() != null) { //SI TENIA IMAGEN...
+                        $em->remove($user->getImagen()); //borro imagen en bd                  
+                        unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar); //borro imagen disco
                     }
+
+                    $user->setImagen($imagen); 
+                    try {
+                        $fichero->move(
+                            $this->getParameter('carpeta_imagenes'),
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+                }
 
             }
 
