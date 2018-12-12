@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+
+<link rel="stylesheet" href="{{asset('build/evento.css')}}">
+
+
+
+
+{% endblock %}
+
+{% block title %}Eventos{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+       {% if is_granted('ROLE_AYTO') %} 
+    <a id="nuevoevento" class="btn btn-primary" href="{{ path('evento_new') }}">Nuevo artículo</a>
+
+  {% endif %}  
+  {% for row in evento|batch(3) %}
+    <div class="row">
+      {% for evento in row %}
+        <div  class="col-sm-4">
+          <div class="card h-100">
+            <a href="{{evento.id}}">
+              <img class="card-img-top" src="{{ asset(ruta_imagenes ~ evento.imagen.nombre) }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ evento.titular}}</h5></a>        
+                <div class="card-text">
+                  <p class="card-text">{{ evento.texto|slice(0, 140) }}</p>
+                   <p class="fecha_evento">{{ evento.fechahora ? evento.fechahora|date('d/m/Y') : '' }}</p>
+                </div>
+                                        
+              </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <br>
+    <br>
+  {% endfor %}
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}  
+    <script src="{{ asset('build/eventojs.js') }}"></script>
+            
+{% endblock %}
+
