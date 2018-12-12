@@ -18,21 +18,19 @@
             <a class="nav-link" href="{{ path('salud_index') }}">Salud</a>
           </li>
           <li class="nav-item">
+
             <a class="nav-link" href="{{ path('inicio') }}">Vecinos</a>
+
           </li>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('opina_index') }}">Opina</a>
           </li>
-        {% else %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('login') }}">Opina</a>
+            <a class="nav-link" href="{{ path('user_show', {'id': app.user.id }) }}">{{ app.user.email|default('') }}</a>
           </li>
         {% endif %}
       </ul>
-      <span class="navbar-text">
-        {{ app.user.email|default('') }}
-    </span>
     </div>
   </div>
 </nav>
