@@ -1,5 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+
 h1{
 	margin-top: 10px;
 }
@@ -7,6 +8,7 @@ h1{
 .row{
 	margin-left: 5px;
 }
+
 
 .img-rounded{
     border-radius:180px;
@@ -29,7 +31,7 @@ tr{
 	font-size: 17px;
 }
 
-.col-md-8{
+#linea{
 	border-left: #dee2e6 solid 1px;
 }
 
@@ -47,6 +49,9 @@ tr{
 	border-color: #ff3300;
 }
 
+#atras:hover{
+	text-decoration: none;
+}
 div table a {
     color: black;
 }
