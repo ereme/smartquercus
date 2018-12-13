@@ -29,7 +29,10 @@ class OpinaController extends AbstractController
     {
 
         $opinas = array();
-        if ($this->isGranted('ROLE_AYTO')) { //soy ayto
+        if ($this->isGranted('ROLE_ADMIN')){
+            $opinas = $opinaRepository->findAll();
+        }
+        elseif ($this->isGranted('ROLE_AYTO')) { //soy ayto
             $opinas = $this->getUser()->getEncuestas();
         } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
             $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
