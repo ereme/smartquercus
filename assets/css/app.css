@@ -4,6 +4,10 @@ body {
   padding-top: 54px;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 .navbar {
   height: 65px;
 }

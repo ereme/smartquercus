@@ -6,8 +6,21 @@
 
 <div class="container-fluid contenedor">
 
-    {% include('inicio/_panel_explotacion_without.html.twig') %}
-  
+
+    {#{% if participaciones is empty %}
+        {% include('inicio/_panel_explotacion_without.html.twig') %}
+    {% else %}
+        {% include('inicio/_panel_titular_dashboard.html.twig') %}
+    {% endif %}#}
+
+
+    {% if is_granted('ROLE_AYTO') %}
+    	{% include('inicio/_panel_ayto.html.twig') %}
+    {% elseif is_granted('ROLE_VECINO') %}
+    	{% include('inicio/_panel_vecino.html.twig') %}
+    {% else %}
+    	{% include('inicio/_panel_admin.html.twig') %}
+	{% endif %}  
 </div>
 
 {% endblock %}
