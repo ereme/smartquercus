@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Edit Telefono{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/telefono.css') }}">
+{% endblock %}
+{% block title %}Editar teféfono{% endblock %}
 
 {% block body %}
-    <h1>Edit Telefono</h1>
+    <h1>Editar teléfono</h1>
 
-    {{ include('telefono/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('telefono_index') }}">back to list</a>
+    {{ include('telefono/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
     {{ include('telefono/_delete_form.html.twig') }}
+
+    <a class="volver" href="{{ path('telefono_index') }}"><i class="fas fa-arrow-circle-left"></i> Volver a la lista de teléfonos</a>
+
 {% endblock %}

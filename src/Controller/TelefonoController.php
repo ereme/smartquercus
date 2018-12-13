@@ -29,11 +29,14 @@ class TelefonoController extends AbstractController
             $telefonos = $telefonoRepository->findAll();
         } elseif ($this->isGranted('ROLE_AYTO')) { 
             $telefonos = $this->getUser()->getTelefonos();
+            $localidad = $this->getUser()->getLocalidad();
         } elseif ($this->isGranted('ROLE_VECINO')) { 
             $telefonos = $this->getUser()->getAyuntamiento()->getTelefonos();
+            $localidad = $this->getUser()->getAyuntamiento()->getLocalidad();
         }
 
-        return $this->render('telefono/index.html.twig', ['telefonos' => $telefonos]);
+        return $this->render('telefono/index.html.twig', ['telefonos' => $telefonos,
+        'localidad' => $localidad]);
     }
 
     /**
