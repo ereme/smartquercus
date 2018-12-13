@@ -54,7 +54,6 @@ class OpinaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if ($request->files->get('opina')['fichero'] != null){
                 $fichero = $request->files->get('opina')['fichero'];
                 $fileName = md5(uniqid());
@@ -63,6 +62,8 @@ class OpinaController extends AbstractController
                 $imagen->setNombre($fileName);
                 $imagen->setOriginal($fichero->getClientOriginalName());
                 $opina->setImagen($imagen);
+                $imagen->setSize($fichero->getSize());
+
                 /*dump ($imagen);
                 dump ($fichero);
                 dump ($salud);*/
@@ -76,6 +77,7 @@ class OpinaController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
+
             }
             
 
@@ -160,7 +162,7 @@ class OpinaController extends AbstractController
             $em->flush();
             $this->getDoctrine()->getManager()->flush();            
 
-            return $this->redirectToRoute('opina_edit', ['id' => $opina->getId()]);
+            return $this->redirectToRoute('opina_index');
         }
 
         return $this->render('opina/edit.html.twig', [
@@ -179,6 +181,7 @@ class OpinaController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$opina->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
+            dump($opina);
             $em->remove($opina);
             $em->flush();
         }

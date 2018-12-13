@@ -1,62 +1,59 @@
 {{ form_start(form) }}
 
+<div class="container-fluid">
 	 <div class="row">
 			{% if (form.nombre) is defined %}    	
-					<div class="col-md-12">
+					<div class="col-md-6">
 						{{ form_row(form.nombre) }}
 					</div>	
-		    {% endif %}	
-    </div>
+		    {% endif %}
 		    
-	<div class="row">
 			{% if (form.apellido1) is defined %}		
 					<div class="col-md-6">
 						{{ form_row(form.apellido1) }}
 					</div>		
 			{% endif %}	
-			
 			{% if (form.apellido2) is defined %}		
 					<div class="col-md-6">
 						{{ form_row(form.apellido2) }}
 					</div>
 			{% endif %}					
-	</div>				
-	<div class="row">
+
+
 			{% if (form.localidad) is defined %}    	
-					<div class="col-md-12">
+					<div class="col-md-6">
 						{{ form_row(form.localidad) }}
 					</div>
 			{% endif %}			
-    </div>
-	<div class="row">
+
+
 			{% if (form.ayuntamiento) is defined %}    	
-					<div class="col-md-12">
+					<div class="col-md-6">
 						{{ form_row(form.ayuntamiento) }}
 					</div>
 			{% endif %}			
-    </div>
 
-	<div class="row">
+
 			{% if (form.fichero) is defined %}    	
-					<div class="col-md-12">
+					<div class="col-md-6">
 						{{ form_row(form.fichero) }}
 					</div>
 			{% endif %}			
-    </div>	
 
-	<div class="row">
 			{% if (form.username) is defined %}	
-				<div class="col-md-4">
+				<div class="col-md-6">
 					{{ form_row(form.username) }}
 				</div>
 			{% endif %}	
 			{% if (form.email) is defined %}	
-				<div class="col-md-8">
+				<div class="col-md-6">
 					{{ form_row(form.email) }}
 				</div>
 			{% endif %}		
+
 	</div>	
 	<div class="row">
+
 			{% if (form.plainPassword.first) is defined %}	
 				<div class="col-md-6">
 					{{ form_row(form.plainPassword.first) }}
@@ -67,12 +64,12 @@
 					{{ form_row(form.plainPassword.second) }}
 				</div>
 			{% endif %}		
-	</div>
-	<div class="row">
-			<div class="col-md-12">
+
+			<div class="col-md-6">
 				{{ form_row(form.save) }}
 			</div>
-	</div>		
+	</div>
+</div>	
 {{ form_end(form) }}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>

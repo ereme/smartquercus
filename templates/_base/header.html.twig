@@ -9,27 +9,29 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('inicio') }}">Inicio</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{{ path('incidencia_index') }}">Incidencias</a>
+          </li>
+          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('opina_index') }}">Opina</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('evento_index') }}">Eventos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ path('salud_index') }}">Salud</a>
           </li>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('opina_index') }}">Opina</a>
-          </li>
-        {% endif %}
-        {% if is_granted('ROLE_AYTO') %}
+          {% if is_granted('ROLE_AYTO') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('vecino_listado') }}">Vecinos</a>
           </li>
-        {% endif %}
+          {% endif %}
+          {% if is_granted('ROLE_VECINO') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('telefono_index') }}">Teléfonos</a>
           </li>
+          {% endif %}
           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('user_show', {'id': app.user.id }) }}">{{ app.user.email|default('') }}</a>
