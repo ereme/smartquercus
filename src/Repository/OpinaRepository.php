@@ -50,14 +50,15 @@ class OpinaRepository extends ServiceEntityRepository
 
     }*/
 
-
-    public function findByAyto($aytoid)
+    public function findByAyto($id)
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.ayuntamiento = :val')
-            ->setParameter('val', $aytoid)
-            ->orderBy('o.id', 'DESC')
-            ->setMaxResults(1)
+        return $this->createQueryBuilder('p')
+            ->leftJoin('App\Entity\Imagen', 'imagen', 'WITH', 'imagen.id = p.imagen')
+            ->select('p.id', 'p.pregunta', 'p.votosfavor', 'p.votoscontra', 'p.fechahoralimite', 
+            'imagen.id as imagenid', 'imagen.nombre as imagennombre', 'imagen.original as imagenoriginal')
+            ->andWhere('p.ayuntamiento = :val')
+            ->setParameter('val', $id)
+            ->orderBy('p.fechahoralimite', 'DESC')
             ->getQuery()
             ->getResult()
         ;

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Eventos{% endblock %}
+
+{% block body %}
+    <div class="container-fluid contenedor">
+	<div class="row">
+		<div class="col-md-12">
+		 	<h3>Crear eventos</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		    
+		    <img class="card-img-top" src="{{ asset('imagen/evento.jpg') }}" alt="Card image cap" >
+	
+		</div>
+		<div class="col-md-6">			
+		    {{ include('evento/_form.html.twig') }}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}  
+    <script src="{{ asset('build/eventojs.js') }}"></script>
+            
+{% endblock %}
