@@ -39,8 +39,8 @@
 		                                  {% endfor %}
 	                                </div>
 						    </p>
-						    <!--<a href="#" class="card-link">Salir</a>
-						    <a href="#" class="card-link">Todas las incidencias.</a>-->
+						    <!--<a href="#" class="card-link">Salir</a>-->
+						    <a href="{{ path('incidencia_index') }}" class="card-link">Todas las incidencias</a>
 						  </div>
 					   </div>
 			  	   </div>
@@ -62,7 +62,7 @@
 													<div  class="col-sm-3">
 									                    <div id="opina" class="card border-Gray  mb-2" style="max-width:12rem;">
 									                        <div class="card">
-									                            <div class="card-body">
+																	<div class="card-body">
 									                                <div class="card-text">
 									                                <a href="{{ path('opina_show', {'id': opina.id}) }}"><p class="card-text-2">{{ opina.pregunta }}</p></a>
 									                                </div>
@@ -78,7 +78,6 @@
 		                                  {% endfor %}
 	                                </div>
 							</p>
-						    <a href="#" class="card-link">Salir</a>
 						    <a href="{{ path('opina_index') }}" class="card-link">Ir a opiniones</a>
 								
 						  </div>
@@ -93,33 +92,30 @@
 						  <div class="card-body">
 						    <h3 class="card-title">Últimos Eventos</h3>
 						    <p class="card-text">
-                  <!-- Card Incidencia-->
+                  <!-- Card Evento-->
 						       <div class="container">
-										  {% for row in incidencias|batch(4) %}
-									            <div class="row">
-									                {% for incidencia in incidencias %}
-                                                        <div  class="col-sm-3">
-										                    <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
-										                        <div class="card border-Gray  mb-2" style="width: 12rem;">
-										                            <!-- Slider -->
-										                            <img class="img-fluid" src="/imagen/bache.jpg" alt="First slide">
-										                            <!-- End Slider -->
-										                            <div class="card-body">
-										                                <h6><small class="card-title">Fecha: {{ incidencia.fecha|date('Y-m-d') }}</small></h6>
-										                                <span class="badge badge-{{incidencia.ColorEstado}}">
-										                                    {{incidencia.estado}}
-										                                </span>      
-										                            </div>
-										                        </div>
-										                    </a>
-														</div>
-										                {% endfor %}
-									            </div>
-		                                  {% endfor %}
+										 {% for row in eventos|batch(4) %}
+											<div class="row">
+											{% for evento in row %}
+												<div  class="col-sm-3">
+												 <div id="evento" class="card border-Gray  mb-2" style="max-width:12rem;">
+													<a href="{{evento.id}}">
+													<div class="card-body">
+														<h6 class="card-title">{{ evento.titular}}</h6></a>        
+														<div class="card-text">
+														<h6><small class="fecha_evento">{{ evento.fechahora ? evento.fechahora|date('d/m/Y') : '' }}</small></h6>
+														</div>						
+													</div>
+												</div>
+												</div>
+											{% endfor %}
+											</div>
+											<br>
+											<br>
+										{% endfor %}
 	                                </div>
 						    </p>
-						    <a href="#" class="card-link">Salir</a>
-						    <a href="{{ path('incidencia_index') }}" class="card-link">Todas las incidencias.</a>
+						    <a href="{{ path('evento_index') }}" class="card-link">Ir a eventos</a>
 						  </div>
 					   </div>
 			  	   </div>
@@ -129,7 +125,7 @@
 			<div class="card border-primary  mb-2" class="card" style="margin-top:150px;">
 			    <div class="card-body">
 			    {% if is_granted('ROLE_AYTO') %}
-				<center><a id="nuevaopinion" href="{{ path('incidencia_index') }}"><i class="far fa-edit"></i> Consultar incidencias</a></center>
+				<center><a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-edit"></i> Consultar incidencias</a></center>
 				 {% endif %}
 			    </div>
 		        <div class="centered">
@@ -137,7 +133,7 @@
 				</div>
 			</div>
 			<div class="w-100"><br></div>
-			 <div class="row" style="margin-top:400px;">
+			 <div class="row" style="margin-top:250px;">
 			       <div class="col">
 			  	        <div class="card border-primary  mb-2">
 						  <div class="card-body">
@@ -151,12 +147,12 @@
 			        </div>
 			    </div>
 				<div class="w-100"><br></div>
-			 <div class="row" style="margin-top:400px;">
+			 <div class="row" style="margin-top:350px;">
 			       <div class="col">
 			  	        <div class="card border-primary  mb-2">
 						  <div class="card-body">
 						    {% if is_granted('ROLE_AYTO') %}
-				                <center><a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea eventos</a></center>
+				                <center><a id="nuevoevento" href="{{ path('evento_new') }}"><i class="far fa-edit"></i> Crea eventos</a></center>
 				             {% endif %}
 						   <div class="centered">
 				          </div>   

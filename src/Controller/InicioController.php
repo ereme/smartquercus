@@ -6,9 +6,11 @@ use App\Entity\Localidad;
 use App\Entity\Vecino;
 use App\Entity\Ayuntamiento;
 use App\Entity\Admin;
+use App\Entity\Evento;
 use App\Form\LocalidadType;
 use App\Repository\AyuntamientoRepository;
 use App\Repository\OpinaRepository;
+use App\Repository\EventoRepository;
 use App\Repository\VecinoRepository;
 use App\Repository\AdminRepository;
 use App\Repository\SaludRepository;
@@ -28,14 +30,14 @@ class InicioController extends AbstractController
      * @Route("/", name="inicio", methods="GET")
      */
     
-        public function index(AyuntamientoRepository $aytoRepo,VecinoRepository $vecinoRepo, OpinaRepository $opinaRepo,  SaludRepository $saludRepo ,IncidenciaRepository $incidenciaRepo): Response
+        public function index(AyuntamientoRepository $aytoRepo,VecinoRepository $vecinoRepo, OpinaRepository $opinaRepo,  SaludRepository $saludRepo ,IncidenciaRepository $incidenciaRepo, EventoRepository $eventoRepo): Response
         {
             if ($this->isGranted(Admin::ROLE_ADMIN)) {
                 return $this->render('inicio/inicio_admin.html.twig', [
                     'ayuntamientos' => $aytoRepo->findAll(),
                     'vecinos' => $vecinoRepo->findAll(),
                     'opinas' => $opinaRepo->findAll(),
-                    //'eventos'=> $eventoReppo->findAll(),
+                    'eventos'=> $eventoRepo->findAll(),
                     'saluds' => $saludRepo->findAll(),
                     'incidencias' =>$incidenciaRepo->findAll()
                 ]);
@@ -48,6 +50,7 @@ class InicioController extends AbstractController
                 return $this->render('inicio/inicio_ayto.html.twig', [
                   'opinas'=> $this->getUser()->getEncuestas(),
                   'incidencias'=> $this->getUser()->getIncidencias(),
+                  'eventos'=>$this->getUser()->getEventos()
                 ]);
             }
              else {

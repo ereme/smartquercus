@@ -48,6 +48,12 @@ class Ayuntamiento extends User
      */
     private $incidencias;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Evento", mappedBy="ayuntamiento", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $eventos;
+
 
     public function __construct()
     {
@@ -58,6 +64,7 @@ class Ayuntamiento extends User
         $this->encuestas = new ArrayCollection();
         $this->vecinos = new ArrayCollection();
         $this->incidencias = new ArrayCollection();
+        $this->eventos = new ArrayCollection();
 
     }
 
@@ -196,6 +203,35 @@ class Ayuntamiento extends User
             // set the owning side to null (unless already changed)
             if ($incidencia->getAyuntamiento() === $this) {
                 $incidencia->setAyuntamiento(null);
+            }
+        }
+
+        return $this;
+    }
+    /**
+     * @return Collection|Evento[]
+     */
+    public function getEventos(): Collection
+    {
+        return $this->eventos;
+    }
+
+    public function addEvento(Evento $evento): self
+    {
+        if (!$this->eventos->contains($evento)) {
+            $this->eventos[] = $evento;
+            $evento->setAyuntamiento($this);
+        }
+
+        return $this;
+    }
+    public function removeEvento(Evento $evento): self
+    {
+        if ($this->eventos->contains($evento)) {
+            $this->eventos->removeElement($evento);
+            // set the owning side to null (unless already changed)
+            if ($evento->getAyuntamiento() === $this) {
+                $evento->setAyuntamiento(null);
             }
         }
 

@@ -42,6 +42,9 @@
 		                                  {% endfor %}
 	                                </div>
 						     </p>
+							  {% if is_granted('ROLE_AYTO') %}
+				                <center><a id="nuevaincidencia" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Ver las incidencias</a></center>
+				             {% endif %}
 						    <a href="{{ path('incidencia_index') }}" class="card-link">Ir a incidencias</a>
 						  </div>
 					    </div>
@@ -80,7 +83,9 @@
 		                                  {% endfor %}
 	                                </div>
 							    </p>
-						    <a href="#" class="card-link"></a>
+						     {% if is_granted('ROLE_AYTO') %}
+				                <center><a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea una consulta</a></center>
+				             {% endif %}
 						    <a href="{{ path('opina_index') }}" class="card-link">Ir a opiniones</a>
 						  </div>
 					   </div>
@@ -102,11 +107,9 @@
 									        <div  class="col-sm-3">
 									            <div class="card border-primary ">
 									                <a href="{{salud.id}}">
-									                   <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
 									                <div class="card-body">
 									                <p class="card-title">{{ salud.titulo}}</p></a>        
 									                <div class="card-text">
-									                  <h6><small><class="card-text">{{ salud.texto|slice(0, 100) }}</small></h6>
 									                </div>
 									                <div class="final">
 									                  <h6><small> {{ salud.fechahora ? salud.fechahora|date('d-m-Y') : '' }}</small></h6> 
@@ -119,7 +122,9 @@
 						 <br>
 							    {% endfor %}
 				            </p>
-						    <a href="{{ path('salud_index') }}" class="card-link"></a>
+							 {% if is_granted('ROLE_AYTO') %}
+				                <center><a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea un artículo</a></center>
+				             {% endif %}
 						    <a href="{{ path('salud_index') }}" class="card-link">Ir a salud</a>
 						  </div>
 					    </div>
@@ -135,10 +140,32 @@
 						    <h3 class="card-title">Eventos</h3>
 						    <p class="card-text">
 						    	<!--Contenido de eventos-->
-						    	Contenido por determinar
+						    	 <div class="container">
+										 {% for row in eventos|batch(4) %}
+											<div class="row">
+											{% for evento in row %}
+												<div  class="col-sm-3">
+												 <div id="evento" class="card border-Gray  mb-2" style="max-width:12rem;">
+													<a href="{{evento.id}}">
+													<div class="card-body">
+														<h6 class="card-title">{{ evento.titular}}</h6></a>        
+														<div class="card-text">
+														<h6><small class="fecha_evento">{{ evento.fechahora ? evento.fechahora|date('d/m/Y') : '' }}</small></h6>
+														</div>						
+													</div>
+												</div>
+												</div>
+											{% endfor %}
+											</div>
+											<br>
+											<br>
+										{% endfor %}
+	                                </div>
 						    </p>
-						    <a href="#" class="card-link"></a>
-						    <a href="#" class="card-link">Ver eventos</a>
+						     {% if is_granted('ROLE_AYTO') %}
+				                <center><a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea un evento</a></center>
+				             {% endif %}
+						    <a href="{{ path('evento_index') }}" class="card-link">Ver eventos</a>
 						  </div>
 					    </div>
 			        </div>
@@ -157,11 +184,11 @@
 		        <div class="centered">
 				  <center>
 				  	<label for="añadir"></label>
-				  	<button type="button" class="btn btn-primary " text-aling="center">Añadir</button>
+				  	<!--<button type="button" class="btn btn-primary " text-aling="center">Añadir</button>-->
 				  </center>
 				</div>
 			</div>
-        <div class="w-100"><br></div>
+        <!--<div class="w-100"><br></div>
 			    <div class="row">
 			       <div class="col">
 			  	        <div class="card  mb-2" >
@@ -173,7 +200,7 @@
 						  </div>
 					    </div>
 			        </div>
-			    </div>
+			    </div>-->
 
 	    </div>
 	</div>
