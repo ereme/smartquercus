@@ -13,7 +13,7 @@ use App\Form\ImagenType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 
 class SaludType extends AbstractType
