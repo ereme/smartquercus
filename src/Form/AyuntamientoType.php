@@ -3,6 +3,9 @@
 // src/Form/UserType.php
 namespace App\Form;
 
+use App\Entity\User;
+use App\Form\UserType;
+use App\Form\AdminType;
 use App\Entity\Ayuntamiento;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use App\Form\ImagenType;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 class AyuntamientoType extends AbstractType
@@ -32,12 +37,23 @@ class AyuntamientoType extends AbstractType
                 'label' => 'Imagen escudo',
                 'mapped' => false,
                 'required' => false,
-            ))
-            ->add('save', SubmitType::class, array(
+            ));
+
+            if ($options['data']->getNombre() == null) { //new
+                $boton = 'Darme de alta';
+            } else { //edit
+                $boton = 'Guardar';
+                $builder->add('fichero', FileType::class, array(
+                    'label' => 'Imagen',
+                    'mapped' => false,
+                    'required' => false
+                ));
+            }
+
+            $builder->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),
                'label' => 'Darme de alta'
-           ))
-            
+           ))   
         ;
     }
 
