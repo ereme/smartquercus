@@ -49,4 +49,16 @@ class IncidenciaRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByAyto($aytoid)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.ayuntamiento = :val')
+            ->setParameter('val', $aytoid)
+            ->orderBy('o.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

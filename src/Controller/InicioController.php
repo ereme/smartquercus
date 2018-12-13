@@ -31,7 +31,6 @@ class InicioController extends AbstractController
         public function index(AyuntamientoRepository $aytoRepo,VecinoRepository $vecinoRepo, OpinaRepository $opinaRepo,  SaludRepository $saludRepo ,IncidenciaRepository $incidenciaRepo): Response
         {
             if ($this->isGranted(Admin::ROLE_ADMIN)) {
-                dump ("admin");
                 return $this->render('inicio/inicio_admin.html.twig', [
                     'ayuntamientos' => $aytoRepo->findAll(),
                     'vecinos' => $vecinoRepo->findAll(),
@@ -42,53 +41,20 @@ class InicioController extends AbstractController
                 ]);
             } elseif ($this->isGranted(Vecino::ROLE_VECINO)) {
                 return $this->render('inicio/inicio_vecino.html.twig', [
-                    'cartas' => $this->getUser()->getParticipaciones()
+                    'opinas' => $this->getUser()->getAyuntamiento()->getEncuestas(),
+
                 ]);            
             } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) {
                 return $this->render('inicio/inicio_ayto.html.twig', [
-                    'incidencias' => $this->getUser()->getParticipaciones()
+                  'opinas'=> $this->getUser()->getEncuestas(),
+                  'incidencias'=> $this->getUser()->getIncidencias(),
                 ]);
             }
              else {
-    
                 //HACER UNA PARA USUARIOS NO REGISTRADOS (NO LOGUEADOS)
-                return $this->render('inicio/inicio_admin.html.twig', [
-    
-    
-                   
-                ]);
+                return $this->render('inicio/inicio_admin.html.twig');
             }
     
         }
 
-        /*if ($this->isGranted(Vecino::ROLE_VECINO)) {
-            return $this->render('inicio/inicio_vecino.html.twig', [
-                'cartas' => $this->getUser()->getParticipaciones()
-            ]);            
-        } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) {
-
-            return $this->render('inicio/inicio_ayto.html.twig', [
-                'incidencias' => $this->getUser()->getParticipaciones()
-            ]);
-        } elseif ($this->isGranted(Admin::ROLE_ADMIN)) {
-
-
-            return $this->render('inicio/inicio_admin.html.twig', [
-                'ayuntamientos' => $aytoRepo->findAll(),
-                'vecinos' => $vecinoRepo->findAll()
-
-            ]);
-        } else {
-
-            //HACER UNA PARA USUARIOS NO REGISTRADOS (NO LOGUEADOS)
-            return $this->render('inicio/inicio_admin.html.twig', [
-
-
-                'participaciones' => $this->getUser()->getParticipaciones()
-            ]);
-        }
-
-        return $this->render('inicio/inicio_vecino.html.twig', [
-        ]);
-         }*/
 }

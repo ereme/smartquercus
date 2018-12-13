@@ -7,7 +7,6 @@ use App\Entity\Imagen;
 use App\Form\AyuntamientoType;
 use App\Repository\AyuntamientoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +18,6 @@ class AyuntamientoController extends AbstractController
 {
     /**
      * @Route("/", name="ayuntamiento_index", methods="GET")
-     * @Security("has_role('ROLE_ADMIN')")
      */
     public function index(AyuntamientoRepository $ayuntamientoRepository): Response
     {

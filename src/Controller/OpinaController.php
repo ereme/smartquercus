@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Opina;
 use App\Entity\Ayuntamiento;
+use App\Entity\Admin;
+use App\Entity\Vecino;
 use App\Entity\Imagen;
 use App\Form\OpinaType;
 use App\Repository\OpinaRepository;
@@ -30,11 +32,11 @@ class OpinaController extends AbstractController
      */
     public function index(OpinaRepository $opinaRepository): Response
     {
-
-        $opinas = array();
-        if ($this->isGranted('ROLE_AYTO')) { //soy ayto
+        if ($this->isGranted(Admin::ROLE_ADMIN)) { //soy admin
+            $opinas = $opinaRepository->findAll();
+        } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) { //soy ayto
             $opinas = $this->getUser()->getEncuestas();
-        } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
+        } elseif ($this->isGranted(Vecino::ROLE_VECINO)) { //soy vecino
             $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
         }
 

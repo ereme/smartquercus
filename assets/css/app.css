@@ -4,6 +4,10 @@ body {
   padding-top: 54px;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 .welcome-card, .contenedor {
   margin-top:20px;
 } 
