@@ -1,5 +1,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+#bodyopina{
+	margin-top:8px;
+}
 #opina .card{
 	margin-bottom: 30px;
 	margin-top: 30px;

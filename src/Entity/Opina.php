@@ -52,7 +52,7 @@ class Opina
     private $fechahoralimite;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Vecino", mappedBy="opinas", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Vecino", mappedBy="opinas", cascade={"persist"})
      */
     private $vecinos;
 

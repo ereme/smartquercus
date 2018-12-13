@@ -1,5 +1,9 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+h1{
+	margin-top: 10px;
+}
+
 .row{
 	margin-left: 5px;
 }
@@ -9,7 +13,7 @@
     border:5px solid #e6f3ff;
 }
 
-#boton{
+#boton, #new_telefono{
 	background-color: #b3daff;
 	border-color: #b3daff;
 	color:black;
@@ -41,4 +45,8 @@ tr{
 #eliminar:hover{
 	background-color: #ffd6cc;
 	border-color: #ff3300;
+}
+
+div table a {
+    color: black;
 }

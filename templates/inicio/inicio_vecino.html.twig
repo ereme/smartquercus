@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vecino{% endblock %}
+
+{% block body %}
+  <div class="container">
+
+  <div class="card-group" style="margin-top:50px;">
+    <div class="col-md-3 ">
+        <div class="card border-primary  mb-2" style="max-width: 18rem;">
+  			<center><div class="card-header">Agenda de Eventos</div></center>
+  			    <section class="py-5 bg-image-full" style="background-image: url('http://politecnicocartagena.es/wp-content/uploads/2018/07/salud-port.jpg');"></section>
+				  <div class="card-body text-primary">
+				    <center><a href="{{ path('evento_index') }}"><h5 class="card-title" style="color:#5499C7 ">Qué hacemos hoy</h5></a></center>
+				    <p class="card-text"></p>
+				  </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-danger mb-2" style="max-width: 18rem;">
+  			<center><div class="card-header">Incidencias</div></center>
+  			  <section class="py-5 bg-image-full" style="background-image: url('http://politecnicocartagena.es/wp-content/uploads/2018/07/salud-port.jpg');"></section>
+				  <div class="card-body text-primary">
+				    <a href="{{ path('incidencia_index') }}"><h5 class="card-title" style="color:#FF0000">Describe tú incidencia</h5></a>
+				    <p class="card-text"></p>
+				  </div>
+			
+        </div>
+    </div>
+    <div class="col-md-3">
+  	    <div class="card border-success mb-2" style="max-width: 18rem;">
+  			<center><div class="card-header">Salud</div></center>
+  				<section class="py-5 bg-image-full" style="background-image: url('http://politecnicocartagena.es/wp-content/uploads/2018/07/salud-port.jpg');"></section>
+				  <div class="card-body text-primary">
+				    <center><a href="{{ path('salud_index') }}"><h5 class="card-title" style="color:#1E8449">Cuídate</h5></a></center>
+				    <p class="card-text"></p>
+				  </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+  	    <div class="card border-warning mb-3" style="max-width: 18rem;">
+  			<center><div class="card-header">Opina</div></center>
+  			    <section class="py-5 bg-image-full" style="background-image: url('http://politecnicocartagena.es/wp-content/uploads/2018/07/salud-port.jpg');"></section>
+				  <div class="card-body text-primary">
+				     <center><a href="{{ path('opina_index') }}"><h5 class="card-title" style="color:#D68D05">Participa y vota</h5></a></center>
+				    <p class="card-text"></p>
+				  </div>
+			
+        </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+		<div >
+		<img  src="https://www.plusvecinos.com/blog/wp-content/uploads/2014/03/cropped-imagen-con-logo-plv-gente-2.jpg" width="100%" >
+		</div>
+</div>
+
+
+
+
+<div class="col-md-9">
+</div>
+{% endblock %}
