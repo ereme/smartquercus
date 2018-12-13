@@ -177,6 +177,7 @@ class OpinaController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$opina->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
+            dump($opina);
             $em->remove($opina);
             $em->flush();
         }
