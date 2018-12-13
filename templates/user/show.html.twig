@@ -13,13 +13,15 @@
 
 <div class="container-fluid">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <br>
+        <h1> 
         {% if user.imagen.nombre is defined %}
-            <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
+           <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
         {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
         {% elseif is_granted('ROLE_VECINO') %}
-            <h1><b>
+            <b>
             {{ user.nombre }} {{ user.apellido1 }} {{ user.apellido2 }}
             </b></h1>
             <hr>
@@ -52,22 +54,22 @@
                                             <th scope="row">Ayuntamiento</th>
                                             <td>{{ user.ayuntamiento.localidad}}</td>
                                         </tr>
-                                        <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a></caption>
+                                        <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar <i class="fas fa-user-edit"></i></a></caption>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div id="linea" class="col-md-8">
                         <div class="row" id="publicaciones">
 
                         </div>
                     </div>
             </div>
         {% elseif is_granted('ROLE_AYTO') %}
-            <h1>
+            <b>
                 {{ user.localidad }}
-            </h1>
+            </b></h1>
             <hr>
             <div class="row">
                     <div class="col-md-4">
@@ -93,13 +95,13 @@
                                             <td>AQUI VA UN FOREACH QUE RECORRA TELEFONOS (LO SUBE ESTHER ANTES)</td>
                                         </tr>
                                         <tr>
-                                        <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar perfil</a></caption>
+                                        <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar <i class="fas fa-user-edit"></i></a></caption>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div id="linea" class="col-md-8">
                         <div class="row" id="publicaciones">
 
                         </div>

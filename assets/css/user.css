@@ -1,9 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-.row{
-	margin-left: 5px;
-}
-
 .img-rounded{
     border-radius:180px;
     border:5px solid #e6f3ff;
@@ -25,7 +21,7 @@ tr{
 	font-size: 17px;
 }
 
-.col-md-8{
+#linea{
 	border-left: #dee2e6 solid 1px;
 }
 
@@ -41,4 +37,8 @@ tr{
 #eliminar:hover{
 	background-color: #ffd6cc;
 	border-color: #ff3300;
+}
+
+#atras:hover{
+	text-decoration: none;
 }
