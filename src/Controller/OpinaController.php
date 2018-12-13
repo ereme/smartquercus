@@ -17,9 +17,6 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
-
-
 /**
  * @Route("/opina")
  */
@@ -56,27 +53,29 @@ class OpinaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //$datos = $request->get('salud');
-            $fichero = $request->files->get('opina')['fichero'];
-            $fileName = md5(uniqid());
+            if ($request->files->get('opina')['fichero'] != null){
+                $fichero = $request->files->get('opina')['fichero'];
+                $fileName = md5(uniqid());
 
-            $imagen = new Imagen();
-            $imagen->setNombre($fileName);
-            $imagen->setOriginal($fichero->getClientOriginalName());
-            $opina->setImagen($imagen);
-            /*dump ($imagen);
-            dump ($fichero);
-            dump ($salud);*/
+                $imagen = new Imagen();
+                $imagen->setNombre($fileName);
+                $imagen->setOriginal($fichero->getClientOriginalName());
+                $opina->setImagen($imagen);
+                /*dump ($imagen);
+                dump ($fichero);
+                dump ($salud);*/
 
-            // Move the file to the directory where brochures are stored
-            try {
-                $fichero->move(
-                    $this->getParameter('carpeta_imagenes'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
+                // Move the file to the directory where brochures are stored
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
             }
+            
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($opina);
@@ -194,9 +193,6 @@ class OpinaController extends AbstractController
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
 
-
-
-
         $callback = function ($dateTime) {
             return $dateTime instanceof \DateTime
                 ? $dateTime->format('d-m-Y H:i')
@@ -217,11 +213,6 @@ class OpinaController extends AbstractController
         $normalizer->setCallbacks(array('fechahoralimite' => $callback,
                                         'imagen' => $callback2,
                                         ));
-
-
-
-
-
 
 /*
         $callback = function ($dateTime) {
@@ -270,9 +261,9 @@ class OpinaController extends AbstractController
     }
 
     /**
-     * @Route("/opina/json", name="json_opina")
+     * @Route("/opina/json/{ayto}", name="json_opina")
      */
-    public function opinaJson()
+    public function opinaJson($ayto)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -283,7 +274,9 @@ class OpinaController extends AbstractController
                 : '';
         };
 
-        $normalizer->setCallbacks(array('fechahoralimite' => $callback));
+        $normalizer->setCallbacks(array('fechahoralimite' => $callback,
+            'createdAt' => $callback
+        ));
 
         $normalizer->SetCircularReferenceHandler(function ($object){
             return $object->getId();
@@ -292,9 +285,8 @@ class OpinaController extends AbstractController
 
         $serializer = new Serializer(array($normalizer), array($encoder));
 
-        $em = $this->getDoctrine()->getManager();
         $repo = $this->getDoctrine()->getRepository(Opina::class);
-        $opina = $repo->findAll(); 
+        $opina = $repo->findByAyto($ayto); 
 
         $jsonMensaje = $serializer->serialize($opina, 'json');   
         $respuesta = new Response($jsonMensaje);    

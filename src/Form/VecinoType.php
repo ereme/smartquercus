@@ -4,6 +4,8 @@
 namespace App\Form;
 
 use App\Entity\Vecino;
+use App\Entity\Ayuntamiento;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,11 +14,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class VecinoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    {     
         $builder
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
@@ -28,9 +32,25 @@ class VecinoType extends AbstractType
             ->add('nombre')
             ->add('apellido1')
             ->add('apellido2')
-            ->add('save', SubmitType::class, array(
+            ->add('ayuntamiento', EntityType::class, array(
+                'class' => Ayuntamiento::class,
+                'choice_label' => 'localidad',
+            )); 
+          
+            if ($options['data']->getNombre() == null) { //new
+                $boton = 'Darme de alta';
+            } else { //edit
+                $boton = 'Guardar';
+                $builder->add('fichero', FileType::class, array(
+                    'label' => 'Imagen',
+                    'mapped' => false,
+                    'required' => false
+                ));
+            }
+
+            $builder->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),
-               'label' => 'Darme de alta'
+               'label' => $boton
            ))
             
         ;
@@ -40,6 +60,7 @@ class VecinoType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Vecino::class,
+            'fichero' => null
         ));
     }
 }

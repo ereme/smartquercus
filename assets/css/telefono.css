@@ -4,6 +4,7 @@ h1{
 	font-weight: bold;
 	margin: 30px;
     text-align: center;
+    color: #01254f;
 }
 
 form {
@@ -17,5 +18,28 @@ form > #telefono > div > input{
 
 form > button {
     width: 100px;
+}
+
+div#telefonos {
+    padding-left: 160px;
+    padding-right: 160px;
+}
+
+table {
+    margin-top: 25px;
+}
+
+div table a {
+    color: black;
+}
+
+a#new_telefono, a.volver {
+	color: #01254f;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+a.volver {
+    padding-left: 500px;
 }
 

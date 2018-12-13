@@ -19,6 +19,8 @@ Encore
      */
 
 
+    .addEntry('userjs', './assets/js/user.js')  
+    .addStyleEntry('user', './assets/css/user.css') 
     .addEntry('opinajs', './assets/js/opina.js')    
     .addStyleEntry('app', './assets/css/app.css')
     .addStyleEntry('opina', './assets/css/opina.css')
@@ -30,6 +32,11 @@ Encore
     .addEntry('incidencias-js', './assets/js/incidencias-js.js')
     .addStyleEntry('incidencias-css', './assets/css/incidencias-css.css')
     .addStyleEntry('register', './assets/css/register_footer.css')
+    .addStyleEntry('vecino', './assets/css/vecino.css')
+    .addEntry('eventojs', './assets/js/evento.js')  
+    .addStyleEntry('evento', './assets/css/evento.css')
+  
+
 
 
 

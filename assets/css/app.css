@@ -4,6 +4,9 @@ body {
   padding-top: 54px;
 }
 
+.navbar {
+  height: 65px;
+}
 .welcome-card, .contenedor {
   margin-top:20px;
 } 
@@ -70,17 +73,6 @@ ul.no-bullets {
 .agrupacion-link:hover {
   text-decoration: none;
   color: white;
-  font-weight: bold;
-}
-
-.explotacion-link {
-  text-decoration: none;
-  color: black;
-}
-
-.explotacion-link:hover {
-  text-decoration: none;
-  color: black;
   font-weight: bold;
 }
 

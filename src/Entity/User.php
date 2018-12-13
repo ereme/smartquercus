@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping\Column;
 
 /**
  * @ORM\Table(name="app_users")
@@ -64,15 +65,19 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     protected $isActive;
-
+    
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $imagen;
 
     public function __construct() {
         $this->roles = array('ROLE_USER');
         $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
+        $this->participaciones = new ArrayCollection();
+        //$this->imagen = new Imagen();
     }
-
 
 
     // other properties and methods
@@ -185,6 +190,18 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(Imagen $img): self
+    {
+        $this->imagen = $img;
+        return $this;
     }
 
 }

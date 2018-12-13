@@ -71,6 +71,7 @@ class SaludController extends AbstractController
 
         return $this->render('salud/new.html.twig', [
             'salud' => $salud,
+
             'form' => $form->createView(),
         ]);
     }
@@ -78,7 +79,7 @@ class SaludController extends AbstractController
     /**
      * @Route("/{id}", name="salud_show", methods="GET")
      */
-    public function show(Salud $salud): Response
+    public function show(Salud $salud ): Response
     {
         return $this->render('salud/show.html.twig', ['salud' => $salud]);
     }
@@ -180,7 +181,9 @@ class SaludController extends AbstractController
                 : '';
         };
 
-        $normalizer->setCallbacks(array('fechahora' => $callback));
+        $normalizer->setCallbacks(array('fechahora' => $callback,
+            'createdAt' => $callback
+        ));
 
         $normalizer->setCircularReferenceLimit(0);
         $serializer = new Serializer(array($normalizer), array($encoder));
