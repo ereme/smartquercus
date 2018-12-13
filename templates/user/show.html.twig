@@ -91,11 +91,7 @@
                                             <td>{{ user.email }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Teléfonos</th>
-                                            <td>AQUI VA UN FOREACH QUE RECORRA TELEFONOS (LO SUBE ESTHER ANTES)</td>
-                                        </tr>
-                                        <tr>
-                                        <caption><a class="btn btn-primary" id="boton" href="{{ path('user_edit', {'id': user.id}) }}" role="button">Editar <i class="fas fa-user-edit"></i></a></caption>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -103,6 +99,26 @@
                     </div>
                     <div id="linea" class="col-md-8">
                         <div class="row" id="publicaciones">
+
+
+                    <div class="col-md-8">
+                        <div class="row" id="telefonos">
+                            <h2>Teléfonos</h2>
+                            <table class="table table-hover">
+                                <tbody>
+                                {% for telefono in user.telefonos %}
+                                    <tr>
+                                        <th scope="row">{{telefono.nombre}}</th>
+                                            <td>{{ telefono.telefono }}</td>
+                                            <td><a href="{{ path('telefono_edit', {'id': telefono.id}) }}"><i class="far fa-edit"></i></a></td>
+                                        </tr>
+                                    <tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div>
+                            <a class="btn btn-primary" id="new_telefono" href="{{ path('telefono_new') }}"> <i class="fas fa-plus-circle"></i> Añadir nuevo teléfono </a>
+                            </div>
 
                         </div>
                     </div>

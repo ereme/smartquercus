@@ -24,7 +24,8 @@ class OpinaType extends AbstractType
             ->add('pregunta')
             ->add('fichero', FileType::class, array(
                 'label' => 'Imagen',
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ))
             ->add('fechahoralimite',  DateType::class, array(
               'label' => 'Fecha',

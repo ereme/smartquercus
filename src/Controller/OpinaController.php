@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Opina;
 use App\Entity\Ayuntamiento;
+use App\Entity\Admin;
+use App\Entity\Vecino;
 use App\Entity\Imagen;
+use App\Entity\Admin;
 use App\Form\OpinaType;
 use App\Repository\OpinaRepository;
 use App\Repository\VecinoRepository;
@@ -27,11 +30,11 @@ class OpinaController extends AbstractController
      */
     public function index(OpinaRepository $opinaRepository): Response
     {
-
-        $opinas = array();
-        if ($this->isGranted('ROLE_AYTO')) { //soy ayto
+        if ($this->isGranted(Admin::ROLE_ADMIN)) { //soy admin
+            $opinas = $opinaRepository->findAll();
+        } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) { //soy ayto
             $opinas = $this->getUser()->getEncuestas();
-        } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
+        } elseif ($this->isGranted(Vecino::ROLE_VECINO)) { //soy vecino
             $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
         }
 
@@ -52,7 +55,6 @@ class OpinaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if ($request->files->get('opina')['fichero'] != null){
                 $fichero = $request->files->get('opina')['fichero'];
                 $fileName = md5(uniqid());
@@ -61,6 +63,8 @@ class OpinaController extends AbstractController
                 $imagen->setNombre($fileName);
                 $imagen->setOriginal($fichero->getClientOriginalName());
                 $opina->setImagen($imagen);
+                $imagen->setSize($fichero->getSize());
+
                 /*dump ($imagen);
                 dump ($fichero);
                 dump ($salud);*/
@@ -74,6 +78,7 @@ class OpinaController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
+
             }
             
 
@@ -158,7 +163,7 @@ class OpinaController extends AbstractController
             $em->flush();
             $this->getDoctrine()->getManager()->flush();            
 
-            return $this->redirectToRoute('opina_edit', ['id' => $opina->getId()]);
+            return $this->redirectToRoute('opina_index');
         }
 
         return $this->render('opina/edit.html.twig', [
@@ -177,6 +182,7 @@ class OpinaController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$opina->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
+            dump($opina);
             $em->remove($opina);
             $em->flush();
         }
