@@ -7,7 +7,6 @@ use App\Entity\Ayuntamiento;
 use App\Entity\Admin;
 use App\Entity\Vecino;
 use App\Entity\Imagen;
-use App\Entity\Admin;
 use App\Form\OpinaType;
 use App\Repository\OpinaRepository;
 use App\Repository\VecinoRepository;
