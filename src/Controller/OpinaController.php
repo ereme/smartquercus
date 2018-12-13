@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Opina;
 use App\Entity\Ayuntamiento;
+use App\Entity\Admin;
+use App\Entity\Vecino;
 use App\Entity\Imagen;
 use App\Entity\Admin;
 use App\Form\OpinaType;
@@ -28,14 +30,11 @@ class OpinaController extends AbstractController
      */
     public function index(OpinaRepository $opinaRepository): Response
     {
-
-        $opinas = array();
-        if ($this->isGranted('ROLE_ADMIN')) { //soy admin
-         $opina = $opinaRepository->findAll();
-        }
-        elseif ($this->isGranted('ROLE_AYTO')) { //soy ayto
+        if ($this->isGranted(Admin::ROLE_ADMIN)) { //soy admin
+            $opinas = $opinaRepository->findAll();
+        } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) { //soy ayto
             $opinas = $this->getUser()->getEncuestas();
-        } elseif ($this->isGranted('ROLE_VECINO')) { //soy vecino
+        } elseif ($this->isGranted(Vecino::ROLE_VECINO)) { //soy vecino
             $opinas = $this->getUser()->getAyuntamiento()->getEncuestas();
         }
 
@@ -183,6 +182,7 @@ class OpinaController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$opina->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
+            dump($opina);
             $em->remove($opina);
             $em->flush();
         }

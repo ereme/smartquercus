@@ -39,6 +39,12 @@ class Evento
      */
     private $imagen;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ayuntamiento", inversedBy="eventos")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ayuntamiento;
+
 
     public function __construct()
     {
