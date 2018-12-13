@@ -22,10 +22,16 @@ class VecinoController extends AbstractController
      */
     public function index(VecinoRepository $vecinoRepository)
     { 
-        $id_ayto = $this->getUser()->getId();
-        $localidad = $this->getUser()->getLocalidad();
-        //$vecinos = $vecinoRepository->findByAyto($id_ayto);
-        $vecinos = $this->getUser()->getVecinos();
+        if ($this->isGranted('ROLE_ADMIN')){
+            $vecinos = $vecinoRepository->findAll();
+        }
+        elseif ($this->isGranted('ROLE_AYTO')) { //soy ayto
+            $id_ayto = $this->getUser()->getId();
+            $localidad = $this->getUser()->getLocalidad();
+            //$vecinos = $vecinoRepository->findByAyto($id_ayto);
+            $vecinos = $this->getUser()->getVecinos();
+        }
+        
         return $this->render('vecino/index.html.twig', [
             'vecinos' => $vecinos,
             'localidad' => $localidad

@@ -38,8 +38,7 @@ class SaludController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($request->files->get('salud')['fichero'] != null) {
-                
+            if ($request->files->get('salud')['fichero'] != null) {               
                 
                 $fichero = $request->files->get('salud')['fichero'];
                 $fileName = md5(uniqid());
@@ -60,8 +59,7 @@ class SaludController extends AbstractController
                     // ... handle exception if something happens during file upload
                 }
             }
-            
-
+                 
 
             $em = $this->getDoctrine()->getManager();
             //$em->persist($imagen);  //si no está el cascadepersist en Salud entity

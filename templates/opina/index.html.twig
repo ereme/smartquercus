@@ -14,7 +14,7 @@
 
 
 {% block body %}
-    <h1>Opina</h1>
+    <h1 id="bodyopina">Opina</h1>
 
     {% if is_granted('ROLE_AYTO') %}
 
@@ -49,7 +49,7 @@
                                 <div class="prueba">
                                 <p>
                                     <input type="hidden" value="{{ opina.id }}">
-                                    {% if is_granted('ROLE_VECINO') %}
+                                    {% if is_granted('ROLE_VECINO') and (not is_granted('ROLE_ADMIN')) %}
                                         {% if (date(opina.fechahoralimite) > date('-1days')) or (0==1) %}
                                             <button type="button" class="btn btn-outline-success botonopina" valor="F" {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>A favor</button>
                                             <button type="button" class="btn btn-outline-danger botonopina" valor="C"  {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>En contra</button>

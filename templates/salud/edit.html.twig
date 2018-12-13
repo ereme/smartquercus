@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Salud{% endblock %}
+{% block title %}Editar artículo{% endblock %}
 
 {% block stylesheets %}
   <link rel="stylesheet" href="{{ asset('build/salud.css') }}">
@@ -8,13 +8,13 @@
 
 {% block body %}
 
-  <h1>Edit Salud</h1>
-	<div class="container container-fluid"> 
+	<div class="container contenedor_edit container-fluid">
+    <h3 class="titulo_edit">Editor de artículo</h3> 
     {# include('salud/_delete_form.html.twig') #} 
     <div class="row">
       <div class="col-sm-3">
         <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
-        <a class="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a>                              
+        <a class="saludicon" href="{{ path('salud_show', {'id': salud.id}) }}"><i class="fas fa-arrow-circle-left"></i></a>                              
       </div>
       <div class="col-sm-9"> 
         {{ include('salud/_form.html.twig') }}                 
@@ -22,3 +22,9 @@
     </div>    
   </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }} 
+    <script src="{{ asset('build/saludjs.js') }}"></script>            
+{% endblock %}
+

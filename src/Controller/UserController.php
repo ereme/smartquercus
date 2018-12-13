@@ -63,7 +63,7 @@ class UserController extends Controller
 
         $form = $this->createForm($clase, $user);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             dump ($request->files->get($tipo)['fichero'] != null );
             if ($request->files->get($tipo)['fichero'] != null ){
