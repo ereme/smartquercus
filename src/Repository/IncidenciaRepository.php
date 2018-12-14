@@ -36,6 +36,16 @@ class IncidenciaRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findAllOrdenados(){
+        return $this->createQueryBuilder('s')
+            ->select("s.fecha, s.descripcion, s.estado, s.longitud, s.latitud")
+            ->groupBy('s.id')
+            ->orderBy('s.fecha', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     /*

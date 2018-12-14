@@ -11,8 +11,10 @@
                     <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
                         <div class="card" style="width: 18rem;">
                             <!-- Slider -->
-                            <img class="img-fluid" src="/imagen/bache.jpg" alt="First slide">
+                            {% for imagen in incidencia.imagen if imagen %}
+                            <img class="img-fluid" src="{{imagen.nombre}}" alt="First slide">
                             <!-- End Slider -->
+                            {% endfor %}
                             <div class="card-body">
                                 <h5 class="card-title">Fecha: {{ incidencia.fecha|date('Y-m-d') }}</h5>
                                 <span class="badge badge-{{incidencia.ColorEstado}}">

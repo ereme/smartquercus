@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,6 +66,17 @@ class Incidencia
      * @ORM\JoinColumn(nullable=false)
      */
     private $ayuntamiento;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Imagen", mappedBy="incidencia")
+     */
+    private $imagenes;
+
+    public function __construct()
+    {
+        $this->imagen = new ArrayCollection();
+        $this->imagenes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -145,4 +158,36 @@ class Incidencia
 
         return $this;
     }
+
+    /**
+     * @return Collection|Imagen[]
+     */
+    public function getImagenes(): Collection
+    {
+        return $this->imagenes;
+    }
+
+    public function addImagene(Imagen $imagene): self
+    {
+        if (!$this->imagenes->contains($imagene)) {
+            $this->imagenes[] = $imagene;
+            $imagene->setIncidencia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImagene(Imagen $imagene): self
+    {
+        if ($this->imagenes->contains($imagene)) {
+            $this->imagenes->removeElement($imagene);
+            // set the owning side to null (unless already changed)
+            if ($imagene->getIncidencia() === $this) {
+                $imagene->setIncidencia(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
