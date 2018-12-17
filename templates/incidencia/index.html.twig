@@ -10,11 +10,11 @@
                 {% for incidencia in incidencias %}
                     <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
                         <div class="card" style="width: 18rem;">
-                            <!-- Slider -->
-                            {% for imagen in incidencia.imagen if imagen %}
-                            <img class="img-fluid" src="{{imagen.nombre}}" alt="First slide">
-                            <!-- End Slider -->
-                            {% endfor %}
+                            {% if incidencia.imagenes is null %}
+                                {% for imagen in incidencia.imagenes %}
+                                <img class="img-fluid" src="{{imagen}}" alt="First slide">
+                                {% endfor %}
+                            {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">Fecha: {{ incidencia.fecha|date('Y-m-d') }}</h5>
                                 <span class="badge badge-{{incidencia.ColorEstado}}">

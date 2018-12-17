@@ -21,11 +21,11 @@
                             </ol>
                         <!-- end indicadores -->
                         <div class="carousel-inner">
-                            {% for imagen in incidencia.imagen %}
-                                <div class="carousel-item active">
-                                    <img class="img-fluid" src="{{imagen.nombre}}" alt="First slide">
-                                </div>
-                            {% endfor %}
+                            {% if incidencia.imagenes is null %}
+                                {% for imagen in incidencia.imagenes %}
+                                <img class="img-fluid" src="{{imagen}}" alt="First slide">
+                                {% endfor %}
+                            {% endif %}
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -50,10 +50,14 @@
                             <p class="card-text">{{ incidencia.descripcion }}</p>
                         </div> 
                         <a href="{{ path('incidencia_index') }}" class="card-link">Volver a lista</a>
-                           {% if is_granted('USER_ADMIN') or ('USER_AYTO') %}
+                           {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
                                     Editar
                                 </a>
+                            {% elseif is_granted('ROLE_AYTO')%}
+                                <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
+                                    Editar
+                                </a>    
                             {% endif %}
                             
                         

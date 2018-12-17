@@ -68,7 +68,11 @@ class Incidencia
     private $ayuntamiento;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Imagen", mappedBy="incidencia")
+     * @ManyToMany(targetEntity="Imagen")
+     * @JoinTable(name="incidencia_imagenes",
+     *      joinColumns={@JoinColumn(name="incidencia_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="imagen_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $imagenes;
 
