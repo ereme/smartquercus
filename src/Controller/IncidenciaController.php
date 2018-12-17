@@ -59,9 +59,10 @@ class IncidenciaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             if ($request->files->get('incidencium')['fichero'] != null) {
-                
+
                 
                 $fichero = $request->files->get('incudencium')['fichero'];
+                
                 $fileName = md5(uniqid());
                 
                 $imagen = new Imagen();

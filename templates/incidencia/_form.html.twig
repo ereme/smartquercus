@@ -28,28 +28,7 @@
                 </div>
                 <div class="col-md-4">
                     <!-- Slide -->
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <!-- indicadores -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleControls" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleControls" data-slide-to="2"></li>
-                            </ol>
-                        <!-- end indicadores -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{ form_widget(form.fichero)}}"/>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
+                    {{ form_widget(form.fichero)}}
                     <!-- End Slide -->
                 </div>
             </div>
