@@ -25,6 +25,7 @@
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "*"
     },
+    "minimum-stability": "beta",
     "require-dev": {
         "symfony/debug-pack": "*",
         "symfony/dotenv": "*",
@@ -75,7 +76,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.1.*"
+            "require": "4.2.*"
         }
     }
 }
