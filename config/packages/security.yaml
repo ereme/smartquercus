@@ -26,12 +26,9 @@ security:
         main:
             pattern: ^/
             anonymous: true
-
             # activate different ways to authenticate
-
             http_basic: ~
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
             form_login: 
                 login_path: login
                 check_path: login
@@ -39,23 +36,16 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 always_use_default_target_path: true
                 failure_path: login
-
-
             logout:
                 path: /logout
-                target: /
-
+                target: /inicio
             # https://symfony.com/doc/current/security/form_login_setup.html
-            provider: our_db_provider
-                
-
+            provider: our_db_provider 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/producto, roles: ROLE_USER }
-
-
     role_hierarchy:
             ROLE_VECINO:        ROLE_USER
             ROLE_AYTO:          ROLE_USER
