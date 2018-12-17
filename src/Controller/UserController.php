@@ -92,7 +92,7 @@ class UserController extends Controller
                     
                     dump ($imagen);
                     if ($user->getImagen() != null) { //SI TENIA IMAGEN...
-                        $em->remove($user->getImagen()); //borro imagen en bd                  
+                        $this->getDoctrine()->getManager()->remove($user->getImagen()); //borro imagen en bd                  
                         unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar); //borro imagen disco
                     }
 
@@ -113,7 +113,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+            return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
         }
  
         return $this->render('user/edit.html.twig', [

@@ -67,7 +67,7 @@ class User implements UserInterface, \Serializable
     protected $isActive;
     
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"all"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Imagen", orphanRemoval=true, cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     protected $imagen;
