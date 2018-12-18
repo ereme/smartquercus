@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Ayuntamiento{% endblock %}
+{% block stylesheets %}
+       <link rel="stylesheet" href="{{ asset('build/inicio.css') }}">
+{% endblock %}
 
 {% block body %}
 <div class="container-fluid contenedor">
-	<h2 style="color:#5499C7;margin-top:30px;margin-bottom:35px;margin-left:15px;">PANEL DE GESTIÓN DEL AYUNTAMIENTO</h2>
+	<h2 >PANEL DE GESTIÓN DEL AYUNTAMIENTO</h2>
 	<div class="card-group">
 	        <div class="col-md-9" >
 			<!--Bloque1-->
 	             <div class="row">
 			       <div class="col">
-			  	       <div class="card" style="border-color:#98999a;" >
+			  	       <div class="card" >
 						  <div class="card-body">
-						    <h3 class="card-title" style="margin-left:13px;color:#98999a;">Últimas Incidencias</h3>
+						    <h3  id="titulo"class="card-title">Últimas Incidencias</h3>
 						    <p class="card-text">
                   <!-- Card Incidencia-->
 						       <div class="container">
@@ -20,7 +23,7 @@
 									                {% for incidencia in incidencias %}
                                                         <div  class="col-sm-3">
 										                    <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
-										                        <div class="card  mb-2" style="width: 12rem;border-color:#98999a;">
+										                        <div id="contenido"class="card  mb-2" >
 										                            <!-- Slider -->
 										                            <img class="img-fluid" src="/imagen/bache.jpg" alt="First slide">
 										                            <!-- End Slider -->
@@ -38,7 +41,7 @@
 	                                </div>
 						    </p>
 						    {% if is_granted('ROLE_AYTO') %}
-				             <center><a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-edit"></i> Consultar incidencias</a></center>
+				             <center><a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Consultar incidencias</a></center>
 				            {% endif %}
 						   
 						  </div>
@@ -50,9 +53,9 @@
 				<!--Bloque2-->
 			    <div class="row">
 			       <div class="col">
-			  	        <div class="card" style="border-color:#98999a;">
+			  	        <div class="card" >
 						  <div class="card-body">
-						    <h3 class="card-title" style="margin-left:13px;color:#98999a;">Últimas Opiniones</h3>
+						    <h3  id="titulo" class="card-title" >Últimas Opiniones</h3>
 						    <p class="card-text">
 								 <!-- Card Opinion-->	
 	                               <div class="container">
@@ -60,8 +63,7 @@
 									            <div class="row">
 									                {% for opina in row %}
 													<div  class="col-sm-3">
-									                    <div id="opina" class="card   mb-2" style="width:12rem;border-color:#98999a;">
-									                        <div class="card">
+									                    <div id="contenido" class="card mb-2" >
 																	<div class="card-body">
 									                                <div class="card-text">
 									                                <a href="{{ path('opina_show', {'id': opina.id}) }}"><p class="card-text-2">{{ opina.pregunta }}</p></a>
@@ -70,7 +72,6 @@
 									                                <h6><small> <id="fecha">Tienes de fecha hasta: {{ opina.fechahoralimite ? opina.fechahoralimite|date('d-m-Y') : '' }}</small></h6>     
 									                            </div>
 									                        </div>
-									                    </div>
 													</div>
 									                {% endfor %}
 									            </div>
@@ -88,9 +89,9 @@
             <!--Boque3-->
                  <div class="row">
 			       <div class="col">
-			  	       <div class="card" style="border-color:#98999a;">
+			  	       <div class="card">
 						  <div class="card-body">
-						    <h3 class="card-title" style="margin-left:13px;color:#98999a;">Últimos Eventos</h3>
+						    <h3  id="titulo"class="card-title">Últimos Eventos</h3>
 						    <p class="card-text">
                   <!-- Card Evento-->
 						       <div class="container">
@@ -98,10 +99,10 @@
 											<div class="row">
 											{% for evento in row %}
 												<div  class="col-sm-3">
-												 <div id="evento" class="card  mb-2" style="width:12rem;border-color:#98999a;">
-													<a href="{{evento.id}}">
+												 <div id="contenido" class="card  mb-2" >
+													<a href="{{ path('evento_show', {'id': evento.id}) }}"">
 													<div class="card-body">
-														<h6 class="card-title">{{ evento.titular}}</h6></a>        
+														<p class="card-title">{{ evento.titular}}</p></a>        
 														<div class="card-text">
 														<h6><small class="fecha_evento">{{ evento.fechahora ? evento.fechahora|date('d/m/Y') : '' }}</small></h6>
 														</div>						
