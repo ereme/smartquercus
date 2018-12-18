@@ -38,7 +38,7 @@ security:
                 failure_path: login
             logout:
                 path: /logout
-                target: /inicio
+                target: /
             # https://symfony.com/doc/current/security/form_login_setup.html
             provider: our_db_provider 
     # Easy way to control access for large sections of your site

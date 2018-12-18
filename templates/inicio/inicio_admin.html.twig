@@ -1,30 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Administrador{% endblock %}
+{% block stylesheets %}
+       <link rel="stylesheet" href="{{ asset('build/inicio.css') }}">
+{% endblock %}
 
 {% block body %}
 
 <div class="container-fluid contenedor">
-	<h2 style="color:#5499C7 ">PANEL DE GESTIÓN DEL ADMINISTRADOR</h2>
-	<br>
-	<div class="card-group"style="margin-top:50px;">
+	<h2>PANEL DE GESTIÓN DEL ADMINISTRADOR</h2>
+	
+	<div class="card-group" >
 	    <div class="col-md-9">
-
              <!-- Bloque 1 Incidencias-->
 			    <div class="row">
 			       <div class="col">
-			  	        <div class="card  mb-2" >
+			  	        <div class="card"  >
 						  <div class="card-body">
-						    <h3 class="card-title">Lista de Incidencias</h3>
+						    <h3 id="titulo"class="card-title" >Lista de Incidencias</h3>
 						    <p class="card-text">
 						    	<!-- Card Incidencia-->
-						       <div class="container" >
-										  {% for row in incidencias|batch(4) %}
+						       <div class="container" >						 
 									            <div class="row">
 									                {% for incidencia in incidencias %}
                                                         <div  class="col-sm-3" >
 										                    <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
-										                        <div class="card border-primary  mb-2" style="width: 12rem;">
+										                        <div id="contenido"class="card  mb-2">
 										                            <!-- Slider -->
 										                            <img class="img-fluid" src="/imagen/bache.jpg" alt="First slide">
 										                            <!-- End Slider -->
@@ -39,13 +40,11 @@
 														</div>
 										                {% endfor %}
 									            </div>
-		                                  {% endfor %}
 	                                </div>
 						     </p>
 							  {% if is_granted('ROLE_AYTO') %}
-				                <center><a id="nuevaincidencia" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Ver las incidencias</a></center>
+				                <center><a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Ver las incidencias</a></center>
 				             {% endif %}
-						    <a href="{{ path('incidencia_index') }}" class="card-link">Ir a incidencias</a>
 						  </div>
 					    </div>
 			        </div>
@@ -55,9 +54,9 @@
                  <!-- Bloque 2 Opinion-->
 			    <div class="row">
 			       <div class="col">
-			  	       <div class="card r mb-2" >
+			  	       <div class="card "  >
 						  <div class="card-body">
-						    <h3 class="card-title"> Listado de opiniones</h3
+						    <h3 id="titulo" class="card-title"> Lista de encuestas</h3
 							    <p class="card-text">
 							     <!-- Card Opinion-->	
 	                               <div class="container">
@@ -65,17 +64,13 @@
 									            <div class="row">
 									                {% for opina in row %}
 													<div  class="col-sm-3">
-									                    <div id="opina" class="card border-primary  mb-2" style="max-width:12rem;">
-									                        <div class="card">
+									                    <div id="contenido" class="card mb-2" >
 									                            <div class="card-body">
 									                                <div class="card-text">
 									                                <a href="{{ path('opina_show', {'id': opina.id}) }}"><p class="card-text-2">{{ opina.pregunta }}</p></a>
 									                                </div>
-									                                <br>++
-									                                <h6><small> <id="fecha">Tienes de fecha hasta: {{ opina.fechahoralimite ? opina.fechahoralimite|date('d-m-Y') : '' }}</small></h6>
-									                                
+									                                <h6><small> <id="fecha">Tienes de fecha hasta: {{ opina.fechahoralimite ? opina.fechahoralimite|date('d-m-Y') : '' }}</small></h6>    
 									                            </div>
-									                        </div>
 									                    </div>
 													</div>
 									                {% endfor %}
@@ -84,9 +79,8 @@
 	                                </div>
 							    </p>
 						     {% if is_granted('ROLE_AYTO') %}
-				                <center><a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea una consulta</a></center>
+				                <center><a id="nuevaopinion" href="{{ path('opina_index') }}"><i class="far fa-eye"></i> Ver consultas</a></center>
 				             {% endif %}
-						    <a href="{{ path('opina_index') }}" class="card-link">Ir a opiniones</a>
 						  </div>
 					   </div>
 			  	   </div>
@@ -96,16 +90,17 @@
                 <!-- Bloque 3 Salud-->
                   <div class="row">
 			        <div class="col">
-			  	      <div class="card mb-2" >
+			  	      <div class="card " >
 						 <div class="card-body">
-						    <h3 class="card-title">Salud</h3>
+						    <h3 id="titulo" class="card-title">Salud</h3>
 						    <p class="card-text">
 						    	<!-- Card Salud-->
+								<div class="container">
                                {% for row in saluds|batch(4) %}
 								    <div class="row">
 									      {% for salud in row %}
 									        <div  class="col-sm-3">
-									            <div class="card border-primary ">
+									            <div id="contenido"class="card mb-2">
 									                <a href="{{salud.id}}">
 									                <div class="card-body">
 									                <p class="card-title">{{ salud.titulo}}</p></a>        
@@ -119,13 +114,13 @@
 									        </div>
 									      {% endfor %}
 						            </div>
-						 <br>
 							    {% endfor %}
+								</div>
 				            </p>
 							 {% if is_granted('ROLE_AYTO') %}
-				                <center><a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea un artículo</a></center>
+				                <center><a id="nuevaopinion" href="{{ path('salud_new') }}"><i class="far fa-edit"></i> Crea un artículo</a></center>
 				             {% endif %}
-						    <a href="{{ path('salud_index') }}" class="card-link">Ir a salud</a>
+						  
 						  </div>
 					    </div>
 			        </div>
@@ -135,20 +130,20 @@
                  <!-- Bloque 4 Eventos-->
 			    <div class="row">
 			       <div class="col">
-			  	        <div class="card  mb-2" >
+			  	        <div class="card" >
 						  <div class="card-body">
-						    <h3 class="card-title">Eventos</h3>
+						    <h3 id="titulo" class="card-title" >Eventos</h3>
 						    <p class="card-text">
 						    	<!--Contenido de eventos-->
 						    	 <div class="container">
 										 {% for row in eventos|batch(4) %}
 											<div class="row">
 											{% for evento in row %}
-												<div  class="col-sm-3">
-												 <div id="evento" class="card border-Gray  mb-2" style="max-width:12rem;">
+												<div  class="col-sm-3" >
+												 <div id="contenido" class="card mb-2" >
 													<a href="{{evento.id}}">
 													<div class="card-body">
-														<h6 class="card-title">{{ evento.titular}}</h6></a>        
+														<p class="card-title">{{ evento.titular}}</p></a>        
 														<div class="card-text">
 														<h6><small class="fecha_evento">{{ evento.fechahora ? evento.fechahora|date('d/m/Y') : '' }}</small></h6>
 														</div>						
@@ -157,15 +152,13 @@
 												</div>
 											{% endfor %}
 											</div>
-											<br>
-											<br>
 										{% endfor %}
-	                                </div>
+	                             </div>
 						    </p>
 						     {% if is_granted('ROLE_AYTO') %}
-				                <center><a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea un evento</a></center>
+				                <center><a id="nuevaopinion" href="{{ path('evento_index') }}"><i class="far fa-eye"></i> Crea un evento</a></center>
 				             {% endif %}
-						    <a href="{{ path('evento_index') }}" class="card-link">Ver eventos</a>
+						    
 						  </div>
 					    </div>
 			        </div>
@@ -173,13 +166,32 @@
 			    
 	    </div>
 	    <div class="col-md-3">
-			<div class="card  mb-2">
+			<div class="card " >
 			    <div class="card-body">
-					Ayuntamientos <span class="float-right">{{ ayuntamientos|length }}</span>
-					<br>
-                    Vecinos <span class="float-right">{{ vecinos|length }}</span>
-                    <br>
+				    <h6 >Ayuntamientos <span class="float-right">{{ ayuntamientos|length }}</span></h6>
+					<h6 >Vecinos <span class="float-right">{{ vecinos|length }}</span></h6>
+                    <h6 >Incidencias <span class="float-right">{{ incidencias|length }}</span></h6>
+				    <h6 >Encuesta <span class="float-right">{{ opinas|length }}</span></h6>
+					<h6 >Salud <span class="float-right">{{ saluds|length }}</span></h6>
+                    <h6 >Eventos<span class="float-right">{{ eventos|length }}</span></h6><hr>
+
+					{% if is_granted('ROLE_AYTO') %}
+				    <a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Ver las incidencias</a>
+				    {% endif %}<br>
+                    {% if is_granted('ROLE_AYTO') %}
+				    <a id="nuevaopinion" href="{{ path('opina_index') }}"><i class="far fa-eye"></i> Ver consultas</a>
+				    {% endif %}<br>
+                    {% if is_granted('ROLE_AYTO') %}
+				    <a id="nuevasalud" href="{{ path('salud_new') }}"><i class="far fa-edit"></i> Crea un artículo</a>
+					<spam class="float-right"> <a href="{{ path('salud_index') }}" class="card-link">Ir a salud</a></spam>
+				    {% endif %}<br>
+					{% if is_granted('ROLE_AYTO') %}
+				    <a id="nuevoevento" href="{{ path('evento_index') }}"><i class="far fa-eye"></i> Ver eventos</a>
+				    {% endif %}<hr>
+
                     
+                   
+					
 			    </div>
 		        <div class="centered">
 				  <center>
