@@ -167,6 +167,37 @@ class EventoController extends AbstractController
         return $this->redirectToRoute('evento_index');
     }
 
+    /**
+     * @Route("/evento/json", name="json_evento")
+     */
+    public function jsonEvento()
+    {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $callback = function ($dateTime) {
+            return $dateTime instanceof \DateTime
+                ? $dateTime->format('d-m-Y H:i')
+                : '';
+        };
+
+        $normalizer->setCallbacks(array('fechahora' => $callback,
+            'createdAt' => $callback
+        ));
+
+        $normalizer->setCircularReferenceLimit(0);
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(Evento::class);
+        $opina = $repo->findAllOrdenados();
+
+        $jsonMensaje = $serializer->serialize($opina, 'json');      
+        $respuesta = new Response($jsonMensaje);   
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');    
+        return $respuesta;
+    }
 }
 
 
