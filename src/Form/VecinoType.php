@@ -30,8 +30,12 @@ class VecinoType extends AbstractType
                 'second_options' => array('label' => 'Confirmar contraseña'),
             ))
             ->add('nombre')
-            ->add('apellido1')
-            ->add('apellido2')
+            ->add('apellido1', TextType::class, array(
+                'label' => 'Primer apellido'
+            ))
+            ->add('apellido2', TextType::class, array(
+                'label' => 'Segundo apellido'
+            ))
             ->add('ayuntamiento', EntityType::class, array(
                 'class' => Ayuntamiento::class,
                 'choice_label' => 'localidad',

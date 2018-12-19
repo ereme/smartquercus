@@ -22,7 +22,8 @@ Encore
     .addEntry('userjs', './assets/js/user.js')  
     .addStyleEntry('user', './assets/css/user.css') 
     .addEntry('opinajs', './assets/js/opina.js')    
-    .addStyleEntry('app', './assets/css/app.css')
+    .addStyleEntry('app', './assets/js/app.js')
+    //.addStyleEntry('app', './assets/css/app.css')
     .addStyleEntry('opina', './assets/css/opina.css')
     .addEntry('saludjs', './assets/js/saludjs.js')    
     .addStyleEntry('salud', './assets/css/salud.css')
@@ -37,7 +38,7 @@ Encore
     .addStyleEntry('evento', './assets/css/evento.css')
   
 
-
+    .enableSingleRuntimeChunk()
 
 
     /*

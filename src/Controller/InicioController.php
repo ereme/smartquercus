@@ -44,7 +44,6 @@ class InicioController extends AbstractController
             } elseif ($this->isGranted(Vecino::ROLE_VECINO)) {
                 return $this->render('inicio/inicio_vecino.html.twig', [
                     'opinas' => $this->getUser()->getAyuntamiento()->getEncuestas(),
-
                 ]);            
             } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) {
                 return $this->render('inicio/inicio_ayto.html.twig', [
@@ -54,10 +53,8 @@ class InicioController extends AbstractController
                 ]);
             }
              else {
-                //HACER UNA PARA USUARIOS NO REGISTRADOS (NO LOGUEADOS)
-                return $this->render('inicio/inicio_admin.html.twig');
+                return $this->redirectToRoute('login');
             }
-    
         }
 
 }
