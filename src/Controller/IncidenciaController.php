@@ -30,7 +30,7 @@ class IncidenciaController extends AbstractController
             return $this->render('incidencia/index.html.twig', 
             ['incidencias' => $incidencias->findAll()]);
         }elseif ($this->isGranted(Ayuntamiento::USER_AYTO)) {
-            $incidencias = $this->getIncidencias();
+            $incidencias = $this->getUser()->$this->getIncidencias();
             return $this->render('incidencia/index.html.twig', ['incidencias' => $incidencias->findAll()]);
         }elseif ($this->isGranted(Admin::USER_ADMIN)) {
             return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findAll()]);

@@ -100,7 +100,7 @@
 											{% for evento in row %}
 												<div  class="col-sm-3">
 												 <div id="contenido" class="card  mb-2" >
-													<a href="{{ path('evento_show', {'id': evento.id}) }}"">
+													<a href="{{ path('evento_show', {'id': evento.id}) }}">
 													<div class="card-body">
 														<p class="card-title">{{ evento.titular}}</p></a>        
 														<div class="card-text">
@@ -129,13 +129,14 @@
 			<div class="card  mb-2" class="card" style="border-color:#98999a;">
 			    <center><h4> </h4></center>
 			    <div class="card-body" >
-				<h6 style="color:#98999a;">Incidencias <span class="float-right">{{ incidencias|length }}</span></h6>
-				<h6 style="color:#98999a;">Encuesta <span class="float-right">{{ opinas|length }}</span></h6>
-                <h6 style="color:#98999a;">Eventos<span class="float-right">{{ eventos|length }}</span></h6><hr>
+				<h6 >Incidencias <span class="float-right">{{ incidencias|length }}</span></h6>
+				<h6 >Encuesta <span class="float-right">{{ opinas|length }}</span></h6>
+                <h6>Eventos<span class="float-right">{{ eventos|length }}</span></h6>
+				<h6 >Vecinos <span class="float-right">{{ vecinos|length }}</span></h6><hr>
 				
 
                  {% if is_granted('ROLE_AYTO') %}
-				    <a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-edit"></i> Consultar incidencias</a><br>
+				    <a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Consultar incidencias</a><br>
 				 {% endif %}
 				 {% if is_granted('ROLE_AYTO') %}
 				    <a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea una consulta</a><br>

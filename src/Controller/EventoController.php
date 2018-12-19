@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Evento;
+use App\Entity\Ayuntamiento;
+use App\Entity\Admin;
+use App\Entity\Vecino;
 use App\Entity\Imagen;
 use App\Form\EventoType;
 use App\Repository\EventoRepository;
+use App\Repository\VecinoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * @Route("/evento")
@@ -24,9 +30,17 @@ class EventoController extends AbstractController
      */
     public function index(EventoRepository $eventoRepository): Response
     {
-        return $this->render('evento/index.html.twig', ['evento' => $eventoRepository->findAll()]);
-    }
+        if ($this->isGranted(Admin::ROLE_ADMIN)) { //soy admin
+            $eventos = $eventoRepository->findAll();
+        } elseif ($this->isGranted(Ayuntamiento::ROLE_AYTO)) { //soy ayto
+            $eventos = $this->getUser()->getEventos();
+        } elseif ($this->isGranted(Vecino::ROLE_VECINO)) { //soy vecino
+            $eventos = $eventoRepository->findAll();
 
+        return $this->render('evento/index.html.twig', [
+            'eventos' => $eventos
+        ]);
+    }
    
   /**
      * @Route("/new", name="evento_new", methods="GET|POST")

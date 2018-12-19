@@ -15,7 +15,7 @@
     <a id="nuevoevento" class="btn btn-primary" href="{{ path('evento_new') }}">Nuevo artículo</a>
 
   {% endif %}  
-  {% for row in evento|batch(3) %}
+  {% for row in eventos|batch(3) %}
     <div class="row">
       {% for evento in row %}
         <div  class="col-sm-4">
