@@ -36,6 +36,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ path('user_show', {'id': app.user.id }) }}">{{ app.user.email|default('') }}</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+          </li>
         {% endif %}
       </ul>
       </div>
