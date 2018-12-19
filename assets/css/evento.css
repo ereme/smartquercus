@@ -5,34 +5,48 @@
 a#nuevoevento.btn.btn-primary{
 	margin-bottom: 20px;
 	margin-top: 20px;
-	margin-left: 1190px;
-}
-.container-fluid .row .col-sm-4 .card a img.card-img-top{ 
-	width: 418px;
-	height: 300px;
+	margin-left: 74%;
 }
 
-.container-fluid .row .col-sm-4 .card .card-body a{	 
+.container-fluid .row .col-md-6 h3.titulo_index{
+	margin-top: 20px;
+	color: #98999a; /*Gris claro*/
+}
+
+.container-fluid .row .espacio_card{
+	padding-bottom: 30px;
+}
+
+
+.container-fluid .row .col-md-4 .card a img.card-img-top{ 
+	height: 220px; 
+	width: 100%;
+}
+
+.container-fluid .row .col-md-4 .card .card-body a{	 
 	color: rgb(78  ,81, 80);
 	text-decoration: none;	
 }
 
-.container-fluid .row .col-sm-4 .card .card-body a:hover{ 
+.container-fluid .row .col-md-4 .card .card-body a:hover{ 
 	color:black;
 	text-decoration: none;	
 }
-.container-fluid .row .col-sm-4 .card .card-text{
+.container-fluid .row .col-md-4 .card .card-text{
 	font-size: 14px;
 	text-align: justify;
 }
 
 
-.container-fluid .row .col-sm-4 .card .card-body a h5{ 
-	font-weight: bolder;
-	text-align: center;
+.container-fluid .row .col-md-4 .card .card-body a h5{ 
+	color: black;
 }
 
-.container-fluid .row .col-sm-4 .card .card-body .card-text p.fecha_evento{
+.container-fluid .row .col-md-4 .card .card-body a h5:hover{ 
+	color: #6999c7; /* Azul claro */
+}
+
+.container-fluid .row .col-md-4 .card .card-body .card-text p.fecha_evento{
 	text-align: right;
 	color: #98999a;
 	font-size: 0.8em;
@@ -43,15 +57,22 @@ a#nuevoevento.btn.btn-primary{
 
 .container-fluid .row .col-md-3 .iconos_evento {
 	margin-top: 20px;
-	margin-left: 100px;
 }
 
- .container-fluid .row .col-md-3 a#eventoicon{
+.container-fluid.show_even{
+	margin-top: 50px;
+}
+
+.show_even .row .col-md-9 h3{
+	color: #6999c7;
+}
+
+ .container-fluid .row .col-md-3 a.eventoicon, .nuevo_evento .row .col-md-12 .eventoicon{
 	color: #cacbcc;
-	font-size: 30px;	
+	font-size: 22px;	
 }
 
-.container-fluid .row .col-md-3 a#eventoicon:hover{
+.container-fluid .row .col-md-3 a.eventoicon:hover, .nuevo_evento .row .col-md-12 .eventoicon:hover{
 	color: #8c8f94;
 }
 
@@ -60,24 +81,45 @@ a#nuevoevento.btn.btn-primary{
 }
 
 .container-fluid .row .icono_borrar{
-	margin-left: 95%;
+	margin-left: 92%;
 }
 
-.container-fluid .row  .col-sm-9 p.texto_show{
+.container-fluid .row  .col-md-9 p.texto_show{
 	text-align: justify;
-
+	font-size: 14px;
 }
 
 /*EDIT*/
- .container-fluid .row  .col-sm-3 .icono_edit{
+ .container-fluid .row  .col-md-3 .icono_edit{
 	color: #cacbcc;	
 	font-size:25px;
 }
- .container-fluid .row  .col-sm-3 .icono_edit{
+ .container-fluid .row  .col-md-3 .icono_edit{
 	color: #8c8f94;
 }
 
- .card-img-top{
-
-	margin-bottom: 40px;
+.edit_even{
+	padding-top: 40px;
 }
+
+.edit_even h3{
+	color: #98999a;
+}
+
+.edit_even .row .col-md-3 .card-img-top{
+	margin-bottom: 20px;
+}
+
+/* New */
+.nuevo_evento{
+	padding-top: 40px;
+}
+
+.nuevo_evento .row .col-md-12 h3{
+	color: #98999a;
+}
+
+.nuevo_evento .row .col-md-12 .row .col-md-6{
+	padding-bottom: 20px;
+}
+

@@ -7,16 +7,16 @@
 {% endblock %}
 
 {% block body %}
-
+  
 	<div class="container contenedor_edit container-fluid">
     <h3 class="titulo_edit">Editor de artículo</h3> 
     {# include('salud/_delete_form.html.twig') #} 
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-xs-12 col-sm-6 col-md-3">
         <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
         <a class="saludicon" href="{{ path('salud_show', {'id': salud.id}) }}"><i class="fas fa-arrow-circle-left"></i></a>                              
       </div>
-      <div class="col-sm-9"> 
+      <div class="col-xs-12 col-sm-6 col-md-9"> 
         {{ include('salud/_form.html.twig') }}                 
       </div>
     </div>    
