@@ -189,7 +189,7 @@ class EventoController extends AbstractController
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         $em = $this->getDoctrine()->getManager();
-        $repo = $this->getDoctrine()->getRepository(Salud::class);
+        $repo = $this->getDoctrine()->getRepository(Evento::class);
         $opina = $repo->findAllOrdenados();
 
         $jsonMensaje = $serializer->serialize($opina, 'json');      
