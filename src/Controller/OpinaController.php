@@ -188,12 +188,13 @@ class OpinaController extends AbstractController
 
         return $this->redirectToRoute('opina_index');
     }
-
+ 
     /**
      * @Route("/{idopina}/{idvecino}/{valor}/json", name="opina_json", requirements={"idopina"="\d+","idvecino"="\d+" })
      */
     public function jsonOpina($idopina, $idvecino, $valor, Request $request, VecinoRepository $vecinoRepo)
     {
+
 
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -294,7 +295,10 @@ class OpinaController extends AbstractController
         $opina = $repo->findByAyto($ayto); 
 
         $jsonMensaje = $serializer->serialize($opina, 'json');   
+        
         $respuesta = new Response($jsonMensaje);    
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');
         return $respuesta;
     }
     
