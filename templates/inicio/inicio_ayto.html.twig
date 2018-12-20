@@ -41,7 +41,7 @@
 	                                </div>
 						    </p>
 						    {% if is_granted('ROLE_AYTO') %}
-				             <center><a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Consultar incidencias</a></center>
+				             <center><a id="nuevaincidencia" href="{{ path('incidencia') }}"><i class="far fa-eye"></i> Consultar incidencias</a></center>
 				            {% endif %}
 						   
 						  </div>
@@ -136,7 +136,7 @@
 				
 
                  {% if is_granted('ROLE_AYTO') %}
-				    <a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Consultar incidencias</a><br>
+				    <a id="nuevaincidencia" href="{{ path('incidencia') }}"><i class="far fa-eye"></i> Consultar incidencias</a><br>
 				 {% endif %}
 				 {% if is_granted('ROLE_AYTO') %}
 				    <a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea una consulta</a><br>

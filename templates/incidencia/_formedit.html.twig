@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-    <div class="container" id="form-container">
+	<div class="container" id="form-container">
         <section>
             <div class="row">
                 <div class="col-md-4">
@@ -27,9 +27,13 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <!-- Slide -->
-                    {{ form_widget(form.ficheros)}}
-                    <!-- End Slide -->
+                {% if incidencia.imagenes is not null %}
+                    {% for imagen in incidencia.imagenes %}
+                        {% if loop.index == 1 %}
+                            <img class="img-fluid" src="{{ asset(ruta_imagenes ~ imagen.nombre) }}" alt="First slide">
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 </div>
             </div>
             <div class="text-center">
@@ -39,6 +43,5 @@
             </div>
             <div class="clearfix"></div>
         </section>
-    </div>      
-{{ form_end(form) }} 
-
+    </div>		
+{{ form_end(form) }}

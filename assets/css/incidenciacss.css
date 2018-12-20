@@ -1,0 +1,148 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* flotados */
+.clearfix{
+    float: none;
+    clear: both;
+}
+
+/* sección global */
+#incidencias > section{
+
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*--- Incidencia index ---*/
+#incidencias > section > #incidencias-cards{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+/*#bt-nuevaincidencia{
+    width: 15%;
+    margin: 20px;
+    align-self: flex-end;
+}*/
+ 
+#incidencias-cards > a {
+    text-decoration: none;
+    color: black;
+    margin: 0 auto;
+}
+
+#incidencias-cards > a > .card{
+    margin-top: 15px;
+}
+ 
+#incidencias-cards > a:hover{
+    -ms-transform: scale(1.10); /* IE 9 */
+    -webkit-transform: scale(1.10); /* Safari 3-8 */
+    transform: scale(1.10); 
+}
+
+/*--- Incidencia show ---*/
+
+#incidencia-vista > div.row {
+    border: 1px solid #808b96;
+}
+ 
+#incidencia-vista > div.row > div.col-4, div.col-6{
+    margin-left: 20px;
+}
+
+#incidencia-vista > div.row > div.col-4{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#incidencia-vista > div.row > div.col-6{
+    margin-top: 20px;
+
+}
+
+#incidencia-vista > div.row > div.col-6 > div.card{
+    margin-left: 50px;
+    padding-bottom: 75px;
+}
+
+#incidencia-vista > div.row > div.col-6 > div.card > div.card-body{
+    margin-top: 5px;
+
+}
+
+#incidencia-vista > div.row > div.col-4 > img.img-fluid{
+    margin-left: 50px;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+#incidencia-vista > div.row > div.col-6 > div.card  span{
+    float: right;
+}
+
+#incidencia-vista > div.row > div.col-6 > div.card > div.card-body > p.card-subtitle{
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+#incidencia-vista > div.row > div.col-6 > div.card > div.card-body > a{
+    float: right;
+    margin-right: 20px;
+}
+
+
+/*-- Editar incidencia ---*/
+#form-container{
+    margin: 2%;
+    width: 100%; 
+}
+
+#form-container > section{
+    margin: 2%; 
+}
+
+#form-container > section > .form-group{
+    width:20%; 
+}
+
+#form-container > section > div.text-center > button#incidencia_delete{
+    margin-right: 10px; 
+}
+
+#form-container > section > div.text-center > a {
+    float: right;
+    margin-right: 10px;
+    text-decoration: none; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
