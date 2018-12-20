@@ -10,6 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\File\File;
+use App\Form\ImagenType;
 
 
 class IncidenciaType extends AbstractType
@@ -45,8 +48,16 @@ class IncidenciaType extends AbstractType
             ->add('estado', ChoiceType::class, array(
                 'attr' => array('class' => 'custom-select'),
                 'choices' => Incidencia::ESTADOS
-            ))
-            ->add('save', SubmitType::class, array(
+             ));
+            if (count($options['data']->getImagenes()) == 0) {
+                $builder->add('ficheros', FileType::class, array(
+                 'label' => 'Imagen',
+                 'mapped' => false,
+                 'multiple' => true,
+                ));
+            }
+
+            $builder->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-primary float-right'),
                 'label' => 'Guardar'
             ))

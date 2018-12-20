@@ -276,7 +276,7 @@ class OpinaController extends AbstractController
 
         $callback = function ($dateTime) {
             return $dateTime instanceof \DateTime
-                ? $dateTime->format('d-m-Y H:i')
+                ? $dateTime->format('d-m-Y')
                 : '';
         };
 
@@ -292,8 +292,8 @@ class OpinaController extends AbstractController
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         $repo = $this->getDoctrine()->getRepository(Opina::class);
-        $opina = $repo->findByAyto($ayto); 
-
+        $opina = $repo->findBy(['ayuntamiento' => $ayto]); 
+        
         $jsonMensaje = $serializer->serialize($opina, 'json');   
         
         $respuesta = new Response($jsonMensaje);    
