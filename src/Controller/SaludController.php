@@ -167,7 +167,7 @@ class SaludController extends AbstractController
         return $this->redirectToRoute('salud_index');
     }
 
-    /**
+    /** 
      * @Route("/salud/json", name="json_salud")
      */
     public function jsonSalud()
@@ -177,7 +177,7 @@ class SaludController extends AbstractController
 
         $callback = function ($dateTime) {
             return $dateTime instanceof \DateTime
-                ? $dateTime->format('d-m-Y H:i')
+                ? $dateTime->format('d-m-Y')
                 : '';
         };
 
