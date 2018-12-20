@@ -8,9 +8,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
+          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('incidencia') }}">Incidencias</a>
           </li>
+          {% endif %}
           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('opina_index') }}">Opina</a>
