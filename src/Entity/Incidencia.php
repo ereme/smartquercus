@@ -16,17 +16,20 @@ class Incidencia
     const ESTADO_ENPROCESO = "PROCESO";
     const ESTADO_COMPLETADO = "COMPLETADO";
     const ESTADO_RECHAZADO = "RECHAZADO";
+    const ESTADO_DERIVADO = "DERIVADO";
 
     const ESTADOS = array(self::ESTADO_RECIBIDO => "RECIBIDO", 
                             self::ESTADO_ENPROCESO => "PROCESO", 
                             self::ESTADO_COMPLETADO => "COMPLETADO", 
-                            self::ESTADO_RECHAZADO=> "RECHAZADO"
+                            self::ESTADO_RECHAZADO=> "RECHAZADO",
+                            self::ESTADO_DERIVADO=> "DERIVADO" //vecino ve ENPROCESO
                         );
 
     const ESTADOS_COLOR = array(self::ESTADO_RECIBIDO => "primary", 
                             self::ESTADO_ENPROCESO => "warning", 
                             self::ESTADO_COMPLETADO => "success", 
-                            self::ESTADO_RECHAZADO=> "danger"
+                            self::ESTADO_RECHAZADO=> "danger",
+                            self::ESTADO_DERIVADO=> "secondary" //vecino ve ENPROCESO
                         );
 
     /**
@@ -68,11 +71,7 @@ class Incidencia
     private $ayuntamiento;
 
     /**
-     * @ManyToMany(targetEntity="Imagen")
-     * @JoinTable(name="incidencia_imagenes",
-     *      joinColumns={@JoinColumn(name="incidencia_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="imagen_id", referencedColumnName="id", unique=true)}
-     *      )
+     * @ORM\ManyToMany(targetEntity="App\Entity\Imagen", cascade={"persist"})
      */
     private $imagenes;
 
@@ -139,6 +138,15 @@ class Incidencia
     {
         return $this->estado;
     }
+    
+    public function getEstadoParaVecino(): ?string
+    {
+        if ($this->getEstado() == self::ESTADO_DERIVADO) {
+            return self::ESTADO_ENPROCESO; //vecino no ve DERIVADO, ve ENPROCESO
+        }
+        return $this->estado;
+        
+    }
 
     public function setEstado(string $estado): self
     {
@@ -149,6 +157,14 @@ class Incidencia
 
     public function getColorEstado () {
         return self::ESTADOS_COLOR[$this->getEstado()];
+    }
+    
+    public function getColorEstadoParaVecino () {
+        if ($this->getEstado() == self::ESTADO_DERIVADO) {
+            return self::ESTADOS_COLOR[self::ESTADO_ENPROCESO]; //vecino no ve DERIVADO, ve ENPROCESO
+        }
+        return self::ESTADOS_COLOR[$this->getEstado()];
+        
     }
 
     public function getAyuntamiento(): ?Ayuntamiento
@@ -175,9 +191,8 @@ class Incidencia
     {
         if (!$this->imagenes->contains($imagene)) {
             $this->imagenes[] = $imagene;
-            $imagene->setIncidencia($this);
         }
-
+        
         return $this;
     }
 
@@ -185,12 +200,8 @@ class Incidencia
     {
         if ($this->imagenes->contains($imagene)) {
             $this->imagenes->removeElement($imagene);
-            // set the owning side to null (unless already changed)
-            if ($imagene->getIncidencia() === $this) {
-                $imagene->setIncidencia(null);
-            }
         }
-
+        
         return $this;
     }
 

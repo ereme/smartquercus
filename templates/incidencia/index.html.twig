@@ -1,25 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Incidencia index{% endblock %}
-{% block stylesheets %}<link rel="stylesheet" href="{{ asset('build/incidencias-css.css') }}">{% endblock %}
+{% block title %}Hello!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/incidenciacss.css') }}">
+{% endblock %}
 
 {% block body %}
     <div class="container" id="incidencias">
         <section>
+            <!--<a href="{{ path('incidencia_new') }}" id="bt-nuevaincidencia" class="btn btn-primary">
+                Nueva incidencia
+            </a>-->
             <div class="row" id="incidencias-cards">
                 {% for incidencia in incidencias %}
-                    <a href="{{ path('incidencia', {'id': incidencia.id }) }}">
+                    <a href="{{ path('incidencia_show', {'id': incidencia.id }) }}">
                         <div class="card" style="width: 18rem;">
-                            {% if incidencia.imagenes is null %}
-                                {% for imagen in incidencia.imagenes %}
-                                <img class="img-fluid" src="{{imagen}}" alt="First slide">
+                            {% if incidencia.imagenes is not null %}                                    
+                                {% for imagen in incidencia.imagenes %}                                   
+                                    {% if loop.index == 1 %}
+                                        <img class="img-fluid" src="{{ asset(ruta_imagenes ~ imagen.nombre) }}"/>
+                                    {% endif %}
                                 {% endfor %}
                             {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">Fecha: {{ incidencia.fecha|date('Y-m-d') }}</h5>
-                                <span class="badge badge-{{incidencia.ColorEstado}}">
-                                    {{incidencia.estado}}
-                                </span>      
+                                {% if is_granted('ROLE_VECINO') %}
+                                    <span class="badge badge-{{incidencia.ColorEstadoParaVecino}}">
+                                        {{incidencia.EstadoParaVecino}}
+                                    </span>
+                                {% else %}
+                                    <span class="badge badge-{{incidencia.ColorEstado}}">
+                                        {{incidencia.estado}}
+                                    </span>
+                                {% endif %}      
                             </div>
                         </div>
                     </a>
@@ -28,6 +41,5 @@
         </section>
     </div>
 {% endblock %}
-{% block javascripts%}
-    <script src="{{ asset('build/incidencias-js.js') }}"></script>
-{% endblock %}
+
+

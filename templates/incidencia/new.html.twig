@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Incidencia{% endblock %}
+{% block title %}Incidencia new{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/incidenciacss.css') }}">
+{% endblock %}
 
 {% block body %}
     <h1>Create new Incidencia</h1>
 
     {{ include('incidencia/_form.html.twig') }}
 
-    <a href="{{ path('incidencia_index') }}">back to list</a>
 {% endblock %}
-
 {% block javascripts %}
-    <script src="{{ asset('build/incidencias-js.js') }}"></script>
+    <script src="{{ asset('build/incidenciajs.js') }}"></script>  
 {% endblock %}

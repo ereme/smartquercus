@@ -19,21 +19,21 @@ class IncidenciaRepository extends ServiceEntityRepository
         parent::__construct($registry, Incidencia::class);
     }
 
-//    /**
-//     * @return Incidencia[] Returns an array of Incidencia objects
-//     */
-    
-    public function findByAll($incidencia)
+    //    // /**
+    //  * @return Incidencia[] Returns an array of Incidencia objects
+    //  */
+    public function findById($aytoid)
     {
         return $this->createQueryBuilder('i')
-            ->where('i.incidencia = : incidenciaID')
-            ->setParameter(['incidenciaID' => $incidencia])
-            ->select("i.fecha, i.estado")
-            ->groupBy('i.id')
-            ->orderBy('i.fecha', 'DESC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        
+        ->leftJoin('App\Entity\Ayuntamiento', 'ayuntamiento', 'WITH', 'ayuntamiento = i.ayuntamiento')
+        ->where('ayuntamiento.id = :ayuntamientoID')
+        ->setParameters([
+                        'ayuntamientoID' => $aytoid
+                        ])
+        ->groupBy('i.id')
+        ->getQuery()
+        ->getResult()
         ;
     }
 

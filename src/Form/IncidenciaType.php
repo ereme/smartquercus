@@ -48,15 +48,16 @@ class IncidenciaType extends AbstractType
             ->add('estado', ChoiceType::class, array(
                 'attr' => array('class' => 'custom-select'),
                 'choices' => Incidencia::ESTADOS
-            ))
-            ->add('fichero', FileType::class, array(
-                'label' => 'Imagen',
-                'mapped' => false,
-                'required' => false
-                
-                
-            ))
-            ->add('save', SubmitType::class, array(
+             ));
+            if (count($options['data']->getImagenes()) == 0) {
+                $builder->add('ficheros', FileType::class, array(
+                 'label' => 'Imagen',
+                 'mapped' => false,
+                 'multiple' => true,
+                ));
+            }
+
+            $builder->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-primary float-right'),
                 'label' => 'Guardar'
             ))
