@@ -39,7 +39,7 @@ class AyuntamientoType extends AbstractType
                 'required' => false,
             ));
 
-            if ($options['data']->getLocalidad() == null) { //new
+            if ($options['data'] == null) { //new
                 $boton = 'Darme de alta';
             } else { //edit
                 $boton = 'Guardar';
