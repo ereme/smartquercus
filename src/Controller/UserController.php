@@ -9,7 +9,7 @@ use App\Form\AdminType;
 use App\Form\VecinoType;
 use App\Form\AyuntamientoType;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @Route("/user")
  */
-class UserController extends Controller
+class UserController extends AbstractController
 {
 
     /**

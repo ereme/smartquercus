@@ -24,6 +24,7 @@ class VecinoController extends AbstractController
     { 
         if ($this->isGranted('ROLE_ADMIN')){
             $vecinos = $vecinoRepository->findAll();
+            $localidad = "todas las localidades";
         }
         elseif ($this->isGranted('ROLE_AYTO')) { //soy ayto
             $id_ayto = $this->getUser()->getId();
