@@ -131,7 +131,7 @@ class IncidenciaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
         
-            return $this->redirectToRoute('incidencia_edit', ['id' => $incidencia->getId()]);
+            return $this->redirectToRoute('incidencia', ['id' => $incidencia->getId()]);
         }
 
         return $this->render('incidencia/edit.html.twig', [
@@ -155,9 +155,9 @@ class IncidenciaController extends AbstractController
     }
 
     /**
-     * @Route("/json", name="json_incidencia")
+     * @Route("/json/{ayto}", name="json_incidencia")
      */
-    public function incidenciasJson()
+    public function incidenciasJson($ayto)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -167,7 +167,11 @@ class IncidenciaController extends AbstractController
                 : '';
         };
 
-        $normalizer->setCallbacks(array('fecha' => $callback));
+        $callback2 = function ($ayto) {
+            return $ayto->getLocalidad();
+        };
+
+        $normalizer->setCallbacks(array('fecha' => $callback, 'createdAt' => $callback, 'ayuntamiento' => $callback2));
         
         $normalizer->setCircularReferenceLimit(0);
         $normalizer->setCircularReferenceHandler(function ($object) { return $object->getId(); });
@@ -175,7 +179,7 @@ class IncidenciaController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repo = $this->getDoctrine()->getRepository(Incidencia::class);
-        $incidencias= $repo->findAllOrdenados();
+        $incidencias=  $repo->findBy(['ayuntamiento' => $ayto], ['fecha' => 'DESC']);
 
         $jsonIncidencias = $serializer->serialize($incidencias, 'json');      
         $respuesta = new Response($jsonIncidencias);       

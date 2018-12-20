@@ -71,4 +71,6 @@ class IncidenciaRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    
 }
