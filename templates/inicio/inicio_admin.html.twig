@@ -43,7 +43,7 @@
 	                                </div>
 						     </p>
 							  {% if is_granted('ROLE_AYTO') %}
-				                <center><a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Ver las incidencias</a></center>
+				                <center><a id="nuevaincidencia" href="{{ path('incidencia') }}"><i class="far fa-eye"></i> Ver las incidencias</a></center>
 				             {% endif %}
 						  </div>
 					    </div>
@@ -176,7 +176,7 @@
                     <h6 >Eventos<span class="float-right">{{ eventos|length }}</span></h6><hr>
 
 					{% if is_granted('ROLE_AYTO') %}
-				    <a id="nuevaincidencia" href="{{ path('incidencia_index') }}"><i class="far fa-eye"></i> Ver las incidencias</a>
+				    <a id="nuevaincidencia" href="{{ path('incidencia') }}"><i class="far fa-eye"></i> Ver las incidencias</a>
 				    {% endif %}<br>
                     {% if is_granted('ROLE_AYTO') %}
 				    <a id="nuevaopinion" href="{{ path('opina_index') }}"><i class="far fa-eye"></i> Ver consultas</a>
