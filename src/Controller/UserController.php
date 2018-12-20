@@ -55,7 +55,7 @@ class UserController extends Controller
             $tipo = 'admin';
         } elseif ($this->isGranted('ROLE_AYTO')) { //soy ayto
             $clase = AyuntamientoType::class;
-            $tipo = 'ayto';
+            $tipo = 'ayuntamiento';
         } else { //soy vecino
             $clase = VecinoType::class;
             $tipo = 'vecino';

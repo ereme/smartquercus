@@ -193,7 +193,9 @@ class SaludController extends AbstractController
         $opina = $repo->findAllOrdenados();
 
         $jsonMensaje = $serializer->serialize($opina, 'json');      
-        $respuesta = new Response($jsonMensaje);       
+        $respuesta = new Response($jsonMensaje);   
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');    
         return $respuesta;
     }
 }

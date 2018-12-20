@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Opina{% endblock %}
+{% block title %}Editor consulta{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -10,24 +10,16 @@
             
 {% endblock %}
 
-{% block body %}
-
-    <h1 id="editarpregunta"><i class="far fa-edit"></i> Editar las pregutnas</h1>
+{% block body %}    
 
     <div class="container">
-
-    {{ include('opina/_form.html.twig', {'button_label': 'Update'}) }}
-
-
-
-    <a id="volver" href="{{ path('opina_index') }}"><i class="fas fa-arrow-circle-left"></i> Volver a las opiniones</a>
-
-    <hr>
-
-
-    {{ include('opina/_delete_form.html.twig') }}
-
-
+        <div class="col-xs-12 col-sm-6 col-md-12">
+            <h3 id="editarpregunta"><i class="far fa-edit"></i> Editor de consulta</h3>
+            {{ include('opina/_form.html.twig', {'button_label': 'Update'}) }}
+            <a id="volver" href="{{ path('opina_index') }}"><i class="fas fa-arrow-circle-left"></i> Volver a las opiniones</a>
+            <hr>
+            {{ include('opina/_delete_form.html.twig') }}
+        </div>
     </div>
 
 {% endblock %}

@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container container-fluid">
+    <div class="container container-fluid show_salu">
         <div class="row">
-            <div class="col-md-3">
-                 <img class="saludimg"src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="100%"> 
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <img class="saludimg" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="100%"> 
                 <div class="iconos"> 
                     <a class="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
                     {% if is_granted('ROLE_ADMIN') %}            
@@ -18,7 +18,7 @@
                     {% endif %}                                
                 </div>                               
             </div>         
-            <div class="col-sm-9">
+            <div class="col-xs-12 col-sm-6 col-md-9">
                <h3 class="salud2">{{ salud.titulo }}</h3>
                <p class="salud4"> {{ salud.texto }}</p>
             </div>

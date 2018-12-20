@@ -101,7 +101,7 @@
 									      {% for salud in row %}
 									        <div  class="col-sm-3">
 									            <div id="contenido"class="card mb-2">
-									                <a href="{{salud.id}}">
+									                <a href="{{ path('salud_show', {'id': salud.id}) }}">
 									                <div class="card-body">
 									                <p class="card-title">{{ salud.titulo}}</p></a>        
 									                <div class="card-text">
