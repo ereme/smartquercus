@@ -280,8 +280,12 @@ class OpinaController extends AbstractController
                 : '';
         };
 
+        $callback2 = function ($ayto){
+            return $ayto->getLocalidad();
+        };
+
         $normalizer->setCallbacks(array('fechahoralimite' => $callback,
-            'createdAt' => $callback
+            'createdAt' => $callback, 'ayuntamiento' => $callback2
         ));
 
         $normalizer->SetCircularReferenceHandler(function ($object){
