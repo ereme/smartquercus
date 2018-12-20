@@ -1,17 +1,34 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-#bodyopina{
-	margin-top:8px;
-}
-#opina .card{
-	margin-bottom: 30px;
-	margin-top: 30px;
+/* index */
+.index_opinion{
+	padding-top: 40px;
 }
 
-#pregunta a{
+.index_opinion .col-md-12 .row .col-md-6:last-child #nuevaopinion {
+	padding-left: 50%;
+}
+
+#pregunta span{
 	font-size: 18px;
 	color: #01254f ;
 }
+
+.card_opina{
+	padding-bottom: 80px;
+}
+
+#fecha{
+	text-align: right;
+	color: #98999a;
+	font-size: 12px;
+	padding-bottom: 10px;
+}
+
+#editarpregunta{
+	padding-top: 40px;
+}
+
 
 #opina .card-text p{
 	height: 100px;
@@ -21,21 +38,16 @@
 	width: 100%;
 }
 
-h1{
-	color: #01254f;
-	font-weight: bold;
-	margin-left: 20px;
-	margin-bottom: 30px;
+.container .col-md-12 h3#editarpregunta, h1{
+	color: #98999a;
 	
 }
 
 
 
-#fecha{
-	color: #01254f;
-	font-weight: bold;
-	font-size: 12px;
-}
+/* Color para eventos
+color: #01254f; */
+
 
 .progress .far{
 
