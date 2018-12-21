@@ -2,8 +2,9 @@
 
 {% block title %}Edit Incidencia{% endblock %}
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('build/incidencias-css.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/incidenciacss.css') }}">
 {% endblock %}
+
 {% block body %}
 
 <div class="container-fluid contenedor">
@@ -14,8 +15,7 @@
 	</div>
 	<div class="">
 		<div class="">
-            {{ include('incidencia/_form.html.twig') }}
-            {{ include('incidencia/_delete_form.html.twig') }}
+            {{ include('incidencia/_formedit.html.twig') }}
 		</div>
         <div class="col-md-6">
         </div>

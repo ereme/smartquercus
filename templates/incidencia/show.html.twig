@@ -2,7 +2,7 @@
 
 {% block title %}Incidencia{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/incidencias-css.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/incidenciacss.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -11,53 +11,44 @@
     <div class="container" id="incidencia-vista">
         <div class="row">
             <div class="col-4">
-                <!-- Slider -->
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <!-- indicadores -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleControls" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleControls" data-slide-to="2"></li>
-                            </ol>
-                        <!-- end indicadores -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="img-fluid" src="/imagen/arbol.jpg" alt="First slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="img-fluid" src="/imagen/bache.jpg" alt="Second slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="img-fluid" src="/imagen/calle.jpg" alt="Third slide">
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                <!-- End Slider --> 
+               
+                {% if incidencia.imagenes is not null %}
+                    {% for imagen in incidencia.imagenes %}
+                        {% if loop.index == 1 %}
+                            <img class="img-fluid" src="{{ asset(ruta_imagenes ~ imagen.nombre) }}" alt="First slide">
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                        
             </div>
             <div class="col-6">
                 
                 <div class="card">    
                     <div class="card-body">
-                        <span class="badge badge-{{incidencia.ColorEstado}}">{{incidencia.estado}}</span>
+                        {% if is_granted('ROLE_VECINO') %}
+                            <span class="badge badge-{{incidencia.ColorEstadoParaVecino}}">
+                                {{incidencia.EstadoParaVecino}}
+                            </span>
+                        {% else %}
+                            <span class="badge badge-{{incidencia.ColorEstado}}">
+                                {{incidencia.estado}}
+                            </span>
+                        {% endif %} 
                         <h6 class="card-title">
                             {{ incidencia.fecha ? incidencia.fecha|date('Y-m-d') }}
                         </h6>
                         <div class="descripcion">
                             <p class="card-text">{{ incidencia.descripcion }}</p>
                         </div> 
-                        <a href="{{ path('incidencia_index') }}" class="card-link">Volver a lista</a>
-                           {% if is_granted('USER_ADMIN') or ('USER_AYTO') %}
+                        <a href="{{ path('incidencia') }}" class="card-link">Volver a lista</a>
+                           {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
                                     Editar
                                 </a>
+                            {% elseif is_granted('ROLE_AYTO')%}
+                                <a href="{{ path('incidencia_edit', {'id': incidencia.id }) }}" class="card-link">
+                                    Editar
+                                </a>    
                             {% endif %}
                             
                         
@@ -67,5 +58,6 @@
             </div>
         </div>
     </div>
-    
-{% endblock %}
+
+
+{% endblock %}    

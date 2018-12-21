@@ -14,30 +14,35 @@
 
 
 {% block body %}
-    <h1 id="bodyopina">Opina</h1>
+    <div class="container container-fluid index_opinion">
+        <div class="col-xs-12 col-sm-6 col-md-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <h1 id="bodyopina">Opina</h1>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    {% if is_granted('ROLE_AYTO') %}
+                        <a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea una nueva opinión</a>
+                    {% endif %}
+                </div>  
+            </div>                 
+        </div>
 
-    {% if is_granted('ROLE_AYTO') %}
-
-        <a id="nuevaopinion" href="{{ path('opina_new') }}"><i class="far fa-edit"></i> Crea una nueva opinión</a>
-
-    {% endif %}
-
-    <div class="container-fluid">
+   
         {% for row in opinas|batch(3) %}
             <div class="row">
                 {% for opina in row %}
-                    <div id="opina" class="col-sm-4">
+                    <div id="opina" class="col-xs-12 col-sm-6 col-md-4 card_opina">
                         <div class="card">
                             <p>
                             <img class="card-img-top" src="{{ asset(opina.imagen.nombre, 'usuarios') }}" alt="Card image cap" width="20" height="250">
                             </p>
                             <div class="card-body">
-                                <div id = "pregunta" class="card-text">
+                                <div id="pregunta" class="card-text">
                                     <p>
-                                    <a href="{{ path('opina_show', {'id': opina.id}) }}">{{ opina.pregunta }}</a>
+                                    <span>{{ opina.pregunta }}</span>
                                     </p>
-                                </div>
-                                
+                                </div>                                
                                 <div class="progress">
                                     <i class="far fa-thumbs-up"></i> <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ opina.PorcentajeFavor }}%" aria-valuenow="{{ opina.PorcentajeFavor }}" aria-valuemin="0" aria-valuemax="100"><span>{{ opina.PorcentajeFavor }} %</span></div>
                                 </div>
@@ -47,13 +52,13 @@
                                 </div>
                                 <br>
                                 <div class="prueba">
-                                <p>
+                                    <p>
                                     <input type="hidden" value="{{ opina.id }}">
-                                    {% if is_granted('ROLE_VECINO') and (not is_granted('ROLE_ADMIN')) %}
-                                        {% if (date(opina.fechahoralimite) > date('-1days')) or (0==1) %}
-                                            <button type="button" class="btn btn-outline-success botonopina" valor="F" {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>A favor</button>
-                                            <button type="button" class="btn btn-outline-danger botonopina" valor="C"  {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>En contra</button>
-                                            {% else %}
+                                        {% if is_granted('ROLE_VECINO') and (not is_granted('ROLE_ADMIN')) %}
+                                            {% if (date(opina.fechahoralimite) > date('-1days')) or (0==1) %}
+                                                <button type="button" class="btn btn-outline-success botonopina" valor="F" {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>A favor</button>
+                                                <button type="button" class="btn btn-outline-danger botonopina" valor="C"  {{ opina.HaVotado(app.user) == true ? 'disabled = "disabled"'}}>En contra</button>
+                                                {% else %}
 
                                                     <table id="mostrar" class="table">
                                                         <tbody>
@@ -66,37 +71,30 @@
                                                                 <td>{{ opina.votoscontra }}</td>
                                                             </tr>
                                                         </tbody>
-                                                    </table>   
-
-
+                                                    </table> 
                                         {% endif %}
 
-                                    {% elseif is_granted('ROLE_AYTO') %}
-
-                                         <div class="container">
-
-                                            <table id="mostrar" class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Votos a favor</th>
-                                                        <td>{{ opina.votosfavor }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Votos en contra</th>
-                                                        <td>{{ opina.votoscontra }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>   
-                                        </div>
-
-                                {% endif %}
-
-                                    
-                                </p>
+                                        {% elseif is_granted('ROLE_AYTO') %}
+                                             <div class="container">
+                                                <table id="mostrar" class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Votos a favor</th>
+                                                            <td>{{ opina.votosfavor }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Votos en contra</th>
+                                                            <td>{{ opina.votoscontra }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>   
+                                            </div>
+                                        {% endif %}                                    
+                                    </p>
                                 </div>
                                 {% if is_granted('ROLE_VECINO') %}
                                     {% if date(opina.fechahoralimite) > date('-1days') %}
-                                    <p id="fecha">Tienes de fecha hasta: {{ opina.fechahoralimite ? opina.fechahoralimite|date('Y-m-d') : '' }}</p>
+                                        <p id="fecha">Finalización: {{ opina.fechahoralimite ? opina.fechahoralimite|date('d-m-Y') : '' }}</p>
                                     {% endif %}
                                 {% endif %}
 

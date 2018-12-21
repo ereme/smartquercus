@@ -27,6 +27,7 @@ class TelefonoController extends AbstractController
 
         if ($this->isGranted('ROLE_ADMIN')) {
             $telefonos = $telefonoRepository->findAll();
+            $localidad = 'de todas las localidades';
         } elseif ($this->isGranted('ROLE_AYTO')) { 
             $telefonos = $this->getUser()->getTelefonos();
             $localidad = $this->getUser()->getLocalidad();

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Admin;
 use App\Entity\Vecino;
+use App\Entity\Imagen;
 use App\Entity\Ayuntamiento;
 use App\Entity\Incidencia;
 use App\Form\IncidenciaType;
@@ -13,6 +14,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/incidencia")
@@ -20,55 +25,92 @@ use Symfony\Component\Routing\Annotation\Route;
 class IncidenciaController extends AbstractController
 {
     /**
-     * @Route("/", name="incidencia_index", methods="GET")
+     * @Route("/", name="incidencia")
      */
-    public function index(IncidenciaRepository $incidenciaRepository, AuthorizationCheckerInterface $authChecker): Response
+    public function index(IncidenciaRepository $incidenciaRepository, AuthorizationCheckerInterface $authChecker):Response
     {
-        if ($this->isGranted(Vecino::USER_VECINO) ) {
-            $ayuntamiento = $this->getAyuntamiento();
+        $usuario = $this->getUser();
+        $roles = $usuario->getRoles();
+        dump($usuario);
+        if ($roles[0] == 'ROLE_VECINO'  ) {
+            $ayuntamiento = $usuario->getAyuntamiento();
+            $aytoid = $ayuntamiento->getId();
             $incidencias = $ayuntamiento->getIncidencias(); 
             return $this->render('incidencia/index.html.twig', 
-            ['incidencias' => $incidencias->findAll()]);
-        }elseif ($this->isGranted(Ayuntamiento::USER_AYTO)) {
-            $incidencias = $this->getIncidencias();
-            return $this->render('incidencia/index.html.twig', ['incidencias' => $incidencias->findAll()]);
-        }elseif ($this->isGranted(Admin::USER_ADMIN)) {
+            ['incidencias' => $incidenciaRepository->findById($aytoid)]);
+
+        }elseif ($roles[0] == 'ROLE_AYTO' ) {
+            $incidencias = $usuario->getIncidencias();
+            $aytoid = $usuario->getId();
+            return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findById($aytoid)]);
+
+        }elseif ($roles[0] == 'ROLE_ADMIN' ) {
             return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findAll()]);
         }
-        
-
-        return $this->render('incidencia/index.html.twig', ['incidencias' => $incidenciaRepository->findAll()]);
+       
+        return $this->redirectToRoute('login');
     }
 
     /**
      * @Route("/new", name="incidencia_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request)
     {
         $usuario = $this->getUser();
         $ayuntamiento = $usuario->getAyuntamiento();
-        $incidencium = new Incidencia();
-        $form = $this->createForm(IncidenciaType::class, $incidencium);
-        $form->handleRequest($request);
+        $incidencia = new Incidencia();
+        $form = $this->createForm(IncidenciaType::class, $incidencia);
+        $form->handleRequest($request); 
 
+        dump ($ayuntamiento);
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            $incidencium->setAyuntamiento($ayuntamiento);
+    
+            $ficheros = $request->files->get('incidencia')['ficheros'];
+
+            
+            foreach ($ficheros as $fichero) {
+                
+               
+                $fileName = md5(uniqid());
+
+                $imagen = new Imagen();
+                $imagen->setNombre($fileName);
+                $imagen->setOriginal($fichero->getClientOriginalName());
+                $imagen->setSize($fichero->getSize());
+                $incidencia->addImagene($imagen);
+                
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),$fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+            } 
+
+
+            $incidencia->setAyuntamiento($ayuntamiento);
+            dump ($incidencia);
             //$ayuntamiento->addIncidencia($incidencium);
             $em = $this->getDoctrine()->getManager();
-            $em->persist($incidencium);
+            $em->persist($incidencia);
             $em->flush();
 
-            return $this->redirectToRoute('incidencia_index');
+            return $this->redirectToRoute('incidencia');
         }
 
         return $this->render('incidencia/new.html.twig', [
-            'incidencium' => $incidencium,
+            'incidencia' => $incidencia,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="incidencia", methods="GET")
+     * @Route("/{id}", name="incidencia_show", methods="GET", requirements={"id"="\d+"})
      */
     public function show(Incidencia $incidencia, $id): Response
     {
@@ -88,8 +130,8 @@ class IncidenciaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('incidencia_edit', ['id' => $incidencia->getId()]);
+        
+            return $this->redirectToRoute('incidencia', ['id' => $incidencia->getId()]);
         }
 
         return $this->render('incidencia/edit.html.twig', [
@@ -110,6 +152,38 @@ class IncidenciaController extends AbstractController
         }
 
         return $this->redirectToRoute('incidencia_index');
+    }
+
+    /**
+     * @Route("/json/{ayto}", name="json_incidencia")
+     */
+    public function incidenciasJson($ayto)
+    {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $callback = function ($date) {
+            return $date instanceof \Date
+                ? $date->format('d-m-Y ')
+                : '';
+        };
+
+        $callback2 = function ($ayto) {
+            return $ayto->getLocalidad();
+        };
+
+        $normalizer->setCallbacks(array('fecha' => $callback, 'createdAt' => $callback, 'ayuntamiento' => $callback2));
+        
+        $normalizer->setCircularReferenceLimit(0);
+        $normalizer->setCircularReferenceHandler(function ($object) { return $object->getId(); });
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(Incidencia::class);
+        $incidencias=  $repo->findBy(['ayuntamiento' => $ayto], ['fecha' => 'DESC']);
+
+        $jsonIncidencias = $serializer->serialize($incidencias, 'json');      
+        $respuesta = new Response($jsonIncidencias);       
+        return $respuesta;
     }
     
 }

@@ -1,29 +1,34 @@
 {% extends 'base.html.twig' %}
+
 {% block stylesheets %}
-
-<link rel="stylesheet" href="{{asset('build/evento.css')}}">
-
+	<link rel="stylesheet" href="{{asset('build/evento.css')}}">
 {% endblock %}
-{% block title %}New Eventos{% endblock %}
+
+{% block title %}Nuevo evento{% endblock %}
 
 {% block body %}
-    <div class="container-fluid contenedor">
-	<div class="row">
-		<div class="col-md-12">
-		 	<h3>Crear eventos</h3>
+    <div class="container container-fluid nuevo_evento">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-12">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+				 		<a class="eventoicon" href="{{ path('evento_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
+				 	</div>
+				 	<div class="col-xs-12 col-sm-6 col-md-6">
+				 		<h3>Añade un evento</h3>
+				 	</div>
+			 	</div>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-6">		    
+			    <img class="card-img-top" src="{{ asset('imagen/evento.jpg') }}" alt="Card image cap" width="100%">				    	
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6">			
+			    {{ include('evento/_form.html.twig') }}
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-6">
-		    
-		    <img class="card-img-top" src="{{ asset('imagen/evento.jpg') }}" alt="Card image cap" >
-	
-		</div>
-		<div class="col-md-6">			
-		    {{ include('evento/_form.html.twig') }}
-		</div>
-	</div>
-</div>
 {% endblock %}
 
 {% block javascripts %}

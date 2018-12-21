@@ -11,12 +11,12 @@
 
 {% block body %}
 
-<div class="container-fluid">
+<div class="container container-fluid">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <br>
         <h1> 
         {% if user.imagen.nombre is defined %}
-           <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
+           <img class="img-rounded" src="{{ asset(ruta_imagenes ~ user.imagen.nombre)}}" alt="Card image cap" height="200" width="200">
         {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
@@ -29,7 +29,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="col-md-12">
-                                <h2>Información</h2>
+                                <h3>Información</h3>
                                 <table class="table table-hover">
                                     <tbody>
                                         <tr>
@@ -62,7 +62,8 @@
                     </div>
                     <div id="linea" class="col-md-8">
                         <div class="row" id="publicaciones">
-
+                            <h2>Ayuntamiento de {{ user.ayuntamiento.localidad }}</h2>
+                                <img class="img" src="{{ asset(ruta_imagenes ~ app.user.ayuntamiento.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
                         </div>
                     </div>
             </div>
@@ -75,7 +76,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="col-md-12">
-                                <h2>Información</h2>
+                                <h3>Información</h3>
                                 <table class="table table-hover">
                                     <tbody>
                                         <tr>
@@ -97,13 +98,10 @@
                             </div>
                         </div>
                     </div>
+
                     <div id="linea" class="col-md-8">
-                        <div class="row" id="publicaciones">
-
-
-                    <div class="col-md-8">
                         <div class="row" id="telefonos">
-                            <h2>Teléfonos</h2>
+                            <h4>Teléfonos</h4>
                             <table class="table table-hover">
                                 <tbody>
                                 {% for telefono in user.telefonos %}
@@ -119,7 +117,6 @@
                             <div>
                             <a class="btn btn-primary" id="new_telefono" href="{{ path('telefono_new') }}"> <i class="fas fa-plus-circle"></i> Añadir nuevo teléfono </a>
                             </div>
-
                         </div>
                     </div>
             </div>

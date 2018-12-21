@@ -49,7 +49,8 @@ class InicioController extends AbstractController
                 return $this->render('inicio/inicio_ayto.html.twig', [
                   'opinas'=> $this->getUser()->getEncuestas(),
                   'incidencias'=> $this->getUser()->getIncidencias(),
-                  'eventos'=>$this->getUser()->getEventos()
+                  'eventos'=>$this->getUser()->getEventos(),
+                  'vecinos'=> $this->getUser()->getVecinos(),
                 ]);
             }
              else {

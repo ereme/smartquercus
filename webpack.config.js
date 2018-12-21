@@ -22,22 +22,23 @@ Encore
     .addEntry('userjs', './assets/js/user.js')  
     .addStyleEntry('user', './assets/css/user.css') 
     .addEntry('opinajs', './assets/js/opina.js')    
-    .addStyleEntry('app', './assets/css/app.css')
+    .addEntry('app', './assets/js/app.js')
+    //.addStyleEntry('app', './assets/css/app.css')
     .addStyleEntry('opina', './assets/css/opina.css')
     .addEntry('saludjs', './assets/js/saludjs.js')    
     .addStyleEntry('salud', './assets/css/salud.css')
     .addStyleEntry('telefono', './assets/css/telefono.css')
     .addStyleEntry('ayto', './assets/css/ayto.css')
     .addStyleEntry('inicio', './assets/css/inicio.css')
-    .addEntry('incidencias-js', './assets/js/incidencias-js.js')
-    .addStyleEntry('incidencias-css', './assets/css/incidencias-css.css')
+    .addEntry('incidenciasjs', './assets/js/incidenciajs.js')
+    .addStyleEntry('incidenciacss', './assets/css/incidenciacss.css')
     .addStyleEntry('register', './assets/css/register_footer.css')
     .addStyleEntry('vecino', './assets/css/vecino.css')
     .addEntry('eventojs', './assets/js/evento.js')  
     .addStyleEntry('evento', './assets/css/evento.css')
   
 
-
+    .enableSingleRuntimeChunk()
 
 
     /*

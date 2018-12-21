@@ -188,12 +188,13 @@ class OpinaController extends AbstractController
 
         return $this->redirectToRoute('opina_index');
     }
-
+ 
     /**
      * @Route("/{idopina}/{idvecino}/{valor}/json", name="opina_json", requirements={"idopina"="\d+","idvecino"="\d+" })
      */
     public function jsonOpina($idopina, $idvecino, $valor, Request $request, VecinoRepository $vecinoRepo)
     {
+
 
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -275,12 +276,16 @@ class OpinaController extends AbstractController
 
         $callback = function ($dateTime) {
             return $dateTime instanceof \DateTime
-                ? $dateTime->format('d-m-Y H:i')
+                ? $dateTime->format('d-m-Y')
                 : '';
         };
 
+        $callback2 = function ($ayto){
+            return $ayto->getLocalidad();
+        };
+
         $normalizer->setCallbacks(array('fechahoralimite' => $callback,
-            'createdAt' => $callback
+            'createdAt' => $callback, 'ayuntamiento' => $callback2
         ));
 
         $normalizer->SetCircularReferenceHandler(function ($object){
@@ -291,10 +296,13 @@ class OpinaController extends AbstractController
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         $repo = $this->getDoctrine()->getRepository(Opina::class);
-        $opina = $repo->findByAyto($ayto); 
-
+        $opina = $repo->findBy(['ayuntamiento' => $ayto]); 
+        
         $jsonMensaje = $serializer->serialize($opina, 'json');   
+        
         $respuesta = new Response($jsonMensaje);    
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');
         return $respuesta;
     }
     

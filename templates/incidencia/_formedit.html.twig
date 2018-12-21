@@ -1,0 +1,47 @@
+{{ form_start(form) }}
+	<div class="container" id="form-container">
+        <section>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="col-form-label">Fecha</label>
+                    <div class="form-group">
+                        {{ form_widget(form.fecha)}}
+                    </div>
+                    <label class="col-form-label">Latitud</label>
+                    <div class="form-group">
+                        {{ form_widget(form.latitud)}}
+                    </div>
+                    <label class="col-form-label">Longitud</label>
+                    <div class="form-group">
+                        {{ form_widget(form.longitud)}}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Descripción</label>
+                    <div class="form-group">
+                        {{ form_widget(form.descripcion)}}
+                    </div>
+                    <label class="col-form-label">Estado</label>
+                    <div class="form-group">
+                        {{ form_widget(form.estado)}}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                {% if incidencia.imagenes is not null %}
+                    {% for imagen in incidencia.imagenes %}
+                        {% if loop.index == 1 %}
+                            <img class="img-fluid" src="{{ asset(ruta_imagenes ~ imagen.nombre) }}" alt="First slide">
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+            <div class="text-center">
+                {{ form_widget(form.save)}}
+                {{ form_widget(form.delete)}}
+                <a href="{{ path('incidencia') }}" class="btn btn-primary">Volver a lista</a>
+            </div>
+            <div class="clearfix"></div>
+        </section>
+    </div>		
+{{ form_end(form) }}
