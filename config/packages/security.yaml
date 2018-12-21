@@ -26,6 +26,8 @@ security:
         main:
             pattern: ^/
             anonymous: true
+            json_login:
+                check_path: /loginjson
             # activate different ways to authenticate
             http_basic: ~
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
