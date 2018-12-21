@@ -528,9 +528,10 @@
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.3.1.tgz#5466b8f31c1f493a96754c1426c25796d0633dd9"
 
-"@symfony/webpack-encore@^0.21.1":
-  version "0.21.1"
-  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-0.21.1.tgz#a7b10197373386d6ad134d7d9fbb04b90543a65c"
+"@symfony/webpack-encore@^0.22.2":
+  version "0.22.2"
+  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-0.22.2.tgz#036cffc86e2f4da2a194b5eabc2409c4ffe0d31b"
+  integrity sha512-lJR9GhhbuNmyN1NWx8o4xL+MsxPFv6JZF6h3xMGw8tNks53xzYqagTC4WeW3mL5d7i0WJdpKfgBsRth7nFF8Cg==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"

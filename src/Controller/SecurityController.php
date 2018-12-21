@@ -46,6 +46,20 @@ class SecurityController extends AbstractController
 
 
     /**
+     * @Route("/loginjson", name="loginjson", methods="GET|POST")
+     */
+    public function loginjson(Request $request)
+    {    
+        $user = $this->getUser();
+        return $this->json(array(
+            'username' => $user->getUsername(),
+            'roles' => $user->getRoles(),
+        ));
+    }
+
+
+
+    /**
      * @Route("/register", name="user_registration")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
