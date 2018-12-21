@@ -27,6 +27,42 @@ use Symfony\Component\HttpFoundation\File\File;
 class UserController extends Controller
 {
 
+   /**
+     * @Route("/email", name="user_email", methods="GET")
+     */
+    public function email(\Swift_Mailer $mailer)
+    {
+        $name = 'Jesus';
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('send@example.com')
+            ->setTo('ddiazp04@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/registration.html.twig
+                    'emails/registration.html.twig',
+                    array('name' => $name)
+                ),
+                'text/html'
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'emails/registration.txt.twig',
+                    array('name' => $name)
+                ),
+                'text/plain'
+            )
+            */
+        ;
+        
+        dump ($mailer);
+        $mailer->send($message);
+
+        return $this->render('user/index.html.twig');
+    }
+
+
     /**
      * @Route("/", name="user_index", methods="GET")
      */
