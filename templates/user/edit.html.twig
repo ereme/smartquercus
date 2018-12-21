@@ -3,7 +3,7 @@
 {% block title %}Edit User{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/user.css') }}">
+    {{ encore_entry_link_tags('user') }}
 {% endblock %}
 
 {% block body %}
@@ -28,14 +28,7 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-
-    $('#vecino_fichero').on('change',function (e) {
-        $(this).next('.custom-file-label').html(e.target.files[0].name);
-    });
-
-	</script>
-
+	
+ {{ encore_entry_script_tags('userjs') }}
 {% endblock %}
 

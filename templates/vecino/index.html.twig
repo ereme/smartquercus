@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('build/vecino.css') }}">
+        {{ encore_entry_link_tags('vecino') }}
 {% endblock %}
 {% block title %} Vecinos {% endblock %}
 

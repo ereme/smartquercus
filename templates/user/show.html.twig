@@ -3,10 +3,7 @@
 {% block title %}User{% endblock %}
 
 {% block stylesheets %}
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
-        
-        <link rel="stylesheet" href="{{ asset('build/user.css') }}">
+     {{ encore_entry_link_tags('user') }}
 {% endblock %}
 
 {% block body %}
@@ -63,7 +60,7 @@
                     <div id="linea" class="col-md-8">
                         <div class="row" id="publicaciones">
                             <h2>Ayuntamiento de {{ user.ayuntamiento.localidad }}</h2>
-                                <img class="img" src="{{ asset(ruta_imagenes ~ app.user.ayuntamiento.imagen.nombre) }}" alt="Card image cap" height="200" width="200">
+                                <img class="img" src="{{ asset(app.user.ayuntamiento.imagen.nombre, 'usuarios') }}" alt="Card image cap" height="200" width="200">
                         </div>
                     </div>
             </div>
@@ -130,6 +127,6 @@
  {{ parent() }}
 
 
- <script src="{{ asset('build/userjs.js') }}"></script>
+ {{ encore_entry_script_tags('userjs') }}>
 
 {% endblock %}

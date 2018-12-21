@@ -3,7 +3,7 @@
 {% block title %}Editar artículo{% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+  {{ encore_entry_link_tags('salud') }}
 {% endblock %}
 
 {% block body %}
@@ -13,7 +13,7 @@
     {# include('salud/_delete_form.html.twig') #} 
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-3">
-        <img class="card-img-top" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
+        <img class="card-img-top" src="{{ asset(salud.imagen.nombre, 'usuarios') }}" alt="Card image cap">
         <a class="saludicon" href="{{ path('salud_show', {'id': salud.id}) }}"><i class="fas fa-arrow-circle-left"></i></a>                              
       </div>
       <div class="col-xs-12 col-sm-6 col-md-9"> 
@@ -25,6 +25,6 @@
 
 {% block javascripts %}
     {{ parent() }} 
-    <script src="{{ asset('build/saludjs.js') }}"></script>            
+     {{ encore_entry_script_tags('saludjs') }}          
 {% endblock %}
 

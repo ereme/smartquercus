@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{asset('build/evento.css')}}">
+{{ encore_entry_link_tags('evento') }}
 {% endblock %}
 
 {% block title %}Eventos{% endblock %}
@@ -10,7 +10,7 @@
     <div class="container container-fluid show_even">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-3">
-                <img src="{{ asset(ruta_imagenes ~ evento.imagen.nombre) }}" alt="Card image cap" width="100%"> 
+                <img src="{{ asset(evento.imagen.nombre, 'usuarios') }}" alt="Card image cap" width="100%"> 
                 <div class="iconos_evento"> 
                     <a class="eventoicon" href="{{ path('evento_index') }}"><i class="fas fa-arrow-circle-left"></i></a>
                     {% if is_granted('ROLE_AYTO') %}            

@@ -2,7 +2,7 @@
 
 {% block title %}Incidencia new{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/incidenciacss.css') }}">
+    {{ encore_entry_link_tags('incidenciacss') }}
 {% endblock %}
 
 {% block body %}
@@ -12,5 +12,5 @@
 
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('build/incidenciajs.js') }}"></script>  
+    {{ encore_entry_script_tags('incidenciajs') }}  
 {% endblock %}

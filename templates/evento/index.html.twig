@@ -3,7 +3,7 @@
 {% block stylesheets %}
 
 
-<link rel="stylesheet" href="{{asset('build/evento.css')}}">
+{{ encore_entry_link_tags('evento') }}
 
 {% endblock %}
 
@@ -30,7 +30,7 @@
             <div  class="col-sm-4">
               <div class="card h-100">
                 <a href="{{evento.id}}">
-                  <img class="card-img-top" src="{{ asset(ruta_imagenes ~ evento.imagen.nombre) }}" alt="Card image cap">
+                  <img class="card-img-top" src="{{ asset(evento.imagen.nombre, 'usuarios') }}" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title">{{ evento.titular}}</h5></a>        
                     <div class="card-text">
@@ -51,7 +51,7 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}  
-    <script src="{{ asset('build/eventojs.js') }}"></script>
+     {{ encore_entry_script_tags('eventojs') }}
             
 {% endblock %}
 

@@ -5,8 +5,7 @@ $(document).ready(function(){
 	console.log('hola');
 
 	
-    $('#imagen_fichero').on('change',function (e) {
+    $('#vecino_fichero').on('change',function (e) {
         $(this).next('.custom-file-label').html(e.target.files[0].name);
     });
-
 });

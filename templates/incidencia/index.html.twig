@@ -2,7 +2,7 @@
 
 {% block title %}Hello!{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/incidenciacss.css') }}">
+    {{ encore_entry_link_tags('incidenciacss') }}
 {% endblock %}
 
 {% block body %}
@@ -18,7 +18,7 @@
                             {% if incidencia.imagenes is not null %}                                    
                                 {% for imagen in incidencia.imagenes %}                                   
                                     {% if loop.index == 1 %}
-                                        <img class="img-fluid" src="{{ asset(ruta_imagenes ~ imagen.nombre) }}"/>
+                                        <img class="img-fluid" src="{{ asset(imagen.nombre, 'usuarios') }}"/>
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}

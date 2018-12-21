@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+      {{ encore_entry_link_tags('register') }}
+
+{% endblock %}
 
 {% block body %}
 
@@ -63,6 +67,3 @@
 {% endblock %}
 
 
-{% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('build/register.css') }}">
-{% endblock %}

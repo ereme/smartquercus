@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{asset('build/evento.css')}}">
+  {{ encore_entry_link_tags('evento') }}
 {% endblock %}
 
 {% block title %}Edit Eventos{% endblock %}
@@ -12,7 +12,7 @@
       {# include('evento/_delete_form.html.twig') #} 
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-3">
-          <img class="card-img-top" src="{{ asset(ruta_imagenes ~ evento.imagen.nombre) }}" alt="Card image cap">
+          <img class="card-img-top" src="{{ asset(evento.imagen.nombre, 'usuarios') }}" alt="Card image cap">
           <a class="eventoicon" href="{{ path('evento_show', {'id': evento.id}) }}"><i class="fas fa-arrow-circle-left"></i></a>                              
         </div>
         <div class="col-xs-12 col-sm-6 col-md-9"> 

@@ -3,14 +3,14 @@
 {% block title %}Saludables{% endblock %}
 
 {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+     {{ encore_entry_link_tags('salud') }}
 {% endblock %}
 
 {% block body %}
     <div class="container container-fluid show_salu">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-3">
-                <img class="saludimg" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap" width="100%"> 
+                <img class="saludimg" src="{{ asset(salud.imagen.nombre, 'usuarios') }}" alt="Card image cap" width="100%"> 
                 <div class="iconos"> 
                     <a class="saludicon" href="{{ path('salud_index') }}"><i class="fas fa-arrow-circle-left"></i></a> 
                     {% if is_granted('ROLE_ADMIN') %}            

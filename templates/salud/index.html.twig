@@ -3,7 +3,7 @@
 {% block title %}Saludables{% endblock %}
 
   {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+   {{ encore_entry_link_tags('salud') }}
   {% endblock %}
 
 {% block body %}
@@ -28,7 +28,7 @@
           <div  class="col-xs-12 col-sm-6 col-md-4 espacio_card">
             <div class="card h-100">
               <a class="salud1" href="{{salud.id}}">    
-                  <img class="card-img-top imgtodas" src="{{ asset(ruta_imagenes ~ salud.imagen.nombre) }}" alt="Card image cap">
+                  <img class="card-img-top imgtodas" src="{{ asset(salud.imagen.nombre, 'usuarios') }}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{ salud.titulo}}</h5></a>        
                   <div class="card-text">
@@ -50,7 +50,7 @@
 
 {% block javascripts %}
     {{ parent() }} 
-    <script src="{{ asset('build/saludjs.js') }}"></script>            
+     {{ encore_entry_script_tags('saludjs') }}           
 {% endblock %}
 
 

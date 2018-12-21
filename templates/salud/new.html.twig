@@ -2,7 +2,7 @@
 
 {% block title %}Nuevo Artículo{% endblock %}
 	{% block stylesheets %}
-    	<link rel="stylesheet" href="{{ asset('build/salud.css') }}">
+    	{{ encore_entry_link_tags('salud') }}
   	{% endblock %}
 
 {% block body %}
@@ -38,5 +38,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-	<script src="{{ asset('build/saludjs.js') }}"></script>
+	 {{ encore_entry_script_tags('saludjs') }}
 {% endblock %}

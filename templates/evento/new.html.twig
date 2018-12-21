@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('build/evento.css')}}">
+	{{ encore_entry_link_tags('evento') }}
 {% endblock %}
 
 {% block title %}Nuevo evento{% endblock %}
@@ -33,6 +33,6 @@
 
 {% block javascripts %}
     {{ parent() }}  
-    <script src="{{ asset('build/eventojs.js') }}"></script>
+     {{ encore_entry_script_tags('eventojs') }}
             
 {% endblock %}
