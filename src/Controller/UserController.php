@@ -71,7 +71,7 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', ['users' => $userRepository->findAll()]);
     }
 
-
+    
     /**
      * @Route("/{id}", name="user_show", methods="GET" , requirements={"id"="\d+"})
      */

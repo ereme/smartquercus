@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/salud")
@@ -30,6 +31,7 @@ class SaludController extends AbstractController
 
     /**
      * @Route("/new", name="salud_new", methods="GET|POST")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request): Response
     {
@@ -86,6 +88,7 @@ class SaludController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="salud_edit", methods="GET|POST")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Salud $salud): Response
     {
@@ -155,6 +158,7 @@ class SaludController extends AbstractController
 
     /**
      * @Route("/{id}", name="salud_delete", methods="DELETE")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Salud $salud): Response
     {
@@ -169,6 +173,7 @@ class SaludController extends AbstractController
 
     /** 
      * @Route("/salud/json", name="json_salud")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function jsonSalud()
     {
