@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @Route("/opina")
@@ -269,7 +270,7 @@ class OpinaController extends AbstractController
     /**
      * @Route("/json/{ayto}", name="json_opina")
      */
-    public function opinaJson($ayto)
+    public function opinaJson($ayto, Request $request)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -286,11 +287,16 @@ class OpinaController extends AbstractController
         $callback3 = function ($vecinos){
             return null;
         };
+        $callbackUrl = function ($url) use ($request) {
+            return $request->server->get('HTTP_HOST') . '/images/'.$url->getNombre();
+        };
+        //TODO: COMPROBAR SI NO FALLA LA RUTA CON LOS ESCAPES DE / DE JSON
 
         $normalizer->setCallbacks(array('fechahoralimite' => $callback,
             'createdAt' => $callback,
             'ayuntamiento' => $callback2,
-            'vecinos' => $callback3
+            'vecinos' => $callback3,
+            'imagen' => $callbackUrl
         ));
 
         $normalizer->SetCircularReferenceHandler(function ($object){
