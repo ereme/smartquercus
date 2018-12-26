@@ -18,8 +18,6 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
 
 /**
  * @Route("/evento")
@@ -47,7 +45,7 @@ class EventoController extends AbstractController
    
   /**
      * @Route("/new", name="evento_new", methods="GET|POST")
-     * @IsGranted("ROLE_AYTO")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function new(Request $request): Response
     {
@@ -110,7 +108,7 @@ class EventoController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="evento_edit", methods="GET|POST")
-     * @IsGranted("ROLE_AYTO")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function edit(Request $request, Evento $evento): Response
     {
@@ -172,7 +170,7 @@ class EventoController extends AbstractController
 
     /**
      * @Route("/{id}", name="evento_delete", methods="DELETE")
-     * @IsGranted("ROLE_AYTO")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function delete(Request $request, Evento $evento): Response
     {

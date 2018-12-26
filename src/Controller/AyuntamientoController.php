@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/ayuntamiento")
@@ -18,6 +19,7 @@ class AyuntamientoController extends AbstractController
 {
     /**
      * @Route("/", name="ayuntamiento_index", methods="GET")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function index(AyuntamientoRepository $ayuntamientoRepository): Response
     {
@@ -26,6 +28,7 @@ class AyuntamientoController extends AbstractController
 
     /**
      * @Route("/new", name="ayuntamiento_new", methods="GET|POST")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function new(Request $request): Response
     {
@@ -52,6 +55,7 @@ class AyuntamientoController extends AbstractController
 
     /**
      * @Route("/{id}", name="ayuntamiento_show", methods="GET")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function show(Ayuntamiento $ayuntamiento): Response
     {
@@ -60,6 +64,7 @@ class AyuntamientoController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="ayuntamiento_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function edit(Request $request, Ayuntamiento $ayuntamiento): Response
     {
@@ -96,6 +101,7 @@ class AyuntamientoController extends AbstractController
 
     /**
      * @Route("/{id}", name="ayuntamiento_delete", methods="DELETE")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function delete(Request $request, Ayuntamiento $ayuntamiento): Response
     {

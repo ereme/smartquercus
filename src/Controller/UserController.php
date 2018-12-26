@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\User;
-
 use App\Form\UserType;
 use App\Form\AdminType;
 use App\Form\VecinoType;
@@ -15,14 +13,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Security;
+//use Symfony\Component\Security\Core\Security;
 use App\Entity\Imagen;
 use App\Form\ImagenType;
 use Symfony\Component\HttpFoundation\File\File;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/user")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class UserController extends AbstractController
 {
@@ -65,13 +65,14 @@ class UserController extends AbstractController
 
     /**
      * @Route("/", name="user_index", methods="GET")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', ['users' => $userRepository->findAll()]);
     }
 
-    
+
     /**
      * @Route("/{id}", name="user_show", methods="GET" , requirements={"id"="\d+"})
      */
@@ -160,6 +161,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_delete", methods="DELETE")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function delete(Request $request, User $user): Response
     {

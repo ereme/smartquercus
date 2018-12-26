@@ -18,9 +18,12 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/incidencia")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class IncidenciaController extends AbstractController
 {
@@ -53,6 +56,7 @@ class IncidenciaController extends AbstractController
 
     /**
      * @Route("/new", name="incidencia_new", methods="GET|POST")
+     * @Security("has_role('ROLE_VECINO')")
      */
     public function new(Request $request)
     {
@@ -122,6 +126,7 @@ class IncidenciaController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="incidencia_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function edit(Request $request, Incidencia $incidencia): Response
     {
@@ -142,6 +147,7 @@ class IncidenciaController extends AbstractController
 
     /**
      * @Route("/{id}", name="incidencia_delete", methods="DELETE")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function delete(Request $request, Incidencia $incidencia): Response
     {
