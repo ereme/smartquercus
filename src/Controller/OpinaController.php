@@ -95,7 +95,7 @@ class OpinaController extends AbstractController
     }
 
     /**
-    * @Route("/{id}", name="opina_show", methods="GET")
+    * @Route("/{id}", name="opina_show", methods="GET", requirements={"id"="\d+"})
     * @Security("has_role('ROLE_AYTO')")
     */
     public function show(Opina $opina): Response
@@ -267,7 +267,7 @@ class OpinaController extends AbstractController
     }
 
     /**
-     * @Route("/opina/json/{ayto}", name="json_opina")
+     * @Route("/json/{ayto}", name="json_opina")
      */
     public function opinaJson($ayto)
     {

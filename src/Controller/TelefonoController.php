@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Telefono;
 use App\Form\TelefonoType;
 use App\Repository\TelefonoRepository;
+use App\Repository\AyuntamientoRepository;
+use App\Repository\OpinaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,7 +70,7 @@ class TelefonoController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="telefono_show", methods="GET")
+     * @Route("/{id}", name="telefono_show", methods="GET", requirements={"id"="\d+"})
      */
     public function show(Telefono $telefono): Response
     {
@@ -110,9 +112,9 @@ class TelefonoController extends AbstractController
     }
 
     /**
-     * @Route("/telefono/json", name="json_telefono")
+     * @Route("/json/{aytoid}", name="json_telefono")
      */
-    public function telefonoJson()
+    public function telefonoJson($aytoid, AyuntamientoRepository $aytoRepo, OpinaRepository $opinaRepo)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -120,11 +122,34 @@ class TelefonoController extends AbstractController
         $normalizer->setCircularReferenceLimit(0);
         $serializer = new Serializer(array($normalizer), array($encoder));
 
-        $em = $this->getDoctrine()->getManager();
-        $repo = $this->getDoctrine()->getRepository(Telefono::class);
-        $opina = $repo->findAll();
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
 
-        $jsonMensaje = $serializer->serialize($opina, 'json');      
+
+        $callback = function ($date) {
+            return $date instanceof \Date
+                ? $date->format('d-m-Y ')
+                : '';
+        };
+        $callback2 = function ($ayto) {
+            return $ayto->getLocalidad();
+        };
+        $callback3 = function ($vecinos) {
+            return null;
+        };
+        $normalizer->setCallbacks(array(
+            'ayuntamiento' => $callback2,
+            'fechahoralimite' => $callback,
+            'createdAt' => $callback,
+            'vecinos' => $callback3
+        ));
+
+        $opinas = $opinaRepo->findAll();
+        $ayto = $aytoRepo->find($aytoid);
+        //$opinas = $opinaRepo->findBy (['ayuntamiento' => $ayto]);
+
+        $jsonMensaje = $serializer->serialize($opinas, 'json');      
         $respuesta = new Response($jsonMensaje);       
         return $respuesta;
     }

@@ -72,6 +72,11 @@ class User implements UserInterface, \Serializable
      */
     protected $imagen;
 
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $vatid;
+
     public function __construct() {
         $this->roles = array('ROLE_USER');
         $this->isActive = true;
@@ -201,6 +206,18 @@ class User implements UserInterface, \Serializable
     public function setImagen(Imagen $img): self
     {
         $this->imagen = $img;
+        return $this;
+    }
+
+    public function getVatid(): ?string
+    {
+        return $this->vatid;
+    }
+
+    public function setVatid(string $vatid): self
+    {
+        $this->vatid = $vatid;
+
         return $this;
     }
 

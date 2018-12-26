@@ -25,6 +25,9 @@ class AdminType extends AbstractType
                 'second_options' => array('label' => 'Confirmar contraseña'),
             ))
             ->add('nombre')
+            ->add('vatid', TextType::class, array (
+                'label' => 'NIF',
+            ))
             ->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),
                'label' => 'Darme de alta'
