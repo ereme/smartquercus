@@ -32,6 +32,9 @@ class AyuntamientoType extends AbstractType
                 'first_options'  => array('label' => 'Contraseña'),
                 'second_options' => array('label' => 'Confirmar contraseña'),
             ))
+            ->add('vatid', TextType::class, array (
+                'label' => 'CIF',
+            ))
             ->add('localidad')
             ->add('imagen', FileType::class, array(
                 'label' => 'Imagen escudo',

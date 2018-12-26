@@ -23,7 +23,6 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        dump ($options['data']);
         $builder
             ->add('fichero', FileType::class, array(
                 'label' => 'Imagen',

@@ -36,6 +36,9 @@ class VecinoType extends AbstractType
             ->add('apellido2', TextType::class, array(
                 'label' => 'Segundo apellido'
             ))
+            ->add('vatid', TextType::class, array (
+                'label' => 'NIF',
+            ))
             ->add('ayuntamiento', EntityType::class, array(
                 'class' => Ayuntamiento::class,
                 'choice_label' => 'localidad',

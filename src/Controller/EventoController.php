@@ -99,7 +99,7 @@ class EventoController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="evento_show", methods="GET")
+     * @Route("/{id}", name="evento_show", methods="GET", requirements={"id"="\d+"})
      */
     public function show(Evento $evento): Response
     {
@@ -182,7 +182,7 @@ class EventoController extends AbstractController
     }
 
     /**
-     * @Route("/evento/json", name="json_evento")
+     * @Route("/json", name="json_evento")
      */
     public function jsonEvento()
     {

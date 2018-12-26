@@ -77,7 +77,7 @@ class SaludController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="salud_show", methods="GET")
+     * @Route("/{id}", name="salud_show", methods="GET", requirements={"id"="\d+"})
      */
     public function show(Salud $salud ): Response
     {
@@ -168,7 +168,7 @@ class SaludController extends AbstractController
     }
 
     /** 
-     * @Route("/salud/json", name="json_salud")
+     * @Route("/json", name="json_salud")
      */
     public function jsonSalud()
     {
