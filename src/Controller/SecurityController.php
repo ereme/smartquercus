@@ -69,6 +69,8 @@ class SecurityController extends AbstractController
         $user = $this->getUser();
         $vector = array(
             'username' => $user->getUsername(),
+            'aytoid' => $user->getAyuntamiento()->getId(),
+            'userid' => $user->getId(),
             'roles' => $user->getRoles(),
         ); 
         
