@@ -24,8 +24,13 @@
 					<div class="col-md-6">
 						{{ form_row(form.localidad) }}
 					</div>
-			{% endif %}			
+			{% endif %}		
 
+			{% if (form.imagen) is defined %}    	
+					<div class="col-md-6">
+						{{ form_row(form.imagen) }}
+					</div>
+			{% endif %}		
 
 			{% if (form.ayuntamiento) is defined %}    	
 					<div class="col-md-6">
