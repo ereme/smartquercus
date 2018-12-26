@@ -61,12 +61,10 @@ class EventoController extends AbstractController
               $imagen = new Imagen();
               $imagen->setNombre($fileName);
               $imagen->setOriginal($fichero->getClientOriginalName());
-              $evento->setImagen($imagen);
               $imagen->setSize($fichero->getSize());
-              /*dump ($imagen);
-              dump ($fichero);
-              dump ($salud);*/
-
+              $evento->setImagen($imagen);
+              $evento->setAyuntamiento($this->getUser());
+              
               // Move the file to the directory where brochures are stored
               try {
                   $fichero->move(
