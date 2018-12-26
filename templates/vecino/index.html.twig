@@ -13,7 +13,9 @@
             <div class="col-sm-2">
                 <div class="card h-100">
                     <div>
-                        <img class="card-img-top" src="{{ asset(vecino.imagen.nombre, 'usuarios') }}" alt="Imagen vecino">
+                        {% if vecino.imagen.nombre is defined %}
+                            <img class="card-img-top" src="{{ asset(vecino.imagen.nombre, 'usuarios') }}" alt="Imagen vecino">
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{vecino.apellido1|capitalize}} {{vecino.apellido2|capitalize}}, {{ vecino.nombre|capitalize}}</h5>

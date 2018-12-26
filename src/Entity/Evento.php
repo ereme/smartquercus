@@ -103,4 +103,16 @@ class Evento
 
         return $this;
     }
+
+    public function getAyuntamiento(): Ayuntamiento
+    {
+        return $this->ayuntamiento;
+    }
+
+    public function setAyuntamiento(Ayuntamiento $ayto): self
+    {
+        $this->ayuntamiento = $ayto;
+
+        return $this;
+    }
 }

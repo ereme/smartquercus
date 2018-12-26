@@ -39,7 +39,7 @@ class AyuntamientoType extends AbstractType
             ->add('fichero', FileType::class, array(
                 'label' => 'Imagen escudo',
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
             ));
 
             if ($options['data'] == null) { //new
@@ -49,7 +49,7 @@ class AyuntamientoType extends AbstractType
                 $builder->add('fichero', FileType::class, array(
                     'label' => 'Imagen',
                     'mapped' => false,
-                    'required' => false
+                    'required' => true
                 ));
             }
 
