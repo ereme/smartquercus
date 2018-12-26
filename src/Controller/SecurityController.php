@@ -19,6 +19,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
+
+
 
 
 class SecurityController extends AbstractController
@@ -50,11 +56,23 @@ class SecurityController extends AbstractController
      */
     public function loginjson(Request $request)
     {    
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
+        $normalizer->setCircularReferenceLimit(0);
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
         $user = $this->getUser();
-        $jsonMensaje = $this->json(array(
+        $vector = array(
             'username' => $user->getUsername(),
             'roles' => $user->getRoles(),
-        ));
+        ); 
+        
+        $jsonMensaje = $serializer->serialize($vector, 'json');   
 
         $respuesta = new Response($jsonMensaje);    
         $respuesta->headers->set('Content-Type', 'application/json');
