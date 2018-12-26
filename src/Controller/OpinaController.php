@@ -283,9 +283,14 @@ class OpinaController extends AbstractController
         $callback2 = function ($ayto){
             return $ayto->getLocalidad();
         };
+        $callback3 = function ($vecinos){
+            return null;
+        };
 
         $normalizer->setCallbacks(array('fechahoralimite' => $callback,
-            'createdAt' => $callback, 'ayuntamiento' => $callback2
+            'createdAt' => $callback,
+            'ayuntamiento' => $callback2,
+            'vecinos' => $callback3
         ));
 
         $normalizer->SetCircularReferenceHandler(function ($object){
@@ -303,6 +308,7 @@ class OpinaController extends AbstractController
         $respuesta = new Response($jsonMensaje);    
         $respuesta->headers->set('Content-Type', 'application/json');
         $respuesta->headers->set('Access-Control-Allow-Origin', '*');
+        
         return $respuesta;
     }
     

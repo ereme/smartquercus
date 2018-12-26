@@ -51,10 +51,16 @@ class SecurityController extends AbstractController
     public function loginjson(Request $request)
     {    
         $user = $this->getUser();
-        return $this->json(array(
+        $jsonMensaje = $this->json(array(
             'username' => $user->getUsername(),
             'roles' => $user->getRoles(),
         ));
+
+        $respuesta = new Response($jsonMensaje);    
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');
+        
+        return $respuesta;
     }
 
 
