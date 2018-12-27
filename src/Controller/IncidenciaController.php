@@ -20,7 +20,6 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -205,7 +204,7 @@ class IncidenciaController extends AbstractController
         }
 
         $incidencia = new Incidencia();
-        $incidencia->setFecha(DateTime::createFromFormat('d-m-Y', $params['fecha']));
+        $incidencia->setFecha(\DateTime::createFromFormat('d-m-Y', $params['fecha']));
         $incidencia->setLatitud($params['latitud']);
         $incidencia->setLongitud($params['longitud']);
         $incidencia->setDescripcion($params['descripcion']);
