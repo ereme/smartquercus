@@ -23,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/incidencia")
- * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class IncidenciaController extends AbstractController
 {
