@@ -111,6 +111,10 @@ class Opina
         }
     }
 
+    public function getActivo (): ?bool { //true si la fecha aún no ha pasado
+        return (new \DateTime("now") > $this->getFechahoralimite());
+    }
+
     public function getVotoscontra(): ?int
     {
         return $this->votoscontra;

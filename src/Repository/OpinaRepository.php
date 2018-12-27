@@ -19,7 +19,7 @@ class OpinaRepository extends ServiceEntityRepository
         parent::__construct($registry, Opina::class);
     }
 
-//    /**
+//z    /**
 //     * @return Opina[] Returns an array of Opina objects
 //     */
     /*

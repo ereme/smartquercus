@@ -84,6 +84,50 @@ class SecurityController extends AbstractController
     }
 
 
+    /**
+     * @Route("/registerjson", name="registerjson", methods="GET|POST")
+     */
+    public function registerjson(Request $request)
+    {    
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
+        $normalizer->setCircularReferenceLimit(0);
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $v = new Vecino();
+        $v->setVatid($dni);
+        $v->setVatid($nombre);
+        $v->setVatid($apellido1);
+        $v->setVatid($apellido2);
+        $v->setVatid($telefono);
+        $v->setVatid($email);
+        $v->setVatid($username);
+        $v->setVatid($password);
+        $v->setVatid($ayto);
+
+        $vector = array(
+            'ok' => ''
+        );
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vecino);
+        $entityManager->flush();
+
+        $jsonMensaje = $serializer->serialize($vector, 'json');   
+
+        $respuesta = new JsonResponse($jsonMensaje);    
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');
+        
+        return $respuesta;
+    }
+
+
 
     /**
      * @Route("/register", name="user_registration")
