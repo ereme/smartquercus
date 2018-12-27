@@ -305,7 +305,7 @@ class OpinaController extends AbstractController
         $respuesta = new Response($jsonMensaje);    
         $respuesta->headers->set('Content-Type', 'application/json');
         $respuesta->headers->set('Access-Control-Allow-Origin', '*');
-        return $respuesta;
+        return $respuesta; 
     }
     
 }

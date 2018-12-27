@@ -159,7 +159,7 @@ class IncidenciaController extends AbstractController
 
         return $this->redirectToRoute('incidencia_index');
     }
-
+ 
     /**
      * @Route("/json/{ayto}", name="json_incidencia")
      */
@@ -192,4 +192,44 @@ class IncidenciaController extends AbstractController
         return $respuesta;
     }
     
+    /**
+     * @Route("/new/json", name="incidencia_new_json")
+     */
+    public function newJson (Request $request)
+    {
+        $params = array();
+        $content = $request->getContent();
+        if (!empty($content)){
+            $params = json_decode($content, true);
+        }
+
+        $incidencia = new Incidencia();
+        $incidencia->setFecha($params->get('fecha'));
+        $incidencia->setLatitud($params->get('latitud'));
+        $incidencia->setLongitud($params->get('longitud'));
+        $incidencia->setDescripcion($params->get('descripcion'));
+        $incidencia->setAyuntamiento($params->get('aytoid'));
+        $incidencia->setEstado($params->get('estado'));
+
+        
+                /*$fileName = md5(uniqid());
+                $imagen = new Imagen();
+                $imagen->setNombre($fileName);
+                $imagen->setOriginal($fichero->getClientOriginalName());
+                $imagen->setSize($fichero->getSize());
+                $incidencia->addImagene($imagen);
+                // Move the file to the directory where brochures are stored
+                try {
+                    $fichero->move(
+                        $this->getParameter('carpeta_imagenes'),$fileName
+                    );
+                } catch (FileException $e) {
+                }*/
+             
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($incidencia);
+        $em->flush();
+        $response = new Response(array('data' => 'ok'));
+
+    }
 }
