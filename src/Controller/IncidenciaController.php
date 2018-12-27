@@ -211,25 +211,31 @@ class IncidenciaController extends AbstractController
         $incidencia->setAyuntamiento($params->get('aytoid'));
         $incidencia->setEstado($params->get('estado'));
 
+        $imagenbase64 = $params->get('imagen');
+        $imagenbase64 = base64_decode($imagenbase64);
+        $imagendecodificada = file_put_contents($this.getUser()->getId().'.'.$params->get('fecha'), $imagenbase64);
+
+        $fileName = md5(uniqid());
+        $imagen = new Imagen();
+        $imagen->setNombre($fileName);
+        $imagen->setOriginal($imagendecodificada->getClientOriginalName());
+        $imagen->setSize($imagendecodificada->getSize());
+        $incidencia->addImage($imagen);
+
+        try {
+            $imagendecodificada->move($this->getParameter('carpeta_imagenes'),$fileName);
+        } catch (FileException $e) {
+        }
         
-                /*$fileName = md5(uniqid());
-                $imagen = new Imagen();
-                $imagen->setNombre($fileName);
-                $imagen->setOriginal($fichero->getClientOriginalName());
-                $imagen->setSize($fichero->getSize());
-                $incidencia->addImagene($imagen);
-                // Move the file to the directory where brochures are stored
-                try {
-                    $fichero->move(
-                        $this->getParameter('carpeta_imagenes'),$fileName
-                    );
-                } catch (FileException $e) {
-                }*/
-             
         $em = $this->getDoctrine()->getManager();
         $em->persist($incidencia);
-        $em->flush();
+        try {
+            $em->flush();
+        } catch (Exception $e) {
+        }
+        
         $response = new Response(array('data' => 'ok'));
+
 
     }
 }
