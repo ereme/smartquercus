@@ -203,7 +203,7 @@ class IncidenciaController extends AbstractController
         }
 
         $incidencia = new Incidencia();
-        $incidencia->setFecha($params['fecha']);
+        $incidencia->setFecha(DateTime::createFromFormat('d-m-Y', $params['fecha']));
         $incidencia->setLatitud($params['latitud']);
         $incidencia->setLongitud($params['longitud']);
         $incidencia->setDescripcion($params['descripcion']);
