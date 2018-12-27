@@ -19,6 +19,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
+
+
 
 
 class SecurityController extends AbstractController
@@ -50,11 +56,75 @@ class SecurityController extends AbstractController
      */
     public function loginjson(Request $request)
     {    
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
+        $normalizer->setCircularReferenceLimit(0);
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
         $user = $this->getUser();
-        return $this->json(array(
+        $vector = array(
             'username' => $user->getUsername(),
+            'aytoid' => $user->getAyuntamiento()->getId(),
+            'userid' => $user->getId(),
             'roles' => $user->getRoles(),
-        ));
+        ); 
+        
+        $jsonMensaje = $serializer->serialize($vector, 'json');   
+
+        $respuesta = new Response($jsonMensaje);    
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');
+        
+        return $respuesta;
+    }
+
+
+    /**
+     * @Route("/registerjson", name="registerjson", methods="GET|POST")
+     */
+    public function registerjson(Request $request)
+    {    
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
+        $normalizer->setCircularReferenceLimit(0);
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $v = new Vecino();
+        $v->setVatid($dni);
+        $v->setVatid($nombre);
+        $v->setVatid($apellido1);
+        $v->setVatid($apellido2);
+        $v->setVatid($telefono);
+        $v->setVatid($email);
+        $v->setVatid($username);
+        $v->setVatid($password);
+        $v->setVatid($ayto);
+
+        $vector = array(
+            'ok' => ''
+        );
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vecino);
+        $entityManager->flush();
+
+        $jsonMensaje = $serializer->serialize($vector, 'json');   
+
+        $respuesta = new JsonResponse($jsonMensaje);    
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');
+        
+        return $respuesta;
     }
 
 

@@ -19,6 +19,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @Route("/opina")
@@ -65,10 +66,6 @@ class OpinaController extends AbstractController
                 $imagen->setOriginal($fichero->getClientOriginalName());
                 $opina->setImagen($imagen);
                 $imagen->setSize($fichero->getSize());
-
-                /*dump ($imagen);
-                dump ($fichero);
-                dump ($salud);*/
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -206,42 +203,14 @@ class OpinaController extends AbstractController
                 ? $dateTime->format('d-m-Y H:i')
                 : '';
         };
-        $callback2 = function ($imagen) {
-            if ($imagen != null) {
-                /*return $imagen->getCreatedAt() instanceof \DateTime
-                    ? $imagen->getCreatedAt()->format('d-m-Y H:i')
-                    : '';
-                    */
-                    return $this->getParameter('carpeta_imagenes') . "/" . $imagen->getNombre();
-            } else {
-                return null;
-            }
-        };
-
-        $normalizer->setCallbacks(array('fechahoralimite' => $callback,
-                                        'imagen' => $callback2,
-                                        ));
-
-/*
-        $callback = function ($dateTime) {
-            return $dateTime instanceof \DateTime
-                ? $dateTime->format('d-m-Y')
-                : '';
-        };
-        $callback2 = function ($dateTime) {
-            return $dateTime instanceof \DateTime
-                ? $dateTime->format('d-m-Y')
-                : '';
-        };
-
-        $normalizer->setCallbacks(array('fechahoralimite' => $callback));
-        $normalizer->setCallbacks(array('createdAt' => $callback2));*/
-
-        $normalizer->setCircularReferenceHandler(
-            function ($object) {
-                return $object->getId();
-            }
-        );
+    
+        $normalizer->setCallbacks(array(
+            'fechahoralimite' => $callback
+        ));
+        $normalizer->setIgnoredAttributes(array('ayuntamiento','vecinos','imagen'));
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
         $normalizer->setCircularReferenceLimit(0);
         $serializer = new Serializer(array($normalizer), array($encoder));
 
@@ -250,8 +219,7 @@ class OpinaController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Opina::class);
         $opina = $repo->find($idopina);
 
-        dump ($opina);
-
+        
         if ($valor == 'C') {
             $opina->subirVotosContra();
         } elseif ($valor == 'F') {
@@ -271,7 +239,7 @@ class OpinaController extends AbstractController
     /**
      * @Route("/json/{ayto}", name="json_opina")
      */
-    public function opinaJson($ayto)
+    public function opinaJson($ayto, Request $request)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -285,27 +253,46 @@ class OpinaController extends AbstractController
         $callback2 = function ($ayto){
             return $ayto->getLocalidad();
         };
+        $callback3 = function ($vecinos){
+            return null;
+        };
+        $callbackUrl = function ($url) use ($request) {
+            return 'https:://' 
+                    . $request->server->get('HTTP_HOST') 
+                    . '/images/'
+                    . $url->getNombre();
+        };
+        //TODO: COMPROBAR SI NO FALLA LA RUTA CON LOS ESCAPES DE / DE JSON
 
         $normalizer->setCallbacks(array('fechahoralimite' => $callback,
-            'createdAt' => $callback, 'ayuntamiento' => $callback2
+            'createdAt' => $callback,
+            'ayuntamiento' => $callback2,
+            'imagen' => $callbackUrl
         ));
 
         $normalizer->SetCircularReferenceHandler(function ($object){
             return $object->getId();
         });
         $normalizer->setCircularReferenceLimit(0);
+        $normalizer->setIgnoredAttributes(array('vecinos'));
 
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         $repo = $this->getDoctrine()->getRepository(Opina::class);
-        $opina = $repo->findBy(['ayuntamiento' => $ayto]); 
-        
-        $jsonMensaje = $serializer->serialize($opina, 'json');   
+        $opinas = $repo->findBy(['ayuntamiento' => $ayto]);
+        //$opinas = $repo->findOpinasArrayByAyto($ayto);
+                
+        $jsonMensaje = $serializer->serialize($opinas, 'json');   
         
         $respuesta = new Response($jsonMensaje);    
         $respuesta->headers->set('Content-Type', 'application/json');
         $respuesta->headers->set('Access-Control-Allow-Origin', '*');
+<<<<<<< HEAD
         return $respuesta; 
+=======
+        
+        return $respuesta;
+>>>>>>> 97e7f931507ea0dd6e836658d0e232839e46c717
     }
     
 }
