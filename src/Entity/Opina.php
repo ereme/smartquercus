@@ -112,7 +112,7 @@ class Opina
     }
 
     public function getActivo (): ?bool { //true si la fecha aún no ha pasado
-        return (new \DateTime("now") > $this->getFechahoralimite());
+        return (new \DateTime("now") <= $this->getFechahoralimite());
     }
 
     public function getVotoscontra(): ?int
@@ -211,7 +211,6 @@ class Opina
        
         //Tenqo que buscar un vecino dentro de la lista de vecinos de este opina
         return $this->vecinos->contains($vecino);
-            
-       
+
     }
 }

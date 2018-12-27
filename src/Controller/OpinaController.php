@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -240,7 +241,7 @@ class OpinaController extends AbstractController
     public function opinaJson($ayto, Request $request)
     {
         $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
+        $normalizer = new GetSetMethodNormalizer();
 
         $callback = function ($dateTime) {
             return $dateTime instanceof \DateTime
@@ -255,17 +256,17 @@ class OpinaController extends AbstractController
             return null;
         };
         $callbackUrl = function ($url) use ($request) {
-            return 'https:://' 
+            return 'https://' 
                     . $request->server->get('HTTP_HOST') 
                     . '/images/'
                     . $url->getNombre();
         };
-        //TODO: COMPROBAR SI NO FALLA LA RUTA CON LOS ESCAPES DE / DE JSON
 
         $normalizer->setCallbacks(array('fechahoralimite' => $callback,
             'createdAt' => $callback,
             'ayuntamiento' => $callback2,
-            'imagen' => $callbackUrl
+            'imagen' => $callbackUrl,
+            //'votado' => $callbackVoto,
         ));
 
         $normalizer->SetCircularReferenceHandler(function ($object){
@@ -279,7 +280,11 @@ class OpinaController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Opina::class);
         $opinas = $repo->findBy(['ayuntamiento' => $ayto]);
         //$opinas = $repo->findOpinasArrayByAyto($ayto);
-                
+        
+        foreach ($opinas as $key => $value) {
+            $value->getHaVotado($this->getUser());
+        }
+        
         $jsonMensaje = $serializer->serialize($opinas, 'json');   
         
         $respuesta = new Response($jsonMensaje);    
