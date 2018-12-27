@@ -203,16 +203,16 @@ class IncidenciaController extends AbstractController
         }
 
         $incidencia = new Incidencia();
-        $incidencia->setFecha($params->get('fecha'));
-        $incidencia->setLatitud($params->get('latitud'));
-        $incidencia->setLongitud($params->get('longitud'));
-        $incidencia->setDescripcion($params->get('descripcion'));
-        $incidencia->setAyuntamiento($params->get('aytoid'));
-        $incidencia->setEstado($params->get('estado'));
+        $incidencia->setFecha($params['fecha']);
+        $incidencia->setLatitud($params['latitud']);
+        $incidencia->setLongitud($params['longitud']);
+        $incidencia->setDescripcion($params['descripcion']);
+        $incidencia->setAyuntamiento($params['aytoid']);
+        $incidencia->setEstado($params['estado']);
 
         $imagenbase64 = $params->get('imagen');
         $imagenbase64 = base64_decode($imagenbase64);
-        $imagendecodificada = file_put_contents($this.getUser()->getId().'.'.$params->get('fecha'), $imagenbase64);
+        $imagendecodificada = file_put_contents($params['userid'].'.'.$params->get('fecha'), $imagenbase64);
 
         $fileName = md5(uniqid());
         $imagen = new Imagen();
