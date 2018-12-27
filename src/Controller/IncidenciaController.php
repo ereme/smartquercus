@@ -9,6 +9,7 @@ use App\Entity\Ayuntamiento;
 use App\Entity\Incidencia;
 use App\Form\IncidenciaType;
 use App\Repository\IncidenciaRepository;
+use App\Repository\AyuntamientoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -208,7 +209,11 @@ class IncidenciaController extends AbstractController
         $incidencia->setLatitud($params['latitud']);
         $incidencia->setLongitud($params['longitud']);
         $incidencia->setDescripcion($params['descripcion']);
-        $incidencia->setAyuntamiento($params['aytoid']);
+
+
+        $repo = $this->getDoctrine()->getRepository(Ayuntamiento::class);
+
+        $incidencia->setAyuntamiento($repo->findBy(['id' => $params['aytoid']]));
         $incidencia->setEstado($params['estado']);
 
         $imagenbase64 = $params->get('imagen');
