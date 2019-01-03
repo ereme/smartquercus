@@ -119,7 +119,7 @@ class SecurityController extends AbstractController
             $v->setUsername($username);
             
             $v->setPassword($password);
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $password = $passwordEncoder->encodePassword($v, $v->getPlainPassword());
 
             $v->setAyuntamiento($ayto);
             
@@ -136,7 +136,7 @@ class SecurityController extends AbstractController
             $vector = array('error' => '');
             $codigo = 401; //error
         }
-        
+
 
         //Codificación a JSON
         $encoder = new JsonEncoder();
