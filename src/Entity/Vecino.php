@@ -47,6 +47,11 @@ class Vecino extends User
      */
     private $opinas;
 
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $telefono;
+
     
 
     public function __construct()
@@ -133,6 +138,18 @@ class Vecino extends User
         if ($this->opinas->contains($opina)) {
             $this->opinas->removeElement($opina);
         }
+
+        return $this;
+    }
+
+    public function getTelefono(): ?string
+    {
+        return $this->telefono;
+    }
+
+    public function setTelefono(?string $telefono): self
+    {
+        $this->telefono = $telefono;
 
         return $this;
     }

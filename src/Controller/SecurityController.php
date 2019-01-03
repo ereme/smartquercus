@@ -12,6 +12,7 @@ use App\Form\VecinoType;
 use App\Form\AyuntamientoType;
 use App\Form\AdminType;
 use App\Repository\UserRepository;
+use App\Repository\AyuntamientoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -87,40 +88,62 @@ class SecurityController extends AbstractController
     /**
      * @Route("/registerjson", name="registerjson", methods="GET|POST")
      */
-    public function registerjson(Request $request)
+    public function registerjson(Request $request, AyuntamientoRepository $aytoRepo)
     {    
+        $codigo = '';
+        try {
+            $dni = $request->get('dni');
+            $nombre = $request->get('nombre');
+            $apellido1 = $request->get('apellido1');
+            $apellido2 = $request->get('apellido2');
+            $telefono = $request->get('telefono');
+            $email = $request->get('email');
+            $username = $request->get('username');
+            $password = $request->get('password');
+            $aytoid = $request->get('aytoid');
+            $ayto = $aytoRepo->find ($aytoid);
+    
+            $v = new Vecino();
+            $v->setVatid($dni);
+            $v->setNombre($nombre);
+            $v->setApellido1($apellido1);
+            $v->setApellido2($apellido2);
+            $v->setTelefono($telefono);
+            $v->setEmail($email);
+            $v->setUsername($username);
+            $v->setPassword($password);
+            $v->setAyuntamiento($ayto);
+            
+            //Persistencia
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($v);
+            $entityManager->flush();
+
+            
+            $vector = array('ok' => '');
+            $codigo = 200; //ok
+        } catch (\Throwable $th) {
+            $vector = array('error' => '');
+            $codigo = 401; //error
+        }
+        
+
+        /*
+http://localhost:8000/registerjson?dni=000&nombre=Juan&apellido1=Andres&apellido2=Montes&telefono=666&email=jesusa@iluego.com&username=juana&password=3&aytoid=1
+        */
+
+        //Codificación a JSON
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
-
         $normalizer->SetCircularReferenceHandler(function ($object){
             return $object->getId();
         });
         $normalizer->setCircularReferenceLimit(0);
-
         $serializer = new Serializer(array($normalizer), array($encoder));
-
-        $v = new Vecino();
-        $v->setVatid($dni);
-        $v->setVatid($nombre);
-        $v->setVatid($apellido1);
-        $v->setVatid($apellido2);
-        $v->setVatid($telefono);
-        $v->setVatid($email);
-        $v->setVatid($username);
-        $v->setVatid($password);
-        $v->setVatid($ayto);
-
-        $vector = array(
-            'ok' => ''
-        );
-        
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($vecino);
-        $entityManager->flush();
 
         $jsonMensaje = $serializer->serialize($vector, 'json');   
 
-        $respuesta = new JsonResponse($jsonMensaje);    
+        $respuesta = new Response($jsonMensaje,$codigo);    
         $respuesta->headers->set('Content-Type', 'application/json');
         $respuesta->headers->set('Access-Control-Allow-Origin', '*');
         
