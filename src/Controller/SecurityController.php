@@ -88,7 +88,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/registerjson", name="registerjson", methods="GET|POST")
      */
-    public function registerjson(Request $request, AyuntamientoRepository $aytoRepo)
+    public function registerjson(Request $request, AyuntamientoRepository $aytoRepo, 
+                                    UserPasswordEncoderInterface $passwordEncoder)
     {    
         $codigo = '';
         try {
@@ -107,6 +108,7 @@ class SecurityController extends AbstractController
             $aytoid = $params['aytoid'];
             $ayto = $aytoRepo->find ($aytoid);
     
+            
             $v = new Vecino();
             $v->setVatid($dni);
             $v->setNombre($nombre);
@@ -115,8 +117,12 @@ class SecurityController extends AbstractController
             $v->setTelefono($telefono);
             $v->setEmail($email);
             $v->setUsername($username);
+            
             $v->setPassword($password);
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+
             $v->setAyuntamiento($ayto);
+            
             
             //Persistencia
             $entityManager = $this->getDoctrine()->getManager();
@@ -131,10 +137,6 @@ class SecurityController extends AbstractController
             $codigo = 401; //error
         }
         
-
-        /*
-http://localhost:8000/registerjson?dni=000&nombre=Juan&apellido1=Andres&apellido2=Montes&telefono=666&email=jesusa@iluego.com&username=juana&password=3&aytoid=1
-        */
 
         //Codificación a JSON
         $encoder = new JsonEncoder();
