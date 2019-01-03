@@ -119,8 +119,8 @@ class SecurityController extends AbstractController
             $v->setUsername($username);
             
             $v->setPassword($password);
-            $password = $passwordEncoder->encodePassword($v, $v->getPlainPassword());
-
+            $password = $passwordEncoder->encodePassword($v, $password);
+            $v->setPassword($password);
             $v->setAyuntamiento($ayto);
             
             
