@@ -20,6 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 
@@ -27,6 +28,7 @@ class InicioController extends AbstractController
 {
     /**
      * @Route("/", name="inicio", methods="GET")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     
         public function index(AyuntamientoRepository $aytoRepo,VecinoRepository $vecinoRepo, OpinaRepository $opinaRepo,  SaludRepository $saludRepo ,IncidenciaRepository $incidenciaRepo, EventoRepository $eventoRepo): Response

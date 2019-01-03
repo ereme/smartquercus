@@ -17,12 +17,15 @@
 		</div>
 	</div>	
     <div class="row">
+	{% if (ayuntamiento.imagen != null) %}
         <div class="col-md-2">
             <img src="{{ asset(ruta_imagenes ~ ayuntamiento.imagen.nombre) }}"height="100" width="100">
-        </div>	
-        <div class="col-md-10">
-            {{ form_row(form.imagen) }}
-        </div>	
+        </div>
+		<div class="col-md-10">
+            {{ form_row(form.fichero) }}
+        </div>
+	{% endif %}	
+        	
     </div>
 	<div class="row">
 		<div class="col-md-12">

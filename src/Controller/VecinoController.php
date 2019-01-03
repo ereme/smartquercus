@@ -10,15 +10,18 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\Response;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/vecino")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class VecinoController extends AbstractController
 {
     /**
      * @Route("/", name="vecino_listado")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function index(VecinoRepository $vecinoRepository)
     { 
@@ -32,7 +35,6 @@ class VecinoController extends AbstractController
             //$vecinos = $vecinoRepository->findByAyto($id_ayto);
             $vecinos = $this->getUser()->getVecinos();
         }
-        
         return $this->render('vecino/index.html.twig', [
             'vecinos' => $vecinos,
             'localidad' => $localidad

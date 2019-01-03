@@ -19,10 +19,12 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @Route("/opina")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class OpinaController extends AbstractController
 {

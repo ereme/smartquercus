@@ -8,16 +8,18 @@ use App\Repository\TelefonoRepository;
 use App\Repository\AyuntamientoRepository;
 use App\Repository\OpinaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/telefono")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class TelefonoController extends AbstractController
 {
@@ -71,6 +73,7 @@ class TelefonoController extends AbstractController
 
     /**
      * @Route("/{id}", name="telefono_show", methods="GET", requirements={"id"="\d+"})
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function show(Telefono $telefono): Response
     {
@@ -79,6 +82,7 @@ class TelefonoController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="telefono_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function edit(Request $request, Telefono $telefono): Response
     {
@@ -99,6 +103,7 @@ class TelefonoController extends AbstractController
 
     /**
      * @Route("/{id}", name="telefono_delete", methods="DELETE")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function delete(Request $request, Telefono $telefono): Response
     {
@@ -113,6 +118,7 @@ class TelefonoController extends AbstractController
 
     /**
      * @Route("/json/{aytoid}", name="json_telefono")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function telefonoJson($aytoid, AyuntamientoRepository $aytoRepo, OpinaRepository $opinaRepo)
     {

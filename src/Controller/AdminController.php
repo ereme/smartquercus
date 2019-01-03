@@ -9,9 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/admin")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class AdminController extends AbstractController
 {
@@ -24,8 +26,6 @@ class AdminController extends AbstractController
          ['admins' => $adminRepository->
          findAll()]);
     }
-
-  
 
     /**
      * @Route("/{id}", name="admin_show", methods="GET")

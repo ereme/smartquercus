@@ -19,7 +19,6 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
 /**
  * @Route("/evento")
  */
@@ -36,6 +35,8 @@ class EventoController extends AbstractController
             $eventos = $this->getUser()->getEventos();
         } elseif ($this->isGranted(Vecino::ROLE_VECINO)) { //soy vecino
             $eventos = $eventoRepository->findAll();
+        } else{
+            $eventos = $eventoRepository->findAll();
         }
         return $this->render('evento/index.html.twig', [
             'eventos' => $eventos
@@ -44,6 +45,7 @@ class EventoController extends AbstractController
    
   /**
      * @Route("/new", name="evento_new", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function new(Request $request): Response
     {
@@ -107,6 +109,7 @@ class EventoController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="evento_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function edit(Request $request, Evento $evento): Response
     {
@@ -168,6 +171,7 @@ class EventoController extends AbstractController
 
     /**
      * @Route("/{id}", name="evento_delete", methods="DELETE")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function delete(Request $request, Evento $evento): Response
     {

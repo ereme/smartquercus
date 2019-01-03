@@ -36,7 +36,7 @@ class AyuntamientoType extends AbstractType
                 'label' => 'CIF',
             ))
             ->add('localidad')
-            ->add('imagen', FileType::class, array(
+            ->add('fichero', FileType::class, array(
                 'label' => 'Imagen escudo',
                 'mapped' => false,
                 'required' => true,
@@ -55,7 +55,7 @@ class AyuntamientoType extends AbstractType
 
             $builder->add('save', SubmitType::class, array(
                'attr' => array('class' => 'btn btn-primary float-right'),
-               'label' => 'Darme de alta'
+               'label' => $boton
            ))   
         ;
     }

@@ -9,6 +9,7 @@ use App\Entity\Ayuntamiento;
 use App\Entity\Incidencia;
 use App\Form\IncidenciaType;
 use App\Repository\IncidenciaRepository;
+use App\Repository\AyuntamientoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,9 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * @Route("/incidencia")
@@ -53,6 +57,7 @@ class IncidenciaController extends AbstractController
 
     /**
      * @Route("/new", name="incidencia_new", methods="GET|POST")
+     * @Security("has_role('ROLE_VECINO')")
      */
     public function new(Request $request)
     {
@@ -122,6 +127,7 @@ class IncidenciaController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="incidencia_edit", methods="GET|POST")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function edit(Request $request, Incidencia $incidencia): Response
     {
@@ -142,6 +148,7 @@ class IncidenciaController extends AbstractController
 
     /**
      * @Route("/{id}", name="incidencia_delete", methods="DELETE")
+     * @Security("has_role('ROLE_AYTO')")
      */
     public function delete(Request $request, Incidencia $incidencia): Response
     {
@@ -153,7 +160,7 @@ class IncidenciaController extends AbstractController
 
         return $this->redirectToRoute('incidencia_index');
     }
-
+ 
     /**
      * @Route("/json/{ayto}", name="json_incidencia")
      */
@@ -186,4 +193,54 @@ class IncidenciaController extends AbstractController
         return $respuesta;
     }
     
+    /**
+     * @Route("/new/json", name="incidencia_new_json")
+     */
+    public function newJson (Request $request)
+    {
+        $params = array();
+        $content = $request->getContent();
+        if (!empty($content)){
+            $params = json_decode($content, true);
+        }
+
+        $incidencia = new Incidencia();
+        $incidencia->setFecha(\DateTime::createFromFormat('d-m-Y', $params['fecha']));
+        $incidencia->setLatitud($params['latitud']);
+        $incidencia->setLongitud($params['longitud']);
+        $incidencia->setDescripcion($params['descripcion']);
+
+
+        $repo = $this->getDoctrine()->getRepository(Ayuntamiento::class);
+
+        $incidencia->setAyuntamiento($repo->findBy(['id' => $params['aytoid']]));
+        $incidencia->setEstado($params['estado']);
+
+        $imagenbase64 = $params->get('imagen');
+        $imagenbase64 = base64_decode($imagenbase64);
+        $imagendecodificada = file_put_contents($params['userid'].'.'.$params->get('fecha'), $imagenbase64);
+
+        $fileName = md5(uniqid());
+        $imagen = new Imagen();
+        $imagen->setNombre($fileName);
+        $imagen->setOriginal($imagendecodificada->getClientOriginalName());
+        $imagen->setSize($imagendecodificada->getSize());
+        $incidencia->addImage($imagen);
+
+        try {
+            $imagendecodificada->move($this->getParameter('carpeta_imagenes'),$fileName);
+        } catch (FileException $e) {
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($incidencia);
+        try {
+            $em->flush();
+        } catch (Exception $e) {
+        }
+        
+        $response = new Response(array('data' => 'ok'));
+
+
+    }
 }

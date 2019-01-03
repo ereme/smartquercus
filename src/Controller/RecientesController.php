@@ -18,29 +18,38 @@ use Symfony\Component\HttpFoundation\Response;
 class RecientesController extends AbstractController
 {
     /**
-     * @Route("/json", name="json_inicio")
+     * @Route("/json/{ayto}", name="json_inicio")
      */
-    public function jsonRecientes()
+    public function jsonRecientes($ayto)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
 
         $callback = function ($dateTime) {
             return $dateTime instanceof \DateTime
-                ? $dateTime->format('d-m-Y')
+                ? $dateTime->format('d-m-Y') 
                 : '';
         };
 
+        $callback2 = function ($ayto){
+            return $ayto->getLocalidad();
+        };
+
+
         $normalizer->setCallbacks(array('fechahora' => $callback,
-            'createdAt' => $callback
+            'createdAt' => $callback, 'ayuntamiento' => $callback2
         ));
+        
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
 
         $normalizer->setCircularReferenceLimit(0);
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         $em = $this->getDoctrine()->getManager();
         $repoeventos = $this->getDoctrine()->getRepository(Evento::class);
-        $recientes []= $repoeventos->findBy([],['fechahora' => 'ASC'],10,0);
+        $recientes []= $repoeventos->findBy(['ayuntamiento' => $ayto],['fechahora' => 'ASC'],10,0);
         $reposalud = $this->getDoctrine()->getRepository(Salud::class);
         $recientes []= $reposalud->findBy([],['fechahora' => 'DESC'],10,0);
         
