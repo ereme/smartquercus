@@ -92,15 +92,19 @@ class SecurityController extends AbstractController
     {    
         $codigo = '';
         try {
-            $dni = $request->get('dni');
-            $nombre = $request->get('nombre');
-            $apellido1 = $request->get('apellido1');
-            $apellido2 = $request->get('apellido2');
-            $telefono = $request->get('telefono');
-            $email = $request->get('email');
-            $username = $request->get('username');
-            $password = $request->get('password');
-            $aytoid = $request->get('aytoid');
+
+            $contenido = $request->getContent();
+            $params = json_decode($contenido, true);
+
+            $dni = $params['dni'];
+            $nombre = $params['nombre'];
+            $apellido1 = $params['apellido1'];
+            $apellido2 = $params['apellido2'];
+            $telefono = $params['telefono'];
+            $email = $params['email'];
+            $username = $params['username'];
+            $password = $params['password'];
+            $aytoid = $params['aytoid'];
             $ayto = $aytoRepo->find ($aytoid);
     
             $v = new Vecino();
