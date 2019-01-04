@@ -107,7 +107,6 @@ class OpinaController extends AbstractController
      * @Route("/{id}/edit", name="opina_edit", methods="GET|POST")
      * @Security("has_role('ROLE_AYTO')")
      */
-    
     public function edit(Request $request, Opina $opina): Response
     {
         $form = $this->createForm(OpinaType::class, $opina);

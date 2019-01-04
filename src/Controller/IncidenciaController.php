@@ -196,9 +196,8 @@ class IncidenciaController extends AbstractController
     /**
      * @Route("/new/json", name="incidencia_new_json")
      */
-    public function newJson (Request $request)
+    public function newJson (Request $request, AyuntamientoRepository $aytoRepo)
     {
-        $params = array();
         $content = $request->getContent();
         if (!empty($content)){
             $params = json_decode($content, true);
@@ -210,37 +209,63 @@ class IncidenciaController extends AbstractController
         $incidencia->setLongitud($params['longitud']);
         $incidencia->setDescripcion($params['descripcion']);
 
-
-        $repo = $this->getDoctrine()->getRepository(Ayuntamiento::class);
-
-        $incidencia->setAyuntamiento($repo->findBy(['id' => $params['aytoid']]));
+        $incidencia->setAyuntamiento($aytoRepo->find($params['aytoid']));
         $incidencia->setEstado($params['estado']);
 
-        $imagenbase64 = $params->get('imagen');
-        $imagenbase64 = base64_decode($imagenbase64);
-        $imagendecodificada = file_put_contents($params['userid'].'.'.$params->get('fecha'), $imagenbase64);
-
         $fileName = md5(uniqid());
+        $data = explode(',', $params['imagen']);
+        $path = $this->getParameter('carpeta_imagenes').'/'.$fileName;
+        $imagenbase64 = base64_decode($data[1],$path);
+        
         $imagen = new Imagen();
         $imagen->setNombre($fileName);
-        $imagen->setOriginal($imagendecodificada->getClientOriginalName());
-        $imagen->setSize($imagendecodificada->getSize());
-        $incidencia->addImage($imagen);
-
+        //$imagen->setOriginal($imagenbase64->getClientOriginalName());
+        $imagen->setSize(100); //CAMBIAR $imagenbase64->getSize()
+        $imagen->setOriginal($fileName);
+        $incidencia->addImagene($imagen);
+/*
         try {
             $imagendecodificada->move($this->getParameter('carpeta_imagenes'),$fileName);
         } catch (FileException $e) {
         }
-        
+ */       
         $em = $this->getDoctrine()->getManager();
         $em->persist($incidencia);
         try {
             $em->flush();
         } catch (Exception $e) {
         }
+
+        $vector = array('ok' => '');
+        $codigo = 200; //ok
         
-        $response = new Response(array('data' => 'ok'));
+        //Codificación a JSON
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->SetCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
+        $normalizer->setCircularReferenceLimit(0);
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $jsonMensaje = $serializer->serialize($vector, 'json');   
+
+        $respuesta = new Response($jsonMensaje,$codigo);    
+        $respuesta->headers->set('Content-Type', 'application/json');
+        $respuesta->headers->set('Access-Control-Allow-Origin', '*');
+        
+        return $respuesta;
+    }
 
 
+    function base64ToImage($base64_string, $output_file) {
+        $file = fopen($output_file, "wb");
+    
+        $data = explode(',', $base64_string);
+    
+        fwrite($file, base64_decode($data[1]));
+        fclose($file);
+    
+        return $output_file;
     }
 }
