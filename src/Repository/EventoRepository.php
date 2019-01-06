@@ -19,22 +19,24 @@ class EventoRepository extends ServiceEntityRepository
         parent::__construct($registry, Evento::class);
     }
 
-//    /**
-//     * @return Eventos[] Returns an array of Eventos objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Eventos[] Returns an array of Eventos objects
+     */
+    public function findRecientes($aytoid)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
+            ->innerJoin('e.imagen','i')
+            ->innerJoin('e.ayuntamiento','a')
+            ->select('e.id, e.titular, e.fechahora, e.texto, i.nombre, a.localidad')
+            ->andWhere('e.ayuntamiento = :aytoid')
+            ->setParameter('aytoid', $aytoid)
             ->orderBy('e.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Eventos

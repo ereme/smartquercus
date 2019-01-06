@@ -19,6 +19,22 @@ class SaludRepository extends ServiceEntityRepository
         parent::__construct($registry, Salud::class);
     }
 
+
+    /**
+     * @return Eventos[] Returns an array of Eventos objects
+     */
+    public function findRecientes()
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.imagen','i')
+            ->select("s.id, s.titulo, s.fechahora, s.texto, i.nombre, 'NULL'")
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Salud[] Returns an array of Salud objects
 //     */
