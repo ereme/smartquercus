@@ -9,6 +9,7 @@ use App\Entity\Vecino;
 use App\Entity\Imagen;
 use App\Form\OpinaType;
 use App\Repository\OpinaRepository;
+use App\Repository\AyuntamientoRepository;
 use App\Repository\VecinoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -143,7 +144,11 @@ class OpinaController extends AbstractController
 
 
                     //Disco duro -> lo borra del disco duro
-                    unlink($this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar);
+                    $absolute_path = $this->getParameter('carpeta_imagenes') ."/". $nombre_antiguo_borrar;
+                    if(file_exists($absolute_path)){
+                        unlink($absolute_path);
+                    }
+
                     try{
                         $fichero->move(
                             $this->getParameter('carpeta_imagenes'),
@@ -236,9 +241,9 @@ class OpinaController extends AbstractController
     }
 
     /**
-     * @Route("/json/{ayto}", name="json_opina")
+     * @Route("/json/{aytoid}/{userid}", name="json_opina")
      */
-    public function opinaJson($ayto, Request $request)
+    public function opinaJson($aytoid, $userid, Request $request, AyuntamientoRepository $aytoRepo, VecinoRepository $vecinoRepo)
     {
         $encoder = new JsonEncoder();
         $normalizer = new GetSetMethodNormalizer();
@@ -252,9 +257,7 @@ class OpinaController extends AbstractController
         $callback2 = function ($ayto){
             return $ayto->getLocalidad();
         };
-        $callback3 = function ($vecinos){
-            return null;
-        };
+
         $callbackUrl = function ($url) use ($request) {
             return 'https://' 
                     . $request->server->get('HTTP_HOST') 
@@ -262,7 +265,8 @@ class OpinaController extends AbstractController
                     . $url->getNombre();
         };
 
-        $normalizer->setCallbacks(array('fechahoralimite' => $callback,
+        $normalizer->setCallbacks(array(
+            'fechahoralimite' => $callback,
             'createdAt' => $callback,
             'ayuntamiento' => $callback2,
             'imagen' => $callbackUrl,
@@ -277,15 +281,14 @@ class OpinaController extends AbstractController
 
         $serializer = new Serializer(array($normalizer), array($encoder));
 
-        $repo = $this->getDoctrine()->getRepository(Opina::class);
-        $opinas = $repo->findBy(['ayuntamiento' => $ayto]);
-        //$opinas = $repo->findOpinasArrayByAyto($ayto);
-        
+        $opinas = $aytoRepo->find($aytoid)->getEncuestas();
+        $user = $vecinoRepo->find($userid);
+
         foreach ($opinas as $key => $value) {
-            $value->getHaVotado($this->getUser());
+            $value->getHaVotado($user);
         }
-        
-        $jsonMensaje = $serializer->serialize($opinas, 'json');   
+
+        $jsonMensaje = $serializer->serialize($opinas, 'json');
         
         $respuesta = new Response($jsonMensaje);    
         $respuesta->headers->set('Content-Type', 'application/json');

@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644e648b-9712-4f10-b2db-13052d741db6" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/IncidenciaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IncidenciaController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/OpinaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OpinaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RecientesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RecientesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/SaludController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SaludController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/EventoRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EventoRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/SaludRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/SaludRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,13 +18,39 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <executablePath>composer</executablePath>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/IncidenciaController.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/SaludController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="216" column="61" selection-start-line="216" selection-start-column="61" selection-end-line="216" selection-end-column="61" />
+            <state relative-caret-position="203">
+              <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/user/show.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="62" column="84" selection-start-line="62" selection-start-column="84" selection-end-line="62" selection-end-column="84" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -40,12 +65,13 @@
       <list>
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/Controller/InicioController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/SaludController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/OpinaController.php" />
         <option value="$PROJECT_DIR$/src/Repository/SaludRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/EventoRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/RecientesController.php" />
         <option value="$PROJECT_DIR$/src/Controller/IncidenciaController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/OpinaController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/SaludController.php" />
+        <option value="$PROJECT_DIR$/templates/user/show.html.twig" />
       </list>
     </option>
   </component>
@@ -167,7 +193,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -192,10 +217,28 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Entity" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="smartquercus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smartquercus" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smartquercus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smartquercus" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="opina" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smartquercus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smartquercus" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -236,18 +279,19 @@
       <workItem from="1546635510228" duration="645000" />
       <workItem from="1546679702493" duration="21000" />
       <workItem from="1546679747881" duration="531000" />
-      <workItem from="1546774966228" duration="3848000" />
+      <workItem from="1546774966228" duration="3962000" />
+      <workItem from="1546895513514" duration="2174000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5233000" />
+    <option name="totallyTimeSpent" value="7521000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="730" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2657512" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26979" />
       <window_info id="npm" order="1" side_tool="true" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -267,7 +311,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Structure" order="3" weight="0.24959612" />
       <window_info anchor="right" id="Remote Host" order="4" weight="0.32956383" />
-      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32956383" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,13 +348,6 @@
     <entry file="file://$PROJECT_DIR$/src/Entity/Salud.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SaludController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2460">
-          <caret line="175" selection-start-line="175" selection-end-line="175" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/SaludRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
@@ -335,20 +372,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/IncidenciaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="186" column="28" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/OpinaController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="328">
+          <caret line="260" column="8" selection-start-line="260" selection-start-column="8" selection-end-line="265" selection-end-column="10" />
           <folding>
             <element signature="e#34#55#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/IncidenciaController.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/SaludController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="216" column="61" selection-start-line="216" selection-start-column="61" selection-end-line="216" selection-end-column="61" />
+        <state relative-caret-position="203">
+          <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/opina/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/opina/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-405">
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="62" column="84" selection-start-line="62" selection-start-column="84" selection-end-line="62" selection-end-column="84" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

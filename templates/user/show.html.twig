@@ -60,7 +60,9 @@
                     <div id="linea" class="col-md-8">
                         <div class="row" id="publicaciones">
                             <h2>Ayuntamiento de {{ user.ayuntamiento.localidad }}</h2>
-                                <img class="img" src="{{ asset(app.user.ayuntamiento.imagen.nombre, 'usuarios') }}" alt="Card image cap" height="200" width="200">
+                                {% if app.user.ayuntamiento.imagen.nombre is defined %}
+                                    <img class="img" src="{{ asset(app.user.ayuntamiento.imagen.nombre, 'usuarios') }}" alt="Card image cap" height="200" width="200">
+                                {% endif %}
                         </div>
                     </div>
             </div>

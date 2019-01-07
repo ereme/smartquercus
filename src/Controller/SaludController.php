@@ -174,7 +174,7 @@ class SaludController extends AbstractController
     /** 
      * @Route("/json", name="json_salud")
      */
-    public function jsonSalud()
+    public function jsonSalud(Request $request)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -185,8 +185,16 @@ class SaludController extends AbstractController
                 : '';
         };
 
+        $callbackUrl = function ($url) use ($request) {
+            return 'https://'
+                . $request->server->get('HTTP_HOST')
+                . '/images/'
+                . $url->getNombre();
+        };
+
         $normalizer->setCallbacks(array('fechahora' => $callback,
-            'createdAt' => $callback
+            'createdAt' => $callback,
+            'imagen' => $callbackUrl
         ));
 
         $normalizer->setCircularReferenceLimit(0);

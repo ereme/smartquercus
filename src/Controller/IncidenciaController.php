@@ -164,7 +164,7 @@ class IncidenciaController extends AbstractController
     /**
      * @Route("/json/{ayto}", name="json_incidencia")
      */
-    public function incidenciasJson($ayto)
+    public function incidenciasJson($ayto, Request $request)
     {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
@@ -178,7 +178,22 @@ class IncidenciaController extends AbstractController
             return $ayto->getLocalidad();
         };
 
-        $normalizer->setCallbacks(array('fecha' => $callback, 'createdAt' => $callback, 'ayuntamiento' => $callback2));
+        $callbackUrl = function ($images) use ($request) {
+            $final = array();
+            foreach ($images as $image) {
+                $final[] = 'https://'
+                    . $request->server->get('HTTP_HOST')
+                    . '/images/'
+                    . $image->getNombre();
+            }
+            return $final;
+        };
+
+        $normalizer->setCallbacks(array('fecha' => $callback,
+                                        'createdAt' => $callback,
+                                        'ayuntamiento' => $callback2,
+                                        'imagenes' => $callbackUrl,
+                                    ));
         
         $normalizer->setCircularReferenceLimit(0);
         $normalizer->setCircularReferenceHandler(function ($object) { return $object->getId(); });
