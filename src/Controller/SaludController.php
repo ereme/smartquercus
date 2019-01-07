@@ -173,7 +173,6 @@ class SaludController extends AbstractController
 
     /** 
      * @Route("/json", name="json_salud")
-     * @Security("has_role('ROLE_ADMIN')")
      */
     public function jsonSalud()
     {

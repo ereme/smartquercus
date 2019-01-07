@@ -27,7 +27,7 @@ class EventoRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->innerJoin('e.imagen','i')
             ->innerJoin('e.ayuntamiento','a')
-            ->select('e.id, e.titular, e.fechahora, e.texto, i.nombre, a.localidad')
+            ->select('e.id, e.titular, e.fechahora, e.texto, i.nombre as imagen, a.localidad')
             ->andWhere('e.ayuntamiento = :aytoid')
             ->setParameter('aytoid', $aytoid)
             ->orderBy('e.id', 'ASC')

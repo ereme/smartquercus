@@ -27,7 +27,7 @@ class SaludRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('s')
             ->innerJoin('s.imagen','i')
-            ->select("s.id, s.titulo, s.fechahora, s.texto, i.nombre, 'NULL'")
+            ->select("s.id, s.titulo as titular, s.fechahora, s.texto, i.nombre as imagen, 'NULL'")
             ->orderBy('s.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()

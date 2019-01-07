@@ -213,7 +213,8 @@ class IncidenciaController extends AbstractController
         $incidencia->setEstado($params['estado']);
 
         $fileName = md5(uniqid());
-        $data = explode(',', $params['imagen']);
+        //$data = explode(',', $params['imagen']); //si viene con la cabecera
+        $data = $params['imagen']; //si viene sin la cabecera
         $path = $this->getParameter('carpeta_imagenes').'/'.$fileName;
         $imagenbase64 = base64_decode($data[1],$path);
         

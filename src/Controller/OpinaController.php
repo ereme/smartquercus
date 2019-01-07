@@ -24,7 +24,6 @@ use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @Route("/opina")
- * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class OpinaController extends AbstractController
 {

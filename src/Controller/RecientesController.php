@@ -26,47 +26,16 @@ class RecientesController extends AbstractController
      */
     public function jsonRecientes($ayto, Request $request, EventoRepository $eventoRepo, SaludRepository $saludRepo)
     {
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-
-        $callback = function ($dateTime) {
-            return $dateTime instanceof \DateTime
-                ? $dateTime->format('d-m-Y')
-                : '';
-        };
-
-        $callbackUrl = function ($nombre) use ($request) {
-            return 'https://'
-                . $request->server->get('HTTP_HOST')
-                . '/images/'
-                . $nombre;
-        };
-
-        $normalizer->setCallbacks(array(
-            'fechahora' => $callback,
-            'nombre' => $callbackUrl
-        ));
-
-        $normalizer->SetCircularReferenceHandler(function ($object){
-            return $object->getId();
-        });
-
-        $normalizer->setCircularReferenceLimit(0);
-        $serializer = new Serializer(array($normalizer), array($encoder));
-
         $eventos= $eventoRepo->findRecientes(1);
         $saludables= $saludRepo->findRecientes();
         $recientes = array_merge($eventos, $saludables);
         foreach ($recientes as $key => $reciente) {
             $recientes[$key]['fechahora'] = $reciente['fechahora']->format('d-m-Y');
-            $recientes[$key]['nombre'] = 'https://'
+            $recientes[$key]['imagen'] = 'https://'
                 .$request->server->get('HTTP_HOST')
                 .'/images/'
-                .$reciente['nombre'];
+                .$reciente['imagen'];
         }
-
-        //$jsonMensaje = $serializer->serialize($recientes, 'json');
-
         
         $respuesta = new Response(json_encode($recientes));
 
