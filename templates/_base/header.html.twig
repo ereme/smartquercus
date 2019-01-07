@@ -36,7 +36,7 @@
           {% endif %}
           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('user_show', {'id': app.user.id }) }}">{{ app.user.email|default('') }}</a>
+            <a class="nav-link" href="{{ path('user_profile') }}">{{ app.user.email|default('') }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{path('logout')}}"><i class="fas fa-sign-out-alt"></i></a>

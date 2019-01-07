@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644e648b-9712-4f10-b2db-13052d741db6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IncidenciaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IncidenciaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OpinaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OpinaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SaludController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SaludController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/_base/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_base/header.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,13 +40,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/user/show.html.twig">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="62" column="84" selection-start-line="62" selection-start-column="84" selection-end-line="62" selection-end-column="84" />
+            <state relative-caret-position="133">
+              <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
               <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
+                <element signature="e#2437#2458#0#PHP" expanded="true" />
+                <element signature="e#2437#2458#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/_base/header.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
+              <folding>
+                <element signature="e#1812#1824#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,6 +82,8 @@
         <option value="$PROJECT_DIR$/src/Controller/OpinaController.php" />
         <option value="$PROJECT_DIR$/src/Controller/SaludController.php" />
         <option value="$PROJECT_DIR$/templates/user/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/templates/_base/header.html.twig" />
       </list>
     </option>
   </component>
@@ -226,6 +238,12 @@
               <item name="smartquercus" type="b2602c69:ProjectViewProjectNode" />
               <item name="smartquercus" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="_base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smartquercus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smartquercus" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="opina" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -280,12 +298,12 @@
       <workItem from="1546679702493" duration="21000" />
       <workItem from="1546679747881" duration="531000" />
       <workItem from="1546774966228" duration="3962000" />
-      <workItem from="1546895513514" duration="2174000" />
+      <workItem from="1546895513514" duration="2651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7521000" />
+    <option name="totallyTimeSpent" value="7998000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="730" extended-state="0" />
@@ -389,13 +407,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SaludController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/opina/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -420,6 +431,34 @@
           <caret line="62" column="84" selection-start-line="62" selection-start-column="84" selection-end-line="62" selection-end-column="84" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/SaludController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+          <folding>
+            <element signature="e#2437#2458#0#PHP" expanded="true" />
+            <element signature="e#2437#2458#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/_base/header.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
+          <folding>
+            <element signature="e#1812#1824#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
