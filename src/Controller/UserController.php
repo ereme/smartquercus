@@ -99,13 +99,21 @@ class UserController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN')) { //soy ayto
             $clase = AdminType::class;
             $tipo = 'admin';
-        } elseif ($this->isGranted('ROLE_AYTO')) { //soy ayto
-            $clase = AyuntamientoType::class;
-            $tipo = 'ayuntamiento';
-        } else { //soy vecino
-            $clase = VecinoType::class;
-            $tipo = 'vecino';
-        } 
+        } else { //no se permite carga de perfil de otros usuarios, redirect al perfil del current user
+            if ($user != $this->getUser()) {
+                return $this->redirectToRoute('user_edit', array('id' => $this->getUser()->getId()));
+            }
+            $user = $this->getUser();
+            if ($this->isGranted('ROLE_AYTO')) { //soy ayto
+                $clase = AyuntamientoType::class;
+                $tipo = 'ayuntamiento';
+            } else { //soy vecino
+                $clase = VecinoType::class;
+                $tipo = 'vecino';
+            }
+        }
+
+
 
         $form = $this->createForm($clase, $user);
         $form->handleRequest($request);
