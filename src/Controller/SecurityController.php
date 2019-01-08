@@ -40,7 +40,6 @@ class SecurityController extends AbstractController
         
         // Recoge el último username introducido por el usuario (tanto si ha habido errores como si ha sido OK el login)
         $lastUsername = $authenticationUtils->getLastUsername();
-        dump ($error);
 
         // Renderiza la plantilla con dos parámetros: last_username y error (por si ha fallado el login y tiene que mostrar un error de autenticación)
 
@@ -192,12 +191,12 @@ class SecurityController extends AbstractController
                 if ($tipo == Ayuntamiento::USER_AYTO) {
                     $fichero = $request->files->get('ayuntamiento')['imagen'];
                     $fileName = md5(uniqid());
-                    dump ($fichero);
+
                     $imagen = new Imagen();
                     $imagen->setNombre($fileName);
                     $imagen->setOriginal($fichero->getClientOriginalName());
                     $imagen->setSize($fichero->getSize());
-                    dump ($imagen);
+
                     $user->setImagen($imagen);
               
                     try {
