@@ -35,7 +35,7 @@ class IncidenciaController extends AbstractController
     {
         $usuario = $this->getUser();
         $roles = $usuario->getRoles();
-        dump($usuario);
+
         if ($roles[0] == 'ROLE_VECINO'  ) {
             $ayuntamiento = $usuario->getAyuntamiento();
             $aytoid = $ayuntamiento->getId();
@@ -65,9 +65,7 @@ class IncidenciaController extends AbstractController
         $ayuntamiento = $usuario->getAyuntamiento();
         $incidencia = new Incidencia();
         $form = $this->createForm(IncidenciaType::class, $incidencia);
-        $form->handleRequest($request); 
-
-        dump ($ayuntamiento);
+        $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
     
